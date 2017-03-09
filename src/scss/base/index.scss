@@ -1,10 +1,17 @@
 @import 'normalize';
 @import 'bourbon';
 @import 'variables';
+@import 'mixins';
 @import 'fonts';
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 html {
@@ -13,12 +20,8 @@ html {
 
 html, body {
   @include size(100%);
-  margin: 0;
 }
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 2rem;
 }

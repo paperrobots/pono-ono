@@ -1,0 +1,54 @@
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  @include size(12.5rem 100%);
+  z-index: 100;
+  border-right: 1px solid $light-grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 0;
+
+  &__burger {
+    appearance: none;
+    border: none;
+    background: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+
+    @include size(3rem 2rem);
+    position: relative;
+
+    &--bar {
+      @include size(100% 1px);
+      margin-bottom: 5px;
+      background-color: $dark-grey;
+    }
+  }
+
+  &__logo {
+    @include size(8rem 12.5rem);
+    background-image: url('#{$base-img}logo-dark-sm-v.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 50%;
+    margin-top: -6.25rem;
+  }
+
+  &__social-media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__social-media-link {
+    padding: 1rem;
+  }
+}

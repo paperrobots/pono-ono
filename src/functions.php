@@ -9,7 +9,7 @@ if ( ! class_exists( 'Timber' ) ) {
 	});
 	return;
 }
-Timber::$dirname = array('templates', 'templates/partials', 'templates/layouts');
+Timber::$dirname = array('templates', 'templates/components', 'templates/sections');
 class PonoOno extends TimberSite {
 	function __construct() {
 		add_theme_support( 'post-thumbnails' );

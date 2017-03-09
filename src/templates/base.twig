@@ -17,8 +17,8 @@
     {{ wp_head }}
   </head>
   <body>
+    {% include "menu-bar.twig" %}
     <main>
-      {% include "header.twig" %}
       {% block content %}
       {% endblock %}
     </main>
