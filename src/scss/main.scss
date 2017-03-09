@@ -1,0 +1,41 @@
+/*!
+Theme Name: Story Lab
+Author: NEU Story Lab
+Version: 0.0.0
+*/
+
+// Everything else
+@import './base/index';
+@import './layout/index';
+@import './module/index';
+@import './state/index';
+
+@mixin hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include hidden;
+}
