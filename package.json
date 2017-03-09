@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bigwheel": "3.0.0",
+    "bourbon": "^4.3.3",
     "bw-router": "^2.0.6",
     "bw-viewmediator": "2.1.0",
     "bw-vm": "^2.1.3",

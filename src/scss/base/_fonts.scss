@@ -1,0 +1,47 @@
+// Freight Text Pro Bold
+@font-face {
+	font-family: 'Freight Text Pro';
+	src: url('#{$base-fonts}FreightTextProBold.eot');
+	src: url('#{$base-fonts}FreightTextProBold.eot?#iefix') format('embedded-opentype'),
+		url('#{$base-fonts}FreightTextProBold.woff') format('woff'),
+		url('#{$base-fonts}FreightTextProBold.ttf') format('truetype'),
+		url('#{$base-fonts}FreightTextProBold.svg#FreightTextProBold') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+
+// Roboto Mono Regular
+@font-face {
+	font-family: 'Roboto Mono';
+	src: url('#{$base-fonts}RobotoMono-Regular.eot');
+	src: url('#{$base-fonts}RobotoMono-Regular.eot?#iefix') format('embedded-opentype'),
+		url('#{$base-fonts}RobotoMono-Regular.woff') format('woff'),
+		url('#{$base-fonts}RobotoMono-Regular.ttf') format('truetype'),
+		url('#{$base-fonts}RobotoMono-Regular.svg#RobotoMono-Regular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+// Roboto Mono Italic
+@font-face {
+	font-family: 'Roboto Mono';
+	src: url('#{$base-fonts}RobotoMono-Italic.eot');
+	src: url('#{$base-fonts}RobotoMono-Italic.eot?#iefix') format('embedded-opentype'),
+		url('#{$base-fonts}RobotoMono-Italic.woff') format('woff'),
+		url('#{$base-fonts}RobotoMono-Italic.ttf') format('truetype'),
+		url('#{$base-fonts}RobotoMono-Italic.svg#RobotoMono-Italic') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+
+// Roboto Mono Medium
+@font-face {
+	font-family: 'Roboto Mono';
+	src: url('#{$base-fonts}RobotoMono-Medium.eot');
+	src: url('#{$base-fonts}RobotoMono-Medium.eot?#iefix') format('embedded-opentype'),
+		url('#{$base-fonts}RobotoMono-Medium.woff') format('woff'),
+		url('#{$base-fonts}RobotoMono-Medium.ttf') format('truetype'),
+		url('#{$base-fonts}RobotoMono-Medium.svg#RobotoMono-Medium') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}

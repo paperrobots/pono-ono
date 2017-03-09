@@ -3,14 +3,13 @@ import utils from 'utils'
 import classes from 'dom-classes'
 import Default from './default'
 
-class Home extends Default {
+class Menu extends Default {
 
 	constructor(opt) {
 
 		super(opt)
 
-		this.slug = 'home'
-		this.ui = null
+		this.slug = 'menu'
 	}
 
 	init(req, done) {
@@ -51,12 +50,10 @@ class Home extends Default {
 
 		super.destroy()
 
-		this.ui = null
-
 		this.page.parentNode.removeChild(this.page)
 
 		done()
 	}
 }
 
-module.exports = Home
+module.exports = Menu

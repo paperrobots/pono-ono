@@ -1,12 +1,18 @@
 @import 'normalize';
+@import 'bourbon';
+@import 'variables';
+@import 'fonts';
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  font-size: 8px;
+}
+
 html, body {
-  width: 100%;
-  height: 100%;
+  @include size(100%);
   margin: 0;
 }
 
@@ -14,4 +20,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2rem;
 }

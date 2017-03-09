@@ -1,0 +1,22 @@
+// Typography
+
+// Font path
+$base-fonts: 'assets/fonts/';
+
+// Font stacks
+$font-freight: 'Freight Text Pro', $georgia;
+$font-roboto-mono: 'Roboto Mono', $monospace;
+
+// Defaults
+$font-title: $font-freight;
+$font-body: $font-roboto-mono;
+
+// Colors
+$light-green: #87977B;
+$dark-green: #3A5644;
+$tan: #FFF9EB;
+$pink: #F9C8BD;
+$dark-blue: #2C315A;
+$light-grey: #B8B8B8;
+$dark-grey: #676767;
+$white: #FFFFFF;

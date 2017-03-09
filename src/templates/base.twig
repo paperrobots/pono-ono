@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="is-preloader">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,3 +18,11 @@
   </head>
   <body>
     <main>
+      {% include "header.twig" %}
+      {% block content %}
+      {% endblock %}
+    </main>
+    <script src="{{site.theme.link}}/js/bundle.js"></script>
+    {{ wp_footer }}
+  </body>
+</html>

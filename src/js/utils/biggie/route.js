@@ -3,11 +3,13 @@ import classes from 'dom-classes'
 
 export default (e) => {
 
-    const target = e.currentTarget
+  e.preventDefault()
 
-    if(classes.has(target, 'no-route') || (target.hasAttribute('target') && target.getAttribute('target') == '_blank')) return
-    
-    e.preventDefault()
+  const target = e.currentTarget
+  const href = target.getAttribute('href')
+  const route = `/${href.split('/')[3]}`
 
-    framework.go(target.getAttribute('href'))
+  if(classes.has(target, 'no-route') || (target.hasAttribute('target') && target.getAttribute('target') == '_blank')) return
+
+  framework.go(route)
 }

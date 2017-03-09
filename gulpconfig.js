@@ -24,7 +24,7 @@ module.exports = {
 
   images: {
     build: { // Copies images from `src` to `build`; does not optimize
-      src: src+'**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg)',
+      src: src+'**/*',
       dest: build
     },
     dist: {
@@ -67,6 +67,7 @@ module.exports = {
       includePaths: [ // Adds npm directories to the load path so you can @import directly
         src+'scss',
         modules+'normalize.css',
+        require('bourbon').includePaths[0],
         modules
       ],
       precision: 6,

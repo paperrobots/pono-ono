@@ -7,4 +7,4 @@ $context = Timber::get_context();
 $context['posts'] = Timber::get_posts();
 
 // Tell Timber what template to render
-Timber::render( 'templates/home/home.twig', $context );
+Timber::render( 'base.twig', $context );
