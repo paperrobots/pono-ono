@@ -1,4 +1,4 @@
-# Story Lab 2017
+# pono ono
 
 This is a [WordPress](https://wordpress.org/) theme built using [Timber](https://www.upstatement.com/timber/).
 
