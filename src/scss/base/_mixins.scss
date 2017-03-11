@@ -20,3 +20,13 @@
    left:0;
    margin: auto;
 }
+
+@mixin resetButton() {
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}

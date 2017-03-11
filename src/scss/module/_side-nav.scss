@@ -1,0 +1,79 @@
+.side-nav {
+  @include position(fixed, 0 null 0 0);
+  @include size(50% 100%);
+  background-color: $pink;
+
+  &::after {
+    content: '';
+    @include position(absolute, 0 0 0 0);
+    @include size(100%);
+    background-image: url('#{$base-img}texture.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+    opacity: 0.45;
+    mix-blend-mode: luminosity;
+  }
+
+  &__inner {
+    position: relative;
+    @include size(100%);
+    padding-left: $menu-bar-size;
+    display: flex;
+    align-items: center;
+  }
+
+  &__menu {
+    list-style-type: none;
+    counter-reset: custom-counter;
+    padding-left: 20%;
+  }
+
+  &__item {
+    margin-bottom: 2rem;
+  }
+
+  &__link {
+    position: relative;
+    font-family: $font-title;
+    font-size: 9rem;
+    font-weight: 900;
+    color: $white;
+
+    &::before {
+      display: inline-block;
+      content: counter(custom-counter, decimal-leading-zero)'.';
+      counter-increment: custom-counter;
+      color: $white;
+      font-family: $font-body;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-right: 4rem;
+      transition: transform .7s $ease-out-expo;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      @include size(7.5rem 1px);
+      background-color: $white;
+      bottom: 21px;
+      left: 0;
+      transform-origin: right;
+      transform: scaleX(0);
+      transition: transform .7s $ease-out-expo;
+    }
+
+    &:hover {
+
+      &::before {
+        transform: translateX(-140%);
+      }
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

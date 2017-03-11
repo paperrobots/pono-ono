@@ -10,6 +10,17 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Freight Text Pro';
+	src: url('#{$base-fonts}FreightTextProBlack.eot');
+	src: url('#{$base-fonts}FreightTextProBlack.eot?#iefix') format('embedded-opentype'),
+		url('#{$base-fonts}FreightTextProBlack.woff') format('woff'),
+		url('#{$base-fonts}FreightTextProBlack.ttf') format('truetype'),
+		url('#{$base-fonts}FreightTextProBlack.svg#FreightTextProBlack') format('svg');
+	font-weight: 900;
+	font-style: normal;
+}
+
 // Roboto Mono Regular
 @font-face {
 	font-family: 'Roboto Mono';

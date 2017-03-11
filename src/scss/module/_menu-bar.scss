@@ -1,10 +1,8 @@
 .menu-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  @include size(12.5rem 100%);
+  @include position(fixed, 0 null 0 0);
+  @include size($menu-bar-size 100%);
   z-index: 100;
+  background-color: $white;
   border-right: 1px solid $light-grey;
   display: flex;
   flex-direction: column;
@@ -13,16 +11,10 @@
   padding: 3rem 0;
 
   &__burger {
-    appearance: none;
-    border: none;
-    background: none;
-    outline: none;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-
+    @include resetButton();
     @include size(3rem 2rem);
     position: relative;
+    z-index: 200;
 
     &--bar {
       @include size(100% 1px);
@@ -32,7 +24,7 @@
   }
 
   &__logo {
-    @include size(8rem 12.5rem);
+    @include size(8rem $menu-bar-size);
     background-image: url('#{$base-img}logo-dark-sm-v.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -40,12 +32,14 @@
     position: absolute;
     top: 50%;
     margin-top: -6.25rem;
+    z-index: 200;
   }
 
   &__social-media {
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 200;
   }
 
   &__social-media-link {
