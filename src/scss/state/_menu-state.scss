@@ -1,0 +1,57 @@
+// Set up closed menu state
+.side-nav {
+  transform: translateX(calc(100% - 100px));
+  will-change: transform;
+}
+
+.menu-bar {
+
+  &__mask {
+    transform: translateX(calc(-100% + 100px));
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  &__overlay {
+    will-change: opacity;
+  }
+}
+
+.menu-is-open {
+
+  .menu-bar {
+
+    &__burger {
+
+      span {
+        transform: rotate(90deg);
+        background-color: rgba($white, 0);
+
+        &:before {
+          transform: rotate(45deg);
+          background-color: $white;
+        }
+
+        &:after {
+          transform: rotate(-45deg);
+          background-color: $white;
+        }
+      }
+    }
+
+    &__logo-img {
+
+      &--light {
+        opacity: 1;
+      }
+
+      &--dark {
+        opacity: 0;
+      }
+    }
+
+    &__social-media-link svg path:not(.bounds) {
+      fill: $white;
+    }
+  }
+}

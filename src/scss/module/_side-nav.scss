@@ -1,19 +1,17 @@
 .side-nav {
   @include position(fixed, 0 null 0 0);
-  @include size(50% 100%);
+  @include size(100%);
   background-color: $pink;
 
   &::after {
     content: '';
     @include position(absolute, 0 0 0 0);
     @include size(100%);
-    background-image: url('#{$base-img}texture.jpg');
+    background-image: url('#{$base-img}texture--pink.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom right;
     z-index: -1;
-    opacity: 0.45;
-    mix-blend-mode: luminosity;
   }
 
   &__inner {
@@ -25,6 +23,7 @@
   }
 
   &__menu {
+    position: relative;
     list-style-type: none;
     counter-reset: custom-counter;
     padding-left: 20%;
@@ -36,10 +35,12 @@
 
   &__link {
     position: relative;
+    display: inline-block;
     font-family: $font-title;
     font-size: 9rem;
     font-weight: 900;
     color: $white;
+    z-index: 200;
 
     &::before {
       display: inline-block;
