@@ -9,7 +9,9 @@ class App {
 
   constructor(opt = {}) {
 
-    this.onMenuClick = this.onMenuClick.bind(this)
+    this.onBurgerClick = this.onBurgerClick.bind(this)
+    this.onPageClick = this.onPageClick.bind(this)
+    this.onAnchorClick = this.onAnchorClick.bind(this)
 
     this.init()
   }
@@ -17,7 +19,7 @@ class App {
   init() {
 
     this.ui = query({ el: config.body })
-
+    this.page = config.view
     this.a = Array.apply(null, this.ui.link)
 
     this.addEvents()
@@ -29,26 +31,35 @@ class App {
 
     biggie.bind.add(config.a)
 
-    on(this.ui.burger, 'click', this.onMenuClick)
+    on(this.ui.burger, 'click', this.onBurgerClick)
+    on(this.page, 'click', this.onPageClick)
+    this.a.forEach(a => on(a, 'click', this.onAnchorClick))
   }
 
-  onMenuClick(e) {
-
-    if (this.animating) return
+  onBurgerClick(e) {
 
     this.open === true ? this.animateMenuOut() : this.animateMenuIn()
+  }
+
+  onPageClick(e) {
+
+    if (!this.open) return
+
+    this.animateMenuOut()
+  }
+
+  onAnchorClick(e) {
+
+    this.animateMenuOut()
   }
 
   animateMenuIn() {
 
     this.open = true
-    this.animating = true
 
     classes.add(config.body, 'menu-is-open')
 
-    const tl = new TimelineMax({ paused: true, onComplete: _ => {
-      this.animating = false
-    }})
+    const tl = new TimelineMax({ paused: true })
 
     tl.to(this.ui.overlay, 0.8, { autoAlpha: 0 }, 'in')
     tl.to(this.ui.mask, 0.8, { x: 0, borderColor: 'transparent' }, 'in')
@@ -60,15 +71,12 @@ class App {
   animateMenuOut() {
 
     this.open = false
-    this.animating = true
 
     classes.remove(config.body, 'menu-is-open')
 
     this.translate = (config.width / 2) - 100;
 
-    const tl = new TimelineMax({ paused: true, onComplete: _ => {
-      this.animating = false
-    }})
+    const tl = new TimelineMax({ paused: true })
 
     tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
     tl.to(this.ui.mask, 0.8, { x: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
