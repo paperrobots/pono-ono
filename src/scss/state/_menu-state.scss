@@ -2,6 +2,7 @@
 .side-nav {
   transform: translateX(calc(100% - 100px));
   will-change: transform;
+  pointer-events: none;
 }
 
 .menu-bar {
@@ -18,6 +19,10 @@
 }
 
 .menu-is-open {
+
+  .side-nav {
+    pointer-events: auto;
+  }
 
   .menu-bar {
 
