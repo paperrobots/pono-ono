@@ -27,7 +27,7 @@ class App {
 
   addEvents() {
 
-    biggie.bind.add(config.nav)
+    biggie.bind.add(config.a)
 
     on(this.ui.burger, 'click', this.onMenuClick)
   }

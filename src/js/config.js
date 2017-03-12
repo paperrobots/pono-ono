@@ -3,10 +3,11 @@ import select from 'dom-select'
 const config = {
 
 	BASE: '/',
+	HOST: window.location.host,
 
 	body: document.body,
 	view: select('main'),
-	nav: select.all('nav a'),
+	a: select.all('a'),
 
 	width: window.innerWidth,
 	height: window.innerHeight
