@@ -15,7 +15,7 @@ gulp.task('utils-clean', ['build', 'utils-wipe'], function() {
   return del(config.clean);
 });
 
-// Copy files from the `build` folder to `dist/[project]`
+// Copy files from the `build` folder to `dist/:project-title`
 gulp.task('utils-copy', ['utils-clean'], function() {
   return gulp.src(config.dist.src)
   .pipe(gulp.dest(config.dist.dest));

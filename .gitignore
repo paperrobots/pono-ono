@@ -34,5 +34,8 @@ node_modules
 donna.json
 build
 dist
-assets/icons
+
+
 _normalize.scss
+
+src/js/env.js

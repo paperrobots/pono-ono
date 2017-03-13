@@ -11,6 +11,7 @@
   "main": "gulpfile.js",
   "browser": {
     "framework": "./src/js/framework",
+    "env": "./src/js/env",
     "config": "./src/js/config",
     "cache": "./src/js/cache",
     "utils": "./src/js/utils",

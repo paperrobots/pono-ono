@@ -1,8 +1,9 @@
+import env from 'env'
 import select from 'dom-select'
 
 const config = {
 
-	BASE: '/',
+	BASE: env,
 	HOST: window.location.host,
 
 	body: document.body,
