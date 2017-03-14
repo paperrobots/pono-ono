@@ -26,6 +26,10 @@ body {
   font-size: 2rem;
   font-family: $font-title;
   color: $light-grey;
+
+  &.is-loading {
+    cursor: wait;
+  }
 }
 
 a {
