@@ -3,24 +3,24 @@ import utils from 'utils'
 import classes from 'dom-classes'
 import Default from './default'
 
-class Section extends Default {
-	
+class Catering extends Default {
+
 	constructor(opt) {
-		
+
 		super(opt)
 
-		this.slug = 'section'
+		this.slug = 'catering'
 	}
-	
+
 	init(req, done) {
-		
+
 		super.init(req, done)
 	}
-	
+
 	ready(done) {
 
 		super.ready()
-		
+
 		done()
 	}
 
@@ -52,9 +52,9 @@ class Section extends Default {
 		super.destroy()
 
 		this.page.parentNode.removeChild(this.page)
-		
+
 		done()
 	}
 }
 
-module.exports = Section
+module.exports = Catering
