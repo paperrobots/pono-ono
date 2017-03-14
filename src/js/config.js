@@ -11,7 +11,9 @@ const config = {
 	a: select.all('a'),
 
 	width: window.innerWidth,
-	height: window.innerHeight
+	height: window.innerHeight,
+
+	menuBarIsHorizontal: window.innerWidth < 769
 }
 
 export default config

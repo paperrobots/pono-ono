@@ -62,8 +62,18 @@ class App {
     const tl = new TimelineMax({ paused: true })
 
     tl.to(this.ui.overlay, 0.8, { autoAlpha: 0 }, 'in')
-    tl.to(this.ui.mask, 0.8, { x: 0, borderColor: 'transparent' }, 'in')
-    tl.to(this.ui.sideNav, 0.8, { x: 0 }, 'in')
+
+    if ( config.menuBarIsHorizontal === true ) {
+
+      tl.to(this.ui.mask, 0.8, { y: 0, borderColor: 'transparent' }, 'in')
+      tl.to(this.ui.sideNav, 0.8, { y: 0 }, 'in')
+
+    } else {
+
+      tl.to(this.ui.mask, 0.8, { x: 0, borderColor: 'transparent' }, 'in')
+      tl.to(this.ui.sideNav, 0.8, { x: 0 }, 'in')
+    }
+    
     tl.staggerFrom(this.a, 1, { y: '100%', autoAlpha: 0 }, 0.06, 'in')
     tl.restart()
   }
@@ -74,13 +84,25 @@ class App {
 
     classes.remove(config.body, 'menu-is-open')
 
-    this.translate = (config.width / 2) - 100;
-
     const tl = new TimelineMax({ paused: true })
 
-    tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
-    tl.to(this.ui.mask, 0.8, { x: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
-    tl.to(this.ui.sideNav, 0.8, { x: this.translate, clearProps: 'all' }, 'out')
+    if ( config.menuBarIsHorizontal === true ) {
+
+      this.translate = config.height - 64
+
+      tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
+      tl.to(this.ui.mask, 0.8, { y: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
+      tl.to(this.ui.sideNav, 0.8, { y: this.translate, clearProps: 'all' }, 'out')
+
+    } else {
+
+      this.translate = (config.width / 2) - 100
+
+      tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
+      tl.to(this.ui.mask, 0.8, { x: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
+      tl.to(this.ui.sideNav, 0.8, { x: this.translate, clearProps: 'all' }, 'out')
+    }
+
     tl.restart()
   }
 }

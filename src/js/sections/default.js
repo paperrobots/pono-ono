@@ -38,6 +38,8 @@ class Default {
 
     config.height = height
     config.width = width
+
+    config.menuBarIsHorizontal = config.width < 769
   }
 
   destroy() {

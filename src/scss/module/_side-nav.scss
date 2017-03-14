@@ -2,6 +2,13 @@
   @include position(fixed, 0 null 0 0);
   @include size(100%);
   background-color: $pink;
+  transform: translateX(calc(100% - 100px));
+  will-change: transform;
+  pointer-events: none;
+
+  @include tablet() {
+    transform: translateY(calc(100% - 64px));
+  }
 
   &::after {
     content: '';
@@ -19,28 +26,40 @@
     @include size(100%);
     padding-left: $menu-bar-size;
     display: flex;
+    justify-content: center;
     align-items: center;
+
+    @include tablet() {
+      padding-left: 0;
+    }
   }
 
   &__menu {
     position: relative;
     list-style-type: none;
     counter-reset: custom-counter;
-    padding-left: 20%;
   }
 
   &__item {
-    margin-bottom: 2rem;
+    @include fluid-type(margin-bottom, $md, $xl, 12px, 16px);
+
+    @include tablet() {
+      @include fluid-type(margin-bottom, $xs, $md, 12px, 16px);
+    }
   }
 
   &__link {
     position: relative;
     display: inline-block;
     font-family: $font-title;
-    font-size: 9rem;
+    @include fluid-type(font-size, $md, $xl, 40px, 72px);
     font-weight: 900;
     color: $white;
     z-index: 200;
+
+    @include tablet() {
+      @include fluid-type(font-size, $xs, $md, 36px, 72px);
+    }
 
     &::before {
       display: inline-block;
@@ -48,22 +67,34 @@
       counter-increment: custom-counter;
       color: $white;
       font-family: $font-body;
-      font-size: 2rem;
       font-weight: 400;
-      margin-right: 4rem;
+      @include fluid-type(font-size, $md, $xl, 12px, 16px);
+      @include fluid-type(margin-right, $md, $xl, 16px, 32px);
       transition: transform .7s $ease-out-expo;
+
+      @include tablet() {
+        @include fluid-type(font-size, $xs, $md, 12px, 16px);
+        @include fluid-type(margin-right, $xs, $md, 16px, 32px);
+      }
     }
 
     &::after {
       content: '';
       position: absolute;
       @include size(7.5rem 1px);
+      @include fluid-type(width, $md, $xl, 38px, 60px);
       background-color: $white;
       bottom: 21px;
+      @include fluid-type(bottom, $md, $xl, 16px, 25px);
       left: 0;
       transform-origin: right;
       transform: scaleX(0);
       transition: transform .7s $ease-out-expo;
+
+      @include tablet() {
+        @include fluid-type(width, $xs, $md, 38px, 60px);
+        @include fluid-type(bottom, $xs, $md, 16px, 25px);
+      }
     }
 
     &:hover {

@@ -20,5 +20,17 @@ $light-grey: #B8B8B8;
 $dark-grey: #676767;
 $white: #FFFFFF;
 
-// Dimensions
+// Sizes
 $menu-bar-size: 12.5rem;
+
+// Breakpoints
+// # using `max-width` for this project
+$xs: 320px;
+$sm: 450px;
+$md: 768px;
+$xl: 1440px;
+
+$mobile-xs: '(max-width: #{$xs})';
+$mobile: '(max-width: #{$sm})';
+$tablet: '(max-width: #{$md})';
+$desktop-hd: '(max-width: #{$xl})';

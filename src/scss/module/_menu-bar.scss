@@ -8,18 +8,28 @@
   justify-content: space-between;
   align-items: center;
 
+  @include tablet() {
+    flex-direction: row;
+    @include position(fixed, 0 0 auto 0);
+    @include size(100% 8rem);
+  }
+
   &__burger {
     @include resetButton();
     width: 100%;
     padding: 4rem 0;
     z-index: 200;
 
+    @include tablet() {
+      padding: 0;
+      @include size(10.5rem 100%);
+    }
+
     span {
-      display: block;
+      @include center-block();
       @include size(3rem 1px);
       background-color: $dark-grey;
       position: relative;
-      margin: 0 auto;
       transition: transform .7s $ease-out-quint, background-color .4s $ease-out-quint;
 
       &:before,
@@ -47,10 +57,33 @@
 
         &:before {
           transform: translateY(-8px);
+
+          @include tablet() {
+            transform: translateY(-6px);
+          }
         }
 
         &:after {
           transform: translateY(8px);
+
+          @include tablet() {
+            transform: translateY(6px);
+          }
+        }
+      }
+    }
+
+    &:active {
+      @include tablet() {
+        span {
+
+          &:before {
+            transform: translateY(-8px);
+          }
+
+          &:after {
+            transform: translateY(8px);
+          }
         }
       }
     }
@@ -61,15 +94,23 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -6.25rem;
-    margin-left: -4rem;
+    transform: translate(-50%, -50%);
     z-index: 200;
+
+    @include tablet() {
+      @include size(8rem 4.25rem);
+    }
 
     &-img {
       @include size($menu-bar-size auto);
       position: absolute;
       transform: translate(-18% , 50%) rotate(-90deg);
       transition: opacity 0.5s $ease-out-quint;
+
+      @include tablet() {
+        @include size(8rem auto);
+        transform: none;
+      }
 
       &--light {
         opacity: 0;
@@ -83,16 +124,44 @@
     align-items: center;
     z-index: 200;
     padding-bottom: 2rem;
+
+    @include tablet() {
+      flex-direction: row;
+      padding-bottom: 0;
+      padding-right: 3rem;
+    }
+
+    @include mobile() {
+      position: absolute;
+      padding-right: 0;
+      top: calc(100vh - 48px);
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      opacity: 0;
+    }
   }
 
   &__social-media-link {
 
-    svg path:not(.bounds) {
-      transition: fill 0.8s $ease-out-quint;
-    }
+    svg {
+      @include size(36px);
 
+      @include tablet() {
+        @include size(32px);
+      }
+
+      path:not(.bounds) {
+        fill: $dark-grey;
+        transition: fill 0.8s $ease-out-quint;
+
+        @include mobile() {
+          fill: $white;
+        }
+      }
+    }
     &:hover svg path:not(.bounds) {
-      fill: $dark-grey;
+      fill: $light-grey;
     }
   }
 
@@ -100,11 +169,28 @@
     @include position(fixed, 0 null 0 0);
     @include size(50% 100%);
     border-right: 1px solid $light-grey;
+    transform: translateX(calc(-100% + 100px));
+    overflow: hidden;
+    will-change: transform;
+
+    @include tablet() {
+      @include position(fixed, 0 0 0 0);
+      @include size(100%);
+      border-right: none;
+      border-bottom: 1px solid $light-grey;
+      transform: translateY(calc(-100% + 64px));
+    }
   }
 
   &__overlay {
     @include position(absolute, 0 null 0 0);
     @include size(100%);
     background-color: $white;
+    will-change: opacity;
+
+    @include tablet() {
+      @include position(absolute, 0 0 0 0);
+      @include size(100%);
+    }
   }
 }
