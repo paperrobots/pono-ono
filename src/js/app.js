@@ -65,15 +65,17 @@ class App {
 
     if ( config.menuBarIsHorizontal === true ) {
 
+      // animate y
       tl.to(this.ui.mask, 0.8, { y: 0, borderColor: 'transparent' }, 'in')
       tl.to(this.ui.sideNav, 0.8, { y: 0 }, 'in')
 
     } else {
 
+      // animate x
       tl.to(this.ui.mask, 0.8, { x: 0, borderColor: 'transparent' }, 'in')
       tl.to(this.ui.sideNav, 0.8, { x: 0 }, 'in')
     }
-    
+
     tl.staggerFrom(this.a, 1, { y: '100%', autoAlpha: 0 }, 0.06, 'in')
     tl.restart()
   }
@@ -88,16 +90,18 @@ class App {
 
     if ( config.menuBarIsHorizontal === true ) {
 
-      this.translate = config.height - 64
+      this.translate = config.height - 64 // height + menu bar height
 
+      // animate y
       tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
       tl.to(this.ui.mask, 0.8, { y: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
       tl.to(this.ui.sideNav, 0.8, { y: this.translate, clearProps: 'all' }, 'out')
 
     } else {
 
-      this.translate = (config.width / 2) - 100
+      this.translate = (config.width / 2) - 100 // side nav width - menu bar width
 
+      // animate x
       tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
       tl.to(this.ui.mask, 0.8, { x: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
       tl.to(this.ui.sideNav, 0.8, { x: this.translate, clearProps: 'all' }, 'out')
