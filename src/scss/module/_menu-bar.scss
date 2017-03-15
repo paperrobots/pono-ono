@@ -15,7 +15,7 @@
   }
 
   &__burger {
-    @include resetButton();
+    @include reset-button();
     width: 100%;
     padding: 4rem 0;
     z-index: 200;
@@ -28,7 +28,7 @@
     span {
       @include center-block();
       @include size(3rem 1px);
-      background-color: $dark-grey;
+      background-color: $charcoal;
       position: relative;
       transition: transform .7s $ease-out-quint, background-color .4s $ease-out-quint;
 
@@ -37,7 +37,7 @@
         content: '';
         display: inline-block;
         @include size(3rem 1px);
-        background-color: $dark-grey;
+        background-color: $charcoal;
         position: absolute;
         left: 0;
         transition: transform .7s $ease-out-quint, background-color .4s $ease-out-quint;
@@ -96,6 +96,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 200;
+    transition: opacity 0.5s $ease-out-quint;
 
     @include tablet() {
       @include size(8rem 4.25rem);
@@ -152,7 +153,7 @@
       }
 
       path:not(.bounds) {
-        fill: $dark-grey;
+        fill: $charcoal;
         transition: fill 0.8s $ease-out-quint;
 
         @include mobile() {
@@ -161,14 +162,14 @@
       }
     }
     &:hover svg path:not(.bounds) {
-      fill: $light-grey;
+      fill: $ash;
     }
   }
 
   &__mask {
     @include position(fixed, 0 null 0 0);
     @include size(50% 100%);
-    border-right: 1px solid $light-grey;
+    border-right: 1px solid $ash;
     transform: translateX(calc(-100% + 100px));
     overflow: hidden;
     will-change: transform;
@@ -177,7 +178,7 @@
       @include position(fixed, 0 0 0 0);
       @include size(100%);
       border-right: none;
-      border-bottom: 1px solid $light-grey;
+      border-bottom: 1px solid $ash;
       transform: translateY(calc(-100% + 64px));
     }
   }

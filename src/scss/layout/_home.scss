@@ -1,0 +1,38 @@
+.page-home {
+  display: block;
+  text-align: left;
+
+  &__container {
+    @include size(100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: $menu-bar-size;
+    position: relative;
+    transition: transform 0.8s $ease-out-expo;
+
+    @include tablet() {
+      margin-left: 0;
+      margin-top: 8rem;
+    }
+  }
+
+  &__inner {
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    text-align: center;
+  }
+
+  &__branding {
+    width: 300px;
+    height: 210px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 8rem;
+  }
+
+  &__title,
+  &__tagline {
+    @include hide-text();
+  }
+}

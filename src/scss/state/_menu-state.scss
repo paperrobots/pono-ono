@@ -40,12 +40,23 @@
       @include mobile() {
         pointer-events: auto;
         opacity: 1;
-        transition: opacity 1.2s $ease-out-quint 0.6s;  
+        transition: opacity 1.2s $ease-out-quint 0.6s;
       }
     }
 
     &__social-media-link svg path:not(.bounds) {
       fill: $white;
+    }
+  }
+
+  .page-home {
+
+    &__container {
+      transform: translateX(80px);
+
+      @include tablet() {
+        transform: none;
+      }
     }
   }
 }

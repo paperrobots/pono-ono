@@ -17,7 +17,6 @@ class PonoOno extends TimberSite {
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
-		// add_filter( 'nav_menu_css_class', array( $this, 'special_nav_class' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 		parent::__construct();
@@ -28,12 +27,6 @@ class PonoOno extends TimberSite {
 	function register_taxonomies() {
 		//this is where you can register custom taxonomies
 	}
-	// function special_nav_class( $classes, $item ) {
-	// 	if ( in_array( 'current-menu-item', $classes ) ){
-	// 		$classes[] = 'site-nav__link--active';
-	// 	}
-	// 	return $classes;
-	// }
 	function add_to_context( $context ) {
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;

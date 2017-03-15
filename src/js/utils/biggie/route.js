@@ -7,11 +7,8 @@ export default (e) => {
   e.preventDefault()
 
   const target = e.currentTarget
-  const href = target.getAttribute('href')
-  const index = href.match(new RegExp(config.HOST)).index + config.HOST.length
-  const newRoute = href.slice(index, href.length - 1)
 
   if (classes.has(target, 'no-route') || (target.hasAttribute('target') && target.getAttribute('target') == '_blank')) return
 
-  framework.go(newRoute)
+  framework.go(target.getAttribute('href'))
 }

@@ -26,18 +26,15 @@ html, body {
 body {
   font-size: 2rem;
   font-family: $font-title;
-  color: $light-grey;
-
-  &.is-loading {
-    cursor: wait;
-  }
+  color: $ash;
 }
 
 a {
   text-decoration: none;
-  color: $dark-grey;
+  color: $charcoal;
 }
 
 h1 {
-  color: $light-green;
+  color: $eucalyptus-1;
+  margin: 0;
 }

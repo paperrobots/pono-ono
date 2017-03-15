@@ -9,15 +9,25 @@ $font-roboto-mono: 'Roboto Mono', $monospace;
 // Defaults
 $font-title: $font-freight;
 $font-body: $font-roboto-mono;
+$font-ui: $font-roboto-mono;
 
 // Colors
-$light-green: #87977B;
-$dark-green: #3A5644;
-$tan: #FFF9EB;
-$pink: #F9C8BD;
-$dark-blue: #2C315A;
-$light-grey: #B8B8B8;
-$dark-grey: #676767;
+$eucalyptus-1: #87977B;
+$eucalyptus-2: #B7C180;
+$eucalyptus-3: #E7EAE5;
+
+$ocean-blue-1: #2C315A;
+$ocean-blue-2: #80839C;
+$ocean-blue-3: #D5D6DE;
+
+$invalid-salmon: #FF5555;
+$shrimp: #F9C8BD;
+$sand: #FFF9EB;
+
+$monstera-green: #3A5644;
+$charcoal: #676767;
+$ash: #B8B8B8;
+
 $white: #FFFFFF;
 
 // Sizes
@@ -28,9 +38,11 @@ $menu-bar-size: 12.5rem;
 $xs: 320px;
 $sm: 450px;
 $md: 768px;
+$lg: 1000px;
 $xl: 1440px;
 
 $mobile-xs: '(max-width: #{$xs})';
 $mobile: '(max-width: #{$sm})';
 $tablet: '(max-width: #{$md})';
+$desktop: '(max-width: #{$lg})';
 $desktop-hd: '(max-width: #{$xl})';

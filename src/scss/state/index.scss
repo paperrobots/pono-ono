@@ -1,1 +1,19 @@
 @import 'menu-state';
+
+body {
+
+  &.is-loading {
+    cursor: wait;
+  }
+
+  &.is-home {
+
+    .menu-bar__logo {
+      @include pointer-events-hidden();
+
+      @include tablet() {
+        @include pointer-events-visible();
+      }
+    }
+  }
+}

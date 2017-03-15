@@ -4,7 +4,7 @@
     	<ol class="side-nav__menu">
     	{% for item in menu %}
     		<li class="side-nav__item">
-          <a href="{{ item.get_link }}" class="side-nav__link js-link {{ item.classes | join(' ') }}">
+          <a href="{{ item.get_link|relative }}" class="side-nav__link js-link {{ item.classes | join(' ') }}">
             {{ item.title }}
           </a>
     		</li>

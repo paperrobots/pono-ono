@@ -1,6 +1,21 @@
-@mixin hidden {
+@mixin hidden() {
   opacity: 0;
   visibility: hidden;
+}
+
+@mixin visible() {
+  opacity: 1;
+  visibility: visible;
+}
+
+@mixin pointer-events-hidden() {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@mixin pointer-events-visible() {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @mixin absolute() {
@@ -26,7 +41,7 @@
   margin: 0 auto;
 }
 
-@mixin resetButton() {
+@mixin reset-button() {
   appearance: none;
   border: none;
   background: none;
@@ -51,6 +66,12 @@
 
 @mixin tablet() {
   @media #{$tablet} {
+    @content;
+  }
+}
+
+@mixin desktop() {
+  @media #{$desktop} {
     @content;
   }
 }

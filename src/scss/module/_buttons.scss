@@ -1,0 +1,21 @@
+.button {
+  display: inline-block;
+  @include reset-button();
+  font-family: $font-ui;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1;
+  color: $charcoal;
+  padding: 15px 6rem;
+  background-color: $eucalyptus-1;
+  border: 1px solid $eucalyptus-1;
+  color: $white;
+  transition: color 0.6s $ease-out-quint,
+              background-color 0.6s $ease-out-quint,
+              border-color 0.6s $ease-out-quint;
+
+  &:hover {
+    background-color: lighten($eucalyptus-1, 10%);
+    border-color: lighten($eucalyptus-1, 10%);
+  }
+}

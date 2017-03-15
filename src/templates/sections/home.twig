@@ -1,5 +1,24 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <h1>{{ post.title }}</h1>
+
+  {% set bg_image = TimberImage(post.get_field('bg_image')) %}
+  {% set bg_position = post.get_field('bg_position') %}
+  {% set logo_image = TimberImage(post.get_field('logo_image')) %}
+  {% set cta_link = post.get_field('cta_link') %}
+  {% set cta_label = post.get_field('cta_label') %}
+
+  <div class="page-home__container" style="background-image: url('{{ bg_image.src }}'); background-position: {{ bg_position }};">
+    <div class="page-home__inner">
+      <div class="page-home__branding" style="background-image: url('{{ logo_image.src }}');">
+        <h1 class="page-home__title">
+          {{ site.title }}
+        </h1>
+        <h2 class="page-home__tagline">{{ site.description }}</h2>
+      </div>
+      <a href="{{ cta_link|relative }}" class="page-home__cta-button button">
+        {{ cta_label }}
+      </a>
+    </div>
+  </div>
 {% endblock %}
