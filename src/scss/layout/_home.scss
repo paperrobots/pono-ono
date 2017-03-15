@@ -8,7 +8,7 @@
     background-repeat: no-repeat;
     margin-left: $menu-bar-size;
     position: relative;
-    transition: transform 0.8s $ease-out-expo;
+    transition: transform 0.8s $ease-out-quint;
 
     @include tablet() {
       margin-left: 0;
