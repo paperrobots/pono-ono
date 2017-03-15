@@ -12,13 +12,12 @@
 
     @include tablet() {
       margin-left: 0;
-      // margin-top: 8rem;
     }
   }
 
   &__inner {
     position: absolute;
-    top: 55%;
+    top: 50%;
     left: 0;
     width: 50%;
     text-align: center;
@@ -32,7 +31,6 @@
     }
 
     @include mobile() {
-      // top: 60%;
       left: 3%;
       width: auto;
     }

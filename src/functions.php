@@ -9,9 +9,15 @@ if ( ! class_exists( 'Timber' ) ) {
 	});
 	return;
 }
+
 Timber::$dirname = array('templates', 'templates/components', 'templates/sections');
+
 class PonoOno extends TimberSite {
+
 	function __construct() {
+
+		show_admin_bar(false);
+
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
@@ -19,19 +25,24 @@ class PonoOno extends TimberSite {
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+
 		parent::__construct();
 	}
+
 	function register_post_types() {
 		//this is where you can register custom post types
 	}
+
 	function register_taxonomies() {
 		//this is where you can register custom taxonomies
 	}
+
 	function add_to_context( $context ) {
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;
 		return $context;
 	}
+
 	function add_to_twig( $twig ) {
 		/* this is where you can add your own functions to twig */
 		$twig->addExtension( new Twig_Extension_StringLoader() );

@@ -6,7 +6,8 @@ body {
     cursor: wait;
   }
 
-  // &.is-home {
+  &.is-home {
+    overflow: hidden;
   //
   //   .menu-bar__logo {
   //     @include pointer-events-hidden();
@@ -15,5 +16,5 @@ body {
   //       @include pointer-events-visible();
   //     }
   //   }
-  // }
+  }
 }
