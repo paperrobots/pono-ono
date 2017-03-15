@@ -12,23 +12,41 @@
 
     @include tablet() {
       margin-left: 0;
-      margin-top: 8rem;
+      // margin-top: 8rem;
     }
   }
 
   &__inner {
     position: absolute;
-    top: 45%;
-    left: 10%;
+    top: 55%;
+    left: 0;
+    width: 50%;
     text-align: center;
+
+    @include desktop() {
+      width: 35%;
+    }
+
+    @include tablet() {
+      width: 50%;
+    }
+
+    @include mobile() {
+      // top: 60%;
+      left: 3%;
+      width: auto;
+    }
   }
 
-  &__branding {
-    width: 300px;
-    height: 210px;
+  &__logo {
+    @include fluid-type(width, $md, $xl, 190px, 300px);
+    @include fluid-type(height, $md, $xl, 150px, 210px);
+    @include fluid-type(margin-bottom, $md, $xl, 0px, 48px);
+    margin-right: auto;
+    margin-left: auto;
+    background-image: url('#{$base-img}logo.png');
     background-size: contain;
     background-repeat: no-repeat;
-    margin-bottom: 8rem;
   }
 
   &__title,
