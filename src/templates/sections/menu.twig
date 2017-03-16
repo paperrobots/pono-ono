@@ -4,27 +4,27 @@
 
   {% set steps = post.get_field('steps') %}
 
-  <div class="page-menu__container">
+  <div class="page-menu__container container">
     <section class="page-menu__section">
-      <div class="page-menu__text-box text-box">
-        <h1>{{ post.get_field('page_title') }}</h1>
-        <p>{{ post.get_field('intro_body') }}</p>
+      <div class="page-menu__text-box text-box text-box--h1">
+        <h1 class="text-box__title">{{ post.get_field('page_title') }}</h1>
+        <div class="text-box__body">{{ post.get_field('intro_body') }}</div>
       </div>
       <ol class="page-menu__steps">
         {% for step in steps %}
-          <li class="step">
-            <h2 class="step__label">{{ step.label }}</h2>
-            <ul class="step__options">
+          <li class="page-menu__step js-steps">
+            <h2 class="page-menu__step__label">{{ step.label }}</h2>
+            <ul class="page-menu__step__options">
               {% set opts = step.options|split(',') %}
               {% for opt in opts %}
-                <li class="step__option">{{ opt }}</li>
+                <li class="page-menu__step__option">{{ opt }}</li>
               {% endfor %}
             </ul>
           </li>
         {% endfor %}
       </ol>
-      <!-- <img class="leaves leaves--bottom" src="{{ site.theme.link }}/assets/img/leaves-1.jpg" alt="Eucalyptus Leaves">
-      <img class="leaves leaves--top" src="{{ site.theme.link }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves"> -->
+      <img class="leaves leaves--bottom" src="{{ site.theme.link }}/assets/img/leaves-1.jpg" alt="Eucalyptus Leaves">
+      <img class="leaves leaves--top" src="{{ site.theme.link }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves">
     </section>
   </div>
 {% endblock %}

@@ -9,6 +9,10 @@
   color: $white;
   position: relative;
 
+  &::after {
+    display: none;
+  }
+
   div {
     @include size(100%);
     position: absolute;

@@ -21,7 +21,22 @@ class Menu extends Default {
 
 		super.ready()
 
+		this.positionStepList()
+
 		done()
+	}
+
+	positionStepList() {
+
+		let margin = 28
+		const interval = 1.2
+
+		this.ui.steps.forEach((step, i) => {
+
+			step.style.marginLeft = `${margin}%`
+
+			margin = margin * interval
+		})
 	}
 
 	animateIn(req, done) {

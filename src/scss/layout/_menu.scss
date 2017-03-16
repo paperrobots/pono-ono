@@ -1,0 +1,69 @@
+.page-menu {
+  display: block;
+  text-align: left;
+  margin-left: $menu-bar-size;
+
+  @include tablet() {
+    margin-left: 0;
+    margin-top: 8rem;
+  }
+
+  &__container {
+    @include size(100%);
+    transition: transform 0.8s $ease-out-quint;
+  }
+
+  &__section {
+    @include position(absolute, 0 0 0 0);
+  }
+
+  &__steps {
+    list-style-type: none;
+    counter-reset: step-count;
+    margin-top: 2%;
+  }
+
+  &__step {
+    margin-bottom: 5rem;
+
+    &::before {
+      content: counter(step-count, decimal-leading-zero)'.';
+      counter-increment: step-count;
+      display: inline-block;
+      color: $charcoal;
+    }
+
+    &__label {
+      display: inline-block;
+      color: $eucalyptus-1;
+      margin-bottom: 2rem;
+    }
+
+    &__options {
+      list-style-type: none;
+      margin-left: 4ch;
+    }
+
+    &__option {
+      display: inline-block;
+      color: $charcoal;
+      margin-right: 5rem;
+    }
+  }
+}
+
+.leaves {
+  position: absolute;
+
+  &--bottom {
+    @include size(24% auto);
+    left: 8rem;
+    bottom: 0;
+  }
+
+  &--top {
+    @include size(38% auto);
+    right: 2rem;
+    top: 0;
+  }
+}
