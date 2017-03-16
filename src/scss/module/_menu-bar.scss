@@ -119,6 +119,10 @@
         opacity: 0;
       }
     }
+
+    &::after {
+      display: none;
+    }
   }
 
   // .menu-bar__social-media
@@ -167,6 +171,10 @@
 
     &:hover svg path:not(.bounds) {
       fill: $ash;
+    }
+
+    &::after {
+      display: none;
     }
   }
 

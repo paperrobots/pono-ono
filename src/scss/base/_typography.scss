@@ -1,0 +1,82 @@
+html {
+  font-size: 8px;
+}
+
+body {
+  font-size: 2rem;
+  font-family: $font-body;
+  color: $ash;
+}
+
+a {
+  text-decoration: none;
+  color: $charcoal;
+  display: inline-block;
+  position: relative;
+  font-weight: 500;
+
+  &::after {
+    content: '';
+    display: block;
+    @include position(absolute, null null -3px 0);
+    @include size(100% 1px);
+    background-color: $ash;
+    transform-origin: left;
+    transition: transform 1s $ease-out-expo;
+  }
+
+  &:hover {
+
+    &::after {
+      transform-origin: right;
+      transform: scaleX(0);
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $monstera-green;
+  font-family: $font-title;
+  font-weight: 700;
+  margin: 0;
+}
+
+h1 {
+  font-size: 16rem;
+  line-height: 1.12;
+}
+
+h2 {
+  font-size: 10rem;
+  line-height: 0.93;
+}
+
+h3 {
+  font-size: 9rem;
+  line-height: 1.06;
+}
+
+h4 {
+  font-size: 4.25rem;
+  line-height: 1.28;
+}
+
+h5 {
+  font-size: 3.5rem;
+}
+
+h6 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 2rem;
+  line-height: 1.5625;
+  margin-bottom: 2rem;
+  color: $ocean-blue-1;
+}

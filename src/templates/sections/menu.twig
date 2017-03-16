@@ -1,5 +1,30 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <h1>{{ post.title }}</h1>
+
+  {% set steps = post.get_field('steps') %}
+
+  <div class="page-menu__container">
+    <section class="page-menu__section">
+      <div class="page-menu__text-box text-box">
+        <h1>{{ post.get_field('page_title') }}</h1>
+        <p>{{ post.get_field('intro_body') }}</p>
+      </div>
+      <ol class="page-menu__steps">
+        {% for step in steps %}
+          <li class="step">
+            <h2 class="step__label">{{ step.label }}</h2>
+            <ul class="step__options">
+              {% set opts = step.options|split(',') %}
+              {% for opt in opts %}
+                <li class="step__option">{{ opt }}</li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ol>
+      <!-- <img class="leaves leaves--bottom" src="{{ site.theme.link }}/assets/img/leaves-1.jpg" alt="Eucalyptus Leaves">
+      <img class="leaves leaves--top" src="{{ site.theme.link }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves"> -->
+    </section>
+  </div>
 {% endblock %}
