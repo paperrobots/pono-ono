@@ -54,6 +54,7 @@
 
 .leaves {
   position: absolute;
+  z-index: -1;
 
   &--bottom {
     @include size(24% auto);
