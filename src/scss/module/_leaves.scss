@@ -1,0 +1,16 @@
+.leaves {
+  position: absolute;
+  z-index: -1;
+
+  &--bottom {
+    @include size(24% auto);
+    left: 8rem;
+    bottom: 0;
+  }
+
+  &--top {
+    @include size(38% auto);
+    right: 2rem;
+    top: 0;
+  }
+}
