@@ -2,6 +2,7 @@ import config from 'config'
 import utils from 'utils'
 import classes from 'dom-classes'
 import Default from './default'
+import Slider from '../lib/slider'
 
 class Menu extends Default {
 
@@ -10,6 +11,8 @@ class Menu extends Default {
 		super(opt)
 
 		this.slug = 'menu'
+
+		this.onSlide = this.onSlide.bind(this)
 	}
 
 	init(req, done) {
@@ -22,6 +25,8 @@ class Menu extends Default {
 		super.ready()
 
 		this.positionStepList()
+
+		this.initSlider()
 
 		done()
 	}
@@ -37,6 +42,40 @@ class Menu extends Default {
 
 			margin = margin * interval
 		})
+	}
+
+	initSlider() {
+
+		this.slides = [...this.ui.slides]
+
+		this.slider = new Slider({
+			length: this.slides.length - 1,
+			direction: config.infos.isDevice ? 'x' : 'y',
+			callback: this.onSlide
+		})
+
+		this.slider.init()
+	}
+
+	onSlide(e) {
+
+		console.log(e)
+
+		const index = e.current
+		const previous = e.previous
+
+		this.slider.animating = true
+
+		const tl = new TimelineMax({ paused: true, onComplete: _ => {
+			this.slider.animating = false
+		}})
+
+		tl.staggerTo(this.slides, 0.8, { cycle: {
+			x: (loop) => index === loop ? 0 : loop < index ? -config.width : config.width,
+			zIndex: (loop) => index === loop ? 2 : 1
+		}, ease: Power4.easeInOut}, 0, 0)
+
+		tl.restart()
 	}
 
 	animateIn(req, done) {
@@ -64,6 +103,8 @@ class Menu extends Default {
 	destroy(req, done) {
 
 		super.destroy()
+
+		this.slider.destroy()
 
 		this.page.parentNode.removeChild(this.page)
 

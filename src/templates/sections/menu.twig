@@ -3,9 +3,10 @@
 {% block content %}
 
   {% set steps = post.get_field('steps') %}
+  {% set menu_items = post.get_field('menu_items') %}
 
   <div class="page-menu__container container">
-    <section class="page-menu__section">
+    <section class="page-menu__section js-slides">
       <div class="page-menu__text-box text-box text-box--h1">
         <h1 class="text-box__title">{{ post.get_field('page_title') }}</h1>
         <div class="text-box__body">{{ post.get_field('intro_body') }}</div>
@@ -26,5 +27,11 @@
       <img class="leaves leaves--bottom" src="{{ site.theme.link }}/assets/img/leaves-1.jpg" alt="Eucalyptus Leaves">
       <img class="leaves leaves--top" src="{{ site.theme.link }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves">
     </section>
+
+    {% for item in menu_items %}
+      <section class="page-menu__section js-slides">
+        {{ item.title }}
+      </section>
+    {% endfor %}
   </div>
 {% endblock %}

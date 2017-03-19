@@ -6,7 +6,8 @@ body {
     cursor: wait;
   }
 
-  &.is-home {
+  &.is-home,
+  &.is-menu {
     overflow: hidden;
   //
   //   .menu-bar__logo {
