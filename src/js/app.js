@@ -38,10 +38,14 @@ class App {
 
   onBurgerClick(e) {
 
+    if (this.animating) return
+
     this.open === true ? this.animateMenuOut() : this.animateMenuIn()
   }
 
   onPageClick(e) {
+
+    if (this.animating) return
 
     if (!this.open) return
 
@@ -50,16 +54,21 @@ class App {
 
   onAnchorClick(e) {
 
+    if (this.animating) return
+
     this.animateMenuOut()
   }
 
   animateMenuIn() {
 
+    this.animating = true
     this.open = true
 
     classes.add(config.body, 'menu-is-open')
 
-    const tl = new TimelineMax({ paused: true })
+    const tl = new TimelineMax({ paused: true, onComplete: _ => {
+      this.animating = false
+    }})
 
     tl.to(this.ui.overlay, 0.8, { autoAlpha: 0 }, 'in')
 
@@ -82,11 +91,14 @@ class App {
 
   animateMenuOut() {
 
+    this.animating = true
     this.open = false
 
     classes.remove(config.body, 'menu-is-open')
 
-    const tl = new TimelineMax({ paused: true })
+    const tl = new TimelineMax({ paused: true, onComplete: _ => {
+      this.animating = false
+    }})
 
     if ( config.menuBarIsHorizontal === true ) {
 
