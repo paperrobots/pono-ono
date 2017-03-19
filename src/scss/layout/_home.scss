@@ -36,6 +36,10 @@
 
     @include desktop() {
       width: 35%;
+
+      &::before {
+        transform: translateX(-50%) translateY(10%);
+      }
     }
 
     @include tablet() {
@@ -45,6 +49,10 @@
     @include mobile() {
       left: 3%;
       width: auto;
+
+      &::before {
+        transform: translateX(-50%) translateY(15%);
+      }
     }
   }
 
