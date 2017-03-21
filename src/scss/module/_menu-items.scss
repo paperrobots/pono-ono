@@ -1,0 +1,32 @@
+.page-menu-item {
+  height: 100vh;
+
+  &__header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    padding: 6rem 0 0 0;
+  }
+
+  &__title {
+    text-transform: lowercase;
+    margin-right: 8rem;
+  }
+
+  &__info {
+    width: 35%;
+    height: 200%;
+    border-image-source: url(#{$base-img}text-box--soft.png);
+    border-image-slice: 20;
+    border-image-width: 20;
+    border-image-outset: 20;
+  }
+
+  &__image {
+    @include center-block();
+    width: auto;
+    height: 90%;
+  }
+}

@@ -30,7 +30,16 @@
 
     {% for item in menu_items %}
       <section class="page-menu__section js-slides">
-        {{ item.title }}
+        <figure class="page-menu-item">
+          <header class="page-menu-item__header">
+            <h2 class="page-menu-item__title">{{ item.title }}</h2>
+            <figcaption class="page-menu-item__info">
+              <p>{{ item.sauce }}</p>
+              {{ item.ingredients }}
+            </figcaption>
+          </header>
+          <img class="page-menu-item__image" src="{{ TimberImage( item.image ).src }}" alt="{{ item.title }}">
+        </figure>
       </section>
     {% endfor %}
   </div>
