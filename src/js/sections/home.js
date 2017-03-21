@@ -12,6 +12,8 @@ class Home extends Default {
 
 		this.slug = 'home'
 		this.ui = null
+
+		this.onAssetsLoad = this.onAssetsLoad.bind(this)
 	}
 
 	init(req, done) {
@@ -23,48 +25,44 @@ class Home extends Default {
 
 		super.ready()
 
-		this.renderer = new PIXI.autoDetectRenderer(config.width, config.height, { transparent: true })
-		this.renderer.view.style.position = 'absolute'
-		this.renderer.view.style.display = 'block'
-		this.renderer.view.style.pointerEvents = 'none'
-		this.renderer.autoResize = true;
+		this.pixi = new PIXI.Application(config.width, config.height, { transparent: true })
+		this.pixi.view.style.position = 'absolute'
+		this.pixi.view.style.display = 'block'
+		this.pixi.view.style.pointerEvents = 'none'
+		this.pixi.view.style.zIndex = '9999'
+		this.pixi.autoResize = true;
 
-		config.body.appendChild(this.renderer.view)
+		config.body.appendChild(this.pixi.view)
 
-		this.stage = new PIXI.Container()
+		this.pixi.stop()
+
+		PIXI.loader.reset()
 
 		PIXI.loader
-		  .add('assets/img/sprite-01.png')
-		  .load(this.setupSprite)
+		  .add('spritesheet', `//${config.HOST}${this.ui.container.dataset.atlas}`)
+		  .load(this.onAssetsLoad)
 
 		done()
 	}
 
-	setupSprite() {
+	onAssetsLoad(loader, resources) {
 
-		console.log('entered setup')
-	  // //Create the `tileset` sprite from the texture
-	  // const texture = PIXI.utils.TextureCache['assets/img/sprite-01.png']
-		//
-	  // // Create a rectangle object that defines the position and
-	  // // size of the sub-image you want to extract from the texture
-	  // const rectangle = new PIXI.Rectangle(192, 128, 64, 64)
-		//
-	  // // Tell the texture to use that rectangular section
-	  // texture.frame = rectangle
-		//
-	  // // Create the sprite from the texture
-	  // const sprite = new PIXI.Sprite(texture)
-		//
-	  // // Position the rocket sprite on the canvas
-	  // sprite.x = 0
-	  // sprite.y = 0
-		//
-	  // // Add the rocket to the stage
-	  // this.stage.addChild(sprite)
-		//
-	  // // Render the stage
-	  // this.renderer.render(stage)
+		const textures = resources.spritesheet.textures
+		const keys = Object.keys(textures)
+		const frames = []
+
+		keys.forEach(key => frames.push(textures[key]))
+
+		this.anim = new PIXI.extras.AnimatedSprite(frames)
+
+		this.anim.x = 0
+    this.anim.y = 0
+		this.anim.scale.set(2.4, 2.4)
+    this.anim.animationSpeed = 0.5
+    this.anim.play()
+
+		this.pixi.stage.addChild(this.anim)
+		this.pixi.start()
 	}
 
 	animateIn(req, done) {
@@ -93,7 +91,7 @@ class Home extends Default {
 
 		super.resize()
 
-		this.renderer.resize(width, height)
+		this.pixi.renderer.resize(width, height)
 	}
 
 	destroy(req, done) {
@@ -103,6 +101,7 @@ class Home extends Default {
 		this.ui = null
 
 		this.page.parentNode.removeChild(this.page)
+		this.pixi.view.parentNode.removeChild(this.pixi.view)
 
 		done()
 	}

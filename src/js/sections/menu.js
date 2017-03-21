@@ -59,8 +59,6 @@ class Menu extends Default {
 
 	onSlide(e) {
 
-		console.log(e)
-
 		const index = e.current
 		const previous = e.previous
 

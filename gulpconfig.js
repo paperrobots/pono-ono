@@ -24,7 +24,7 @@ module.exports = {
 
   images: {
     build: { // Copies images from `src` to `build`; does not optimize
-      src: src+'**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg|*.eot|*.ttf|*.woff)',
+      src: src+'**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg|*.eot|*.ttf|*.woff|*.json)',
       dest: build
     },
     dist: {
