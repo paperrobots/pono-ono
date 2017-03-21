@@ -25,6 +25,7 @@ class Menu extends Default {
 		super.ready()
 
 		this.positionStepList()
+		this.positionMenuItemTitles()
 
 		this.initSlider()
 
@@ -37,10 +38,21 @@ class Menu extends Default {
 		const interval = 1.2
 
 		this.ui.steps.forEach((step, i) => {
-
 			step.style.marginLeft = `${margin}%`
-
 			margin = margin * interval
+		})
+	}
+
+	positionMenuItemTitles() {
+
+		[...this.ui.title]
+		.map(el => el.innerHTML)
+		.map(text => text.split(' '))
+		.map(arr => arr
+			.map(word => `<span>${word}</span>`)
+			.join('')
+		).forEach((split, i) => {
+			this.ui.title[i].innerHTML = split
 		})
 	}
 
@@ -58,8 +70,6 @@ class Menu extends Default {
 	}
 
 	onSlide(e) {
-
-		console.log(e)
 
 		const index = e.current
 		const previous = e.previous

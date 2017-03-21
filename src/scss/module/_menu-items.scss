@@ -1,5 +1,9 @@
 .page-menu-item {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 8rem;
 
   &__header {
     position: relative;
@@ -7,21 +11,26 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
-    padding: 6rem 0 0 0;
   }
 
   &__title {
     text-transform: lowercase;
     margin-right: 8rem;
+
+    span {
+      display: block;
+
+      &:last-child {
+        margin-left: 5rem;
+      }
+    }
   }
 
   &__info {
     width: 35%;
     height: 200%;
-    border-image-source: url(#{$base-img}text-box--soft.png);
-    border-image-slice: 20;
-    border-image-width: 20;
-    border-image-outset: 20;
+    border: 80px solid;
+    border-image: url(#{$base-img}text-box--soft.png) 80;
   }
 
   &__image {

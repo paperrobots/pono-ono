@@ -1,9 +1,7 @@
 .text-box {
-  position: relative;
-  background-image: url('#{$base-img}text-box.png');
-  background-size: 100% 100%;
-  margin: 8rem 0 0 6rem;
   width: 50%;
+  border: 60px solid;
+  border-image: url(#{$base-img}text-box.png) 60;
 
   h1, p {
     position: relative;
@@ -11,12 +9,11 @@
   }
 
   &__title {
-    transform: translateY(-40%);
+    transform: translate(-8%,-50%);
   }
 
   &__body {
-    padding: 0 16rem 8rem 20rem;
-    white-space: normal;
-    transform: translateY(-15%);
+    padding: 0 0 0 10rem;
+    transform: translateY(-100%);
   }
 }
