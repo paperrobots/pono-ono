@@ -1,7 +1,15 @@
 .text-box {
+  position: relative;
   width: 50%;
-  border: 60px solid;
-  border-image: url(#{$base-img}text-box.png) 60;
+  border: 80px solid;
+  border-image: url(#{$base-img}text-box--soft.png) 80;
+
+  &::before {
+    content: '';
+    display: block;
+    @include position(absolute, 0 0 0 0);
+    background-color: $sand;
+  }
 
   h1, p {
     position: relative;
@@ -9,11 +17,14 @@
   }
 
   &__title {
-    transform: translate(-8%,-50%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-60%);
   }
 
   &__body {
-    padding: 0 0 0 10rem;
-    transform: translateY(-100%);
+    padding: 0 4rem 0 14rem;
+    transform: translateY(-50%);
   }
 }

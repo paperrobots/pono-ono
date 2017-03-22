@@ -31,6 +31,10 @@
     height: 200%;
     border: 80px solid;
     border-image: url(#{$base-img}text-box--soft.png) 80;
+
+    p {
+      background-color: $sand;
+    }
   }
 
   &__image {
