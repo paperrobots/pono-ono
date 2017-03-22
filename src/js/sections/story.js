@@ -3,22 +3,22 @@ import utils from 'utils'
 import classes from 'dom-classes'
 import Default from './default'
 
-class About extends Default {
-	
+class Story extends Default {
+
 	constructor(opt) {
-		
+
 		super(opt)
 
-		this.slug = 'about'
+		this.slug = 'story'
 	}
-	
+
 	init(req, done) {
 
 		super.init(req, done)
 	}
-	
+
 	ready(done) {
-		
+
 		super.ready()
 
 		done()
@@ -34,7 +34,7 @@ class About extends Default {
 			onComplete: done
 		})
 	}
-	
+
 	animateOut(req, done) {
 
 		classes.remove(config.body, `is-${this.slug}`)
@@ -51,9 +51,9 @@ class About extends Default {
 		super.destroy()
 
 		this.page.parentNode.removeChild(this.page)
-		
+
 		done()
 	}
 }
 
-module.exports = About
+module.exports = Story
