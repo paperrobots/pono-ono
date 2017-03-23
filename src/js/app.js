@@ -54,8 +54,6 @@ class App {
 
   onAnchorClick(e) {
 
-    if (this.animating) return
-
     this.animateMenuOut()
   }
 
