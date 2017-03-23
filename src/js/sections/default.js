@@ -19,20 +19,10 @@ class Default {
   init(req, done, options) {
 
     const opts = options || { cache: true, sub: false }
+
     const view = this.view
-
-    let page;
-
-    if (req.previous === undefined) {
-      page = this.view.querySelector('.page');
-      classes.remove(page, 'is-hidden')
-      this.ready(done)
-    } else {
-      const ready = this.ready.bind(this, done)
-      page = biggie.page(req, view, opts, ready)
-    }
-
-    this.page = page;
+    const ready = this.ready.bind(this, done)
+    const page = this.page = biggie.page(req, view, opts, ready)
   }
 
   ready() {

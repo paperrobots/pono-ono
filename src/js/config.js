@@ -13,7 +13,8 @@ const config = {
 	width: window.innerWidth,
 	height: window.innerHeight,
 
-	menuBarIsHorizontal: window.innerWidth < 769
+	menuBarIsHorizontal: window.innerWidth < 769,
+	open: false
 }
 
 export default config

@@ -29,7 +29,7 @@ class App {
 
   addEvents() {
 
-    biggie.bind.add(config.a)
+    biggie.bind.add(this.ui.link)
 
     on(this.ui.burger, 'click', this.onBurgerClick)
     on(this.page, 'click', this.onPageClick)
@@ -40,14 +40,14 @@ class App {
 
     if (this.animating) return
 
-    this.open === true ? this.animateMenuOut() : this.animateMenuIn()
+    config.open === true ? this.animateMenuOut() : this.animateMenuIn()
   }
 
   onPageClick(e) {
 
     if (this.animating) return
 
-    if (!this.open) return
+    if (!config.open) return
 
     this.animateMenuOut()
   }
@@ -62,7 +62,7 @@ class App {
   animateMenuIn() {
 
     this.animating = true
-    this.open = true
+    config.open = true
 
     classes.add(config.body, 'menu-is-open')
 
@@ -92,7 +92,7 @@ class App {
   animateMenuOut() {
 
     this.animating = true
-    this.open = false
+    config.open = false
 
     classes.remove(config.body, 'menu-is-open')
 
