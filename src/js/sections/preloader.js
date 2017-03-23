@@ -21,8 +21,6 @@ class Preloader {
 
 		config.infos = sniffer.getInfos()
 
-		this.view.innerHTML = null
-
 		this.createDOM()
 
 		done()

@@ -38,8 +38,12 @@ class PonoOno extends TimberSite {
 	}
 
 	function add_to_context( $context ) {
+		
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;
+
+		$context['isAJAX'] = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+
 		return $context;
 	}
 
