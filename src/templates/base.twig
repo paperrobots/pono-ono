@@ -30,6 +30,13 @@
       {% endblock %}
     </aside>
 
+    <script>
+      window.APP = window.APP || {};
+      APP.BASE_URL = '{{ site.url }}';
+      APP.THEME_URL = '{{ site.theme.uri }}';
+      APP.AJAX_URL = '{{ fn('admin_url', 'admin-ajax.php') }}';
+      APP.SECURITY = '{{ fn( 'wp_create_nonce', 'user-submitted-catering-request' ) }}';
+    </script>
     <script src="{{site.theme.link}}/js/bundle.js"></script>
     {{ wp_footer }}
   </body>

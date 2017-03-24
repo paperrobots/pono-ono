@@ -21,8 +21,24 @@ class PonoOno extends TimberSite {
 		add_theme_support( 'post-thumbnails' );
 		add_theme_support( 'menus' );
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+
+		add_action( 'wp_footer', 'deregister_scripts' );
+
+		remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 );
+		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_action( 'admin_print_styles', 'print_emoji_styles' );
+		remove_action( 'wp_head', 'rest_output_link_wp_head' );
+		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'wp_head', 'wlwmanifest_link' );
+		remove_action( 'wp_head', 'index_rel_link' );
+		remove_action( 'wp_head', 'rsd_link' );
+		remove_action( 'wp_head', 'wp_generator' );
+
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
+
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 
@@ -99,3 +115,17 @@ function howdy_message($translated_text, $text, $domain) {
     return $new_message;
 }
 add_filter('gettext', 'howdy_message', 10, 3);
+
+/* Process Form Submissions */
+function process_catering_request() {
+
+	if ( ! empty( $_POST[ 'submission' ] ) ) {
+		wp_send_json_error( 'Honeypot check failed' );
+	}
+
+	if ( ! check_ajax_referer( 'user-submitted-catering-request', 'security' ) ) {
+		wp_send_json_error( 'Honeypot check failed' );
+	}
+}
+add_action( 'wp_ajax_process_catering_request', 'process_catering_request' );
+add_action( 'wp_ajax_nopriv_process_catering_request', 'process_catering_request' );

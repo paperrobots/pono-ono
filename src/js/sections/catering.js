@@ -1,8 +1,10 @@
 import config from 'config'
 import utils from 'utils'
+import ajax from 'please-ajax'
 import classes from 'dom-classes'
 import select from 'dom-select'
 import { on, off } from 'dom-event'
+import query from 'query-dom-components'
 import Default from './default'
 
 class Catering extends Default {
@@ -12,6 +14,8 @@ class Catering extends Default {
 		super(opt)
 
 		this.slug = 'catering'
+
+		this.onSubmit = this.onSubmit.bind(this)
 	}
 
 	init(req, done) {
@@ -23,12 +27,29 @@ class Catering extends Default {
 
 		super.ready()
 
-		this.ui.modal = select('.js-modal')
-		this.ui.container = select('.js-container')
+		this.modal = select('.js-modal')
+
+		this.form = query({ el: this.modal })
 
 		this.addEvents()
 
 		done()
+	}
+
+	addEvents() {
+
+		on(this.ui.toggle, 'click', this.toggleModal)
+		on(this.modal, 'click', this.toggleModal)
+		on(this.form.outer, 'click', this.blockClicks)
+		on(this.form.el, 'submit', this.onSubmit)
+	}
+
+	removeEvents() {
+
+		off(this.ui.toggle, 'click', this.toggleModal)
+		off(this.modal, 'click', this.toggleModal)
+		off(this.form.outer, 'click', this.blockClicks)
+		off(this.form.el, 'submit', this.onSubmit)
 	}
 
 	toggleModal() {
@@ -41,18 +62,41 @@ class Catering extends Default {
 		e.stopPropagation()
 	}
 
-	addEvents() {
+	onSubmit(e) {
 
-		on(this.ui.toggle, 'click', this.toggleModal)
-		on(this.ui.modal, 'click', this.toggleModal)
-		on(this.ui.container, 'click', this.blockClicks)
+		e.preventDefault()
+
+		const { fullName, eventDate, pickupTime, guestCount, email, dietaryRestrictions, specialRequests } = this.form
+
+		const formData = {
+			'fullName' : fullName.value,
+			'eventDate' : eventDate.value,
+			'pickupTime' : pickupTime.value,
+			'guestCount' : guestCount.value,
+			'email' : email.value,
+			'dietaryRestrictions' : dietaryRestrictions.value,
+			'specialRequests' : specialRequests.value
+		}
+
+		this.postFormData(formData, 'process_catering_request')
 	}
 
-	removeEvents() {
+	postFormData(formData, action) {
 
-		off(this.ui.toggle, 'click', this.toggleModal)
-		off(this.ui.modal, 'click', this.toggleModal)
-		off(this.ui.container, 'click', this.blockClicks)
+		ajax.post(APP.AJAX_URL, {
+			action: action,
+			data: formData,
+			submission: select('#xyq').value,
+			security: APP.SECURITY
+		}, {
+			success: response => {
+				if ( response.success === true ) {
+					alert('success')
+				} else {
+					alert('nahhhhhh bull u done fucked up')
+				}
+			}
+		})
 	}
 
 	animateIn(req, done) {
