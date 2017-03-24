@@ -1,6 +1,8 @@
 import config from 'config'
 import utils from 'utils'
 import classes from 'dom-classes'
+import select from 'dom-select'
+import { on, off } from 'dom-event'
 import Default from './default'
 
 class Catering extends Default {
@@ -21,7 +23,36 @@ class Catering extends Default {
 
 		super.ready()
 
+		this.ui.modal = select('.js-modal')
+		this.ui.container = select('.js-container')
+
+		this.addEvents()
+
 		done()
+	}
+
+	toggleModal() {
+
+		classes.toggle(config.body, 'modal-is-hidden')
+	}
+
+	blockClicks(e) {
+
+		e.stopPropagation()
+	}
+
+	addEvents() {
+
+		on(this.ui.toggle, 'click', this.toggleModal)
+		on(this.ui.modal, 'click', this.toggleModal)
+		on(this.ui.container, 'click', this.blockClicks)
+	}
+
+	removeEvents() {
+
+		off(this.ui.toggle, 'click', this.toggleModal)
+		off(this.ui.modal, 'click', this.toggleModal)
+		off(this.ui.container, 'click', this.blockClicks)
 	}
 
 	animateIn(req, done) {
@@ -51,7 +82,10 @@ class Catering extends Default {
 
 		super.destroy()
 
+		this.removeEvents()
+
 		this.page.parentNode.removeChild(this.page)
+		this.ui.modal.parentNode.removeChild(this.ui.modal)
 
 		done()
 	}

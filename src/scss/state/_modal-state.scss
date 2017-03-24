@@ -1,0 +1,13 @@
+.modal-is-hidden {
+
+  .modal {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s $ease-out-quint 0.3s;
+
+    &__container {
+      opacity: 0;
+      transition: opacity 0.6s $ease-out-quint;
+    }
+  }
+}

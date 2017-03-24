@@ -16,15 +16,19 @@
     <link rel="stylesheet" href="{{ site.theme.link }}/style.css">
     {{ wp_head }}
   </head>
-  <body>
+  <body class="modal-is-hidden">
+
     {% include "menu-bar.twig" %}
+
     <main>
       {% block content %}
       {% endblock %}
     </main>
 
-    {% block modal %}
-    {% endblock %}
+    <aside>
+      {% block modal %}
+      {% endblock %}
+    </aside>
 
     <script src="{{site.theme.link}}/js/bundle.js"></script>
     {{ wp_footer }}

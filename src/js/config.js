@@ -8,6 +8,7 @@ const config = {
 
 	body: document.body,
 	view: select('main'),
+	modal: select('aside'),
 	a: select.all('a'),
 
 	width: window.innerWidth,

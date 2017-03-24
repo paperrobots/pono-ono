@@ -1,16 +1,22 @@
 {% extends "base.twig" %}
 
+{% set cta_label = post.get_field('cta_label') %}
+{% set modal_title = post.get_field('modal_title') %}
+{% set submit_label = post.get_field('submit_label') %}
+{% set bg_image = TimberImage(post.get_field('bg_image')).src %}
+{% set bg_position = post.get_field('bg_position') %}
+
 {% block content %}
   {% if not isAJAX %}<div id="page-catering" class="page page-catering">{% endif %}
     <div class="page__container container">
-      <section class="page__section js-slides">
+      <section class="page__section">
         <div class="page__text-box text-box text-box--h1">
           <h1 class="text-box__title">{{ post.title }}</h1>
           <div class="text-box__body">
             {{ post.content }}
             <button class="button button--secondary js-toggle">
-              Request a booking
-              <div data-label="Request a booking"></div>
+              {{ cta_label }}
+              <div data-label="{{ cta_label }}"></div>
             </button>
           </div>
         </div>
@@ -23,12 +29,12 @@
 
 {% block modal %}
   {% if not isAJAX %}
-  <div class="modal js-modal">
+  <div class="modal modal--catering js-modal">
   {% endif %}
-    <div class="modal__container">
-      <div class="modal__inner">
-        <h4 class="modal__title">Please complete this form.</h4>
-        <form class="modal__form form form--catering js-form">
+    <div class="modal__container js-container">
+      <div class="modal__body">
+        <h4 class="modal__title">{{ modal_title }}</h4>
+        <form class="modal__form form js-form">
           {{ fn('wp_nonce_field', 'action', 'user-submitted-catering-request', true, false) }}
           <div class="form__row">
             <label class="form__input-group" for="full-name">
@@ -68,16 +74,16 @@
           </div>
           <div class="form__row">
             <input type="text" id="xyq" name="{{ fn('apply_filters', 'honeypot_name', 'date_submitted') }}" value="" style="display: none;">
-            <button class="button button--secondary js-submit" type="submit" value="Submit request">
-              Submit request
-              <div data-label="Submit request"></div>
+            <button class="button button--secondary js-submit" type="submit" value="{{ submit_label }}">
+              {{ submit_label }}
+              <div data-label="{{ submit_label }}"></div>
             </button>
           </div>
         </form>
       </div>
-      <div class="modal__image"></div>
+      <div class="modal__image" style="background-image: url('{{ bg_image }}'); background-position: {{ bg_position }};"></div>
     </div>
   {% if not isAJAX %}
-  </div>
+</div>
   {% endif %}
 {% endblock %}

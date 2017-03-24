@@ -1,4 +1,5 @@
 @import 'menu-state';
+@import 'modal-state';
 
 body {
 
@@ -7,7 +8,8 @@ body {
   }
 
   &.is-home,
-  &.is-menu {
+  &.is-menu,
+  &.is-catering {
     overflow: hidden;
   //
   //   .menu-bar__logo {

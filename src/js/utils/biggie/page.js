@@ -10,25 +10,44 @@ export default (req, view, options, done) => {
   const cn = id.replace('/', '-')
   const page = req.previous === undefined ? view.querySelector('.page') : create({ selector: 'div', id: `page-${cn}`, styles: `page page-${cn}` })
 
+  let modal
+
+  if (id === 'catering') {
+
+    modal = req.previous === undefined ? config.modal.querySelector('.js-modal') : create({ selector: 'div', styles: `modal modal--${cn} js-modal` })
+
+    config.modal.appendChild(modal)
+  }
+
   view.appendChild(page)
 
-  if(!cache[id] || !options.cache) {
+  if (!cache[id] || !options.cache) {
 
     ajax.get(`${config.BASE}${id}`, {
       success: (object) => {
-        const html = object.data.split(/(<main>|<\/main>)/ig)[2]
-        page.innerHTML = html
-        if(options.cache) cache[id] = html
+
+        const inner = object.data.split(/(<main>|<\/main>)/ig)[2]
+        const form = object.data.split(/(<aside>|<\/aside>)/ig)[2].trim()
+
+        page.innerHTML = inner
+
+        if (form.length > 0) modal.innerHTML = form
+
+        if (options.cache) cache[id] = { inner, form }
+
         done()
       }
     })
-
   } else {
 
-    setTimeout(() => {
-      page.innerHTML = cache[id]
+    requestAnimationFrame(_ => {
+
+      page.innerHTML = cache[id]['inner']
+
+      if (cache[id]['form'].length > 0) modal.innerHTML = cache[id]['form']
+
       done()
-    }, 1)
+    })
   }
 
   return page

@@ -8,6 +8,7 @@
 
     &:last-child {
       margin-bottom: 0;
+      padding-left: calc(50% + 3rem);
     }
 
     &--w-cols {
@@ -27,41 +28,9 @@
     width: 100%;
     position: relative;
 
-    &::before,
-    &::after {
-      content: '';
-      display: block;
-      @include size(100% 1px);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-
-    &::before {
-      background-color: rgba($ocean-blue-2, 0.45);
-      transition: transform 0.6s $ease-in-quint 0.25s;
-    }
-
-    &::after {
-      background-color: $ocean-blue-1;
-      transition: transform 0.5s $ease-in-quint;
-    }
-
-    &:hover {
-
-      &::before,
-      &::after {
-        transform: none;
-      }
-
-      &::before {
-        transition: transform 0.6s $ease-in-out-quint;
-      }
-
-      &::after {
-        transition: transform 0.5s $ease-in-out-quint 0.25s;
+    &.is-focused {
+      .form__label {
+        opacity: 1;
       }
     }
   }
@@ -86,34 +55,31 @@
     padding: 0.5rem 0;
     color: $charcoal;
     border-bottom: 1px solid $ocean-blue-3;
-    transition: border-color 0.8s $ease-out-quint 1s;
-    //
-    // &:hover {
-    //   border-color: $ocean-blue-2;
-    // }
+    transition: border-color 0.5s $ease-out-quint;
 
+    &:hover,
     &:focus {
       border-color: $ocean-blue-1;
-      transition: border-color 0.8s $ease-out-quint;
+    }
+
+    &:required + .form__label::after {
+      content: '*';
+      display: inline-block;
+      margin-left: 0.5rem;
     }
   }
 }
 
-::-webkit-datetime-edit {}
-::-webkit-datetime-edit-fields-wrapper {
-}
-
-::-webkit-datetime-edit-text {}
 ::-webkit-datetime-edit-month-field {
-  color: $ocean-blue-1;
+  color: $charcoal;
 }
 
 ::-webkit-datetime-edit-day-field {
-  color: $ocean-blue-1;
+  color: $charcoal;
 }
 
 ::-webkit-datetime-edit-year-field {
-  color: $ocean-blue-1;
+  color: $charcoal;
 }
 
 ::-webkit-inner-spin-button {
