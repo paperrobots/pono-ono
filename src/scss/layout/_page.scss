@@ -1,0 +1,26 @@
+.page {
+  @include fixed();
+  @include hidden;
+  display: block;
+  text-align: left;
+  margin-left: $menu-bar-size;
+
+  @include tablet() {
+    margin-left: 0;
+    margin-top: 8rem;
+  }
+
+  &__container {
+    @include size(100%);
+    transition: transform 0.8s $ease-out-quint;
+  }
+
+  &__section {
+    @include position(absolute, 0 0 0 0);
+    will-change: transform;
+
+    &:not(:first-child) {
+      transform: translateX(100%);
+    }
+  }
+}

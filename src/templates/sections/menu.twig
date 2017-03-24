@@ -6,9 +6,9 @@
   {% set menu_items = post.get_field('menu_items') %}
 
   {% if not isAJAX %}<div id="page-menu" class="page page-menu">{% endif %}
-    <div class="page-menu__container container">
-      <section class="page-menu__section js-slides">
-        <div class="page-menu__text-box text-box text-box--h1">
+    <div class="page__container container">
+      <section class="page__section js-slides">
+        <div class="page__text-box text-box text-box--h1">
           <h1 class="text-box__title">{{ post.get_field('page_title') }}</h1>
           <div class="text-box__body">{{ post.get_field('intro_body') }}</div>
         </div>

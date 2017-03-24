@@ -1,0 +1,134 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  &__row {
+    display: flex;
+    margin-bottom: 5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--w-cols {
+      .form__input-group {
+        &:first-child {
+          margin-right: 3rem;
+        }
+
+        &:last-child {
+          margin-left: 3rem;
+        }
+      }
+    }
+  }
+
+  &__input-group {
+    width: 100%;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      @include size(100% 1px);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    &::before {
+      background-color: rgba($ocean-blue-2, 0.45);
+      transition: transform 0.6s $ease-in-quint 0.25s;
+    }
+
+    &::after {
+      background-color: $ocean-blue-1;
+      transition: transform 0.5s $ease-in-quint;
+    }
+
+    &:hover {
+
+      &::before,
+      &::after {
+        transform: none;
+      }
+
+      &::before {
+        transition: transform 0.6s $ease-in-out-quint;
+      }
+
+      &::after {
+        transition: transform 0.5s $ease-in-out-quint 0.25s;
+      }
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    display: block;
+    font-size: 9px;
+    color: $ash;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s $ease-out-quint;
+  }
+
+  &__input {
+    @include reset-button();
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 0.5rem 0;
+    color: $charcoal;
+    border-bottom: 1px solid $ocean-blue-3;
+    transition: border-color 0.8s $ease-out-quint 1s;
+    //
+    // &:hover {
+    //   border-color: $ocean-blue-2;
+    // }
+
+    &:focus {
+      border-color: $ocean-blue-1;
+      transition: border-color 0.8s $ease-out-quint;
+    }
+  }
+}
+
+::-webkit-datetime-edit {}
+::-webkit-datetime-edit-fields-wrapper {
+}
+
+::-webkit-datetime-edit-text {}
+::-webkit-datetime-edit-month-field {
+  color: $ocean-blue-1;
+}
+
+::-webkit-datetime-edit-day-field {
+  color: $ocean-blue-1;
+}
+
+::-webkit-datetime-edit-year-field {
+  color: $ocean-blue-1;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  box-sizing: border-box;
+  width: 3rem;
+  height: 3rem;
+  padding: 1rem;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-35%);
+  right: 0;
+  opacity: 1;
+}

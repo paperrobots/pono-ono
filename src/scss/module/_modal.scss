@@ -1,0 +1,29 @@
+.modal {
+  @include fixed();
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 300;
+
+  &__container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: white;
+    display: flex;
+  }
+
+  &__inner {
+    width: 60%;
+    padding: 8rem 7rem;
+  }
+
+  &__image {
+    width: 40%;
+    background-color: $ocean-blue-2
+  }
+
+  &__title {
+    margin-bottom: 8rem;
+  }
+}

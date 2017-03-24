@@ -1,6 +1,6 @@
 .text-box {
   position: relative;
-  width: 50%;
+  width: 60%;
   border: 80px solid;
   border-image: url(#{$base-img}text-box--soft.png) 80;
 
@@ -25,6 +25,10 @@
 
   &__body {
     padding: 0 4rem 0 14rem;
-    transform: translateY(-50%);
+    transform: translateY(-6rem);
+
+    p {
+      margin-bottom: 6rem;
+    }
   }
 }

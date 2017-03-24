@@ -6,14 +6,6 @@
   align-items: center;
 }
 
-.page {
-  @include fixed();
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @include hidden;
-}
-
+@import 'page';
 @import 'home';
 @import 'menu';

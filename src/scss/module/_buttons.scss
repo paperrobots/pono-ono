@@ -1,7 +1,7 @@
 .button {
   @include reset-button();
   display: inline-block;
-  padding: 15px 6rem;
+  padding: 20px 6rem;
   font-family: $font-ui;
   font-weight: 500;
   font-size: 13px;
@@ -18,19 +18,19 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 15px 6rem;
-    transform: translateX(-100%);
+    padding: 20px 6rem;
+    transform: translateX(-101%);
     transition: transform 0.6s cubic-bezier(.275,0,0,1);
     overflow: hidden;
 
     &::after {
       content: attr(data-label);
       display: block;
-      padding: 15px 6rem;
+      padding: 20px 6rem;
       position: absolute;
       top: 0;
       left: 0;
-      transform: translateX(100%);
+      transform: translateX(101%);
       transition: transform 0.6s cubic-bezier(.275,0,0,1);
     }
   }
@@ -56,10 +56,13 @@
   }
 
   &--secondary {
-    background-color: $ocean-blue-1;
+    border: 1px solid $ocean-blue-3;
+    background-color: transparent;
+    color: $charcoal;
 
     div::after {
-      background-color: lighten($ocean-blue-1, 10%);
+      background-color: $ocean-blue-1;
+      color: $white;
     }
   }
 }

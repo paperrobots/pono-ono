@@ -2,6 +2,82 @@
 
 {% block content %}
   {% if not isAJAX %}<div id="page-catering" class="page page-catering">{% endif %}
-    <h1>{{ post.title }}</h1>
+    <div class="page__container container">
+      <section class="page__section js-slides">
+        <div class="page__text-box text-box text-box--h1">
+          <h1 class="text-box__title">{{ post.title }}</h1>
+          <div class="text-box__body">
+            {{ post.content }}
+            <button class="button button--secondary js-toggle">
+              Request a booking
+              <div data-label="Request a booking"></div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+
   {% if not isAJAX %}</div>{% endif %}
+{% endblock %}
+
+{% block modal %}
+  {% if not isAJAX %}
+  <div class="modal js-modal">
+  {% endif %}
+    <div class="modal__container">
+      <div class="modal__inner">
+        <h4 class="modal__title">Please complete this form.</h4>
+        <form class="modal__form form form--catering js-form">
+          {{ fn('wp_nonce_field', 'action', 'user-submitted-catering-request', true, false) }}
+          <div class="form__row">
+            <label class="form__input-group" for="full-name">
+              <input class="form__input" id="full-name" type="text" name="full-name" placeholder="Full name" required>
+              <span class="form__label">Full name</span>
+            </label>
+          </div>
+          <div class="form__row form__row--w-cols">
+            <label class="form__input-group" for="event-date">
+              <input class="form__input" id="event-date" type="date" name="event-date" placeholder="Date of event" required>
+              <span class="form__label">Date of event</span>
+            </label>
+            <label class="form__input-group" for="pickup-time">
+              <input class="form__input" id="pickup-time" type="time" name="pickup-time" placeholder="Pickup time" required>
+              <span class="form__label">Pickup time</span>
+            </label>
+          </div>
+          <div class="form__row form__row--w-cols">
+            <label class="form__input-group" for="guest_count">
+              <input class="form__input" id="guest_count" type="number" name="guest_count" placeholder="Number of guests" required>
+              <span class="form__label">Number of guests</span>
+            </label>
+            <label class="form__input-group" for="email">
+              <input class="form__input" id="email" type="email" name="email" placeholder="Email address" required>
+              <span class="form__label">Email address</span>
+            </label>
+          </div>
+          <div class="form__row form__row--w-cols">
+            <label class="form__input-group" for="dietary_restrictions">
+              <input class="form__input" id="dietary_restrictions" type="text" name="dietary_restrictions" placeholder="Dietary restrictions">
+              <span class="form__label">Dietary restrictions</span>
+            </label>
+            <label class="form__input-group" for="special_requests">
+              <input class="form__input" id="special_requests" type="text" name="special_requests" placeholder="Special requests">
+              <span class="form__label">Special requests</span>
+            </label>
+          </div>
+          <div class="form__row">
+            <input type="text" id="xyq" name="{{ fn('apply_filters', 'honeypot_name', 'date_submitted') }}" value="" style="display: none;">
+            <button class="button button--secondary js-submit" type="submit" value="Submit request">
+              Submit request
+              <div data-label="Submit request"></div>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal__image"></div>
+    </div>
+  {% if not isAJAX %}
+  </div>
+  {% endif %}
 {% endblock %}
