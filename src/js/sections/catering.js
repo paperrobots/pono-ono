@@ -1,11 +1,12 @@
 import config from 'config'
 import utils from 'utils'
-import ajax from 'please-ajax'
+import { ajax } from 'jquery'
 import classes from 'dom-classes'
 import select from 'dom-select'
 import { on, off } from 'dom-event'
 import query from 'query-dom-components'
 import Default from './default'
+import Validation from '../lib/validation'
 
 class Catering extends Default {
 
@@ -15,6 +16,7 @@ class Catering extends Default {
 
 		this.slug = 'catering'
 
+		this.onChange = this.onChange.bind(this)
 		this.onSubmit = this.onSubmit.bind(this)
 	}
 
@@ -31,6 +33,13 @@ class Catering extends Default {
 
 		this.form = query({ el: this.modal })
 
+		this.inputs = [...select.all('select, input:not([type="submit"])')]
+		this.inputs.forEach(i => (
+			i.hasAttribute('required')
+				? i.validation = new Validation()
+				: null
+		))
+
 		this.addEvents()
 
 		done()
@@ -42,6 +51,9 @@ class Catering extends Default {
 		on(this.modal, 'click', this.toggleModal)
 		on(this.form.outer, 'click', this.blockClicks)
 		on(this.form.el, 'submit', this.onSubmit)
+
+		this.inputs.forEach(i => on(i, 'input', this.onChange))
+		this.inputs.forEach(i => on(i, 'focusout', this.onChange))
 	}
 
 	removeEvents() {
@@ -50,6 +62,9 @@ class Catering extends Default {
 		off(this.modal, 'click', this.toggleModal)
 		off(this.form.outer, 'click', this.blockClicks)
 		off(this.form.el, 'submit', this.onSubmit)
+
+		this.inputs.forEach(i => off(i, 'input', this.onChange))
+		this.inputs.forEach(i => off(i, 'focusout', this.onChange))
 	}
 
 	toggleModal() {
@@ -60,6 +75,25 @@ class Catering extends Default {
 	blockClicks(e) {
 
 		e.stopPropagation()
+	}
+
+	onChange(e) {
+
+		const target = e.target
+
+		if (target.validation) {
+
+			target.validation.checkValidity(target)
+		}
+
+		if (target.value.length > 0) {
+
+			classes.add(target.parentNode, 'is-focused')
+
+		} else {
+
+			classes.remove(target.parentNode, 'is-focused')
+		}
 	}
 
 	onSubmit(e) {
@@ -83,20 +117,28 @@ class Catering extends Default {
 
 	postFormData(formData, action) {
 
-		ajax.post(APP.AJAX_URL, {
-			action: action,
-			data: formData,
-			submission: select('#xyq').value,
-			security: APP.SECURITY
-		}, {
+		ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: APP.AJAX_URL,
+			data: {
+				action: action,
+				data: formData,
+				submission: select('#xyq').value,
+				security: APP.SECURITY
+			},
 			success: response => {
-				if ( response.success === true ) {
-					alert('success')
-				} else {
-					alert('nahhhhhh bull u done fucked up')
+				if ( true === response.success ) {
+
+					this.displayConfirmation()
 				}
 			}
 		})
+	}
+
+	displayConfirmation() {
+
+		alert('success!')
 	}
 
 	animateIn(req, done) {
@@ -129,7 +171,7 @@ class Catering extends Default {
 		this.removeEvents()
 
 		this.page.parentNode.removeChild(this.page)
-		this.ui.modal.parentNode.removeChild(this.ui.modal)
+		this.modal.parentNode.removeChild(this.modal)
 
 		done()
 	}

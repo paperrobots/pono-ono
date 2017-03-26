@@ -22,8 +22,6 @@ class PonoOno extends TimberSite {
 		add_theme_support( 'menus' );
 		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 
-		add_action( 'wp_footer', 'deregister_scripts' );
-
 		remove_action( 'template_redirect', 'rest_output_link_header', 11, 0 );
 		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -41,6 +39,13 @@ class PonoOno extends TimberSite {
 
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+
+		add_action( 'wp_footer', array( $this, 'deregister_scripts' ) );
+
+		add_action( 'wp_ajax_process_catering_request', array( $this, 'process_catering_request' ) );
+		add_action( 'wp_ajax_nopriv_process_catering_request', array( $this, 'process_catering_request' ) );
+
+		add_action('admin_head', array( $this, 'custom_admin_style' ) );
 
 		parent::__construct();
 	}
@@ -83,49 +88,76 @@ class PonoOno extends TimberSite {
 		$twig->addExtension( new Twig_Extension_StringLoader() );
 		return $twig;
 	}
+
+	function deregister_scripts() {
+		wp_deregister_script( 'wp-embed' );
+	}
+
+	/* Process Form Submissions */
+	function process_catering_request() {
+
+		if ( ! empty( $_POST[ 'submission' ] ) ) {
+			wp_send_json_error( 'Honeypot check failed' );
+		}
+
+		if ( ! check_ajax_referer( 'user-submitted-catering-request', 'security' ) ) {
+			wp_send_json_error( 'Security check failed' );
+		}
+
+		$request_data = array(
+			'post_title' => sprintf( '%s-%s',
+				sanitize_text_field( $_POST[ 'data' ][ 'fullName' ] ),
+				esc_attr( current_time( 'Y-m-d' ) )
+			),
+			'post_status' => 'draft',
+			'post_type' => 'catering_request'
+		);
+
+		$post_id = wp_insert_post( $request_data, true );
+
+		if ( $post_id ) {
+			update_post_meta( $post_id, 'full_name', sanitize_text_field( $_POST[ 'data' ][ 'fullName'] ) );
+			update_post_meta( $post_id, 'event_date', sanitize_text_field( $_POST[ 'data' ][ 'eventDate' ] ) );
+			update_post_meta( $post_id, 'pickup_time', sanitize_text_field( $_POST[ 'data' ][ 'pickupTime' ] ) );
+			update_post_meta( $post_id, 'guest_count', sanitize_text_field( $_POST[ 'data' ][ 'guestCount'] ) );
+			update_post_meta( $post_id, 'contact_email', sanitize_email( $_POST[ 'data' ][ 'email'] ) );
+			update_post_meta( $post_id, 'dietary_restrictions', sanitize_text_field( $_POST[ 'data' ][ 'dietaryRestrictions'] ) );
+			update_post_meta( $post_id, 'special_requests', sanitize_text_field( $_POST[ 'data' ][ 'specialRequests'] ) );
+		}
+
+		wp_send_json_success( $post_id );
+	}
+
+	/* WP Admin Customizations */
+	// Increase width of wp admin menu to fit custom post type labels
+	function custom_admin_style() {
+		echo '<style>
+		#adminmenu,
+		#adminmenu .wp-submenu,
+		#adminmenuback,
+		#adminmenuwrap {
+			width: 200px;
+		}
+		#wpcontent, #wpfooter {
+	    margin-left: 200px;
+		}
+		#adminmenu .wp-submenu {
+			left: 200px;
+		}
+		</style>';
+	}
 }
 new PonoOno();
 
-
-
-/* WP Admin Customizations */
-
-// Increase width of wp admin menu to fit custom post type labels
-function custom_admin_style() {
-	echo '<style>
-	#adminmenu,
-	#adminmenu .wp-submenu,
-	#adminmenuback,
-	#adminmenuwrap {
-		width: 200px;
-	}
-	#wpcontent, #wpfooter {
-    margin-left: 200px;
-	}
-	#adminmenu .wp-submenu {
-		left: 200px;
-	}
-	</style>';
-}
-add_action('admin_head', 'custom_admin_style');
-
 // Change Howdy message to Welcome
-function howdy_message($translated_text, $text, $domain) {
-    $new_message = str_replace('Howdy', 'Welcome', $text);
-    return $new_message;
+function change_howdy($translated, $text, $domain) {
+
+  if (!is_admin() || 'default' != $domain)
+    return $translated;
+
+  if (false !== strpos($translated, 'Howdy'))
+    return str_replace('Howdy', 'Welcome', $translated);
+
+  return $translated;
 }
-add_filter('gettext', 'howdy_message', 10, 3);
-
-/* Process Form Submissions */
-function process_catering_request() {
-
-	if ( ! empty( $_POST[ 'submission' ] ) ) {
-		wp_send_json_error( 'Honeypot check failed' );
-	}
-
-	if ( ! check_ajax_referer( 'user-submitted-catering-request', 'security' ) ) {
-		wp_send_json_error( 'Honeypot check failed' );
-	}
-}
-add_action( 'wp_ajax_process_catering_request', 'process_catering_request' );
-add_action( 'wp_ajax_nopriv_process_catering_request', 'process_catering_request' );
+add_filter('gettext', 'change_howdy', 10, 3);

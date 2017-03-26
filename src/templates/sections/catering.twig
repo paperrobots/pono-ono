@@ -29,57 +29,12 @@
 
 {% block modal %}
   {% if not isAJAX %}
-  <div class="modal modal--catering js-modal">
+  <div class="modal modal--{{ post.title|lower }} js-modal">
   {% endif %}
     <div class="modal__container js-outer">
       <div class="modal__body">
         <h4 class="modal__title">{{ modal_title }}</h4>
-        <form class="modal__form form js-el">
-          {{ fn('wp_nonce_field', 'action', 'user-submitted-catering-request', true, false) }}
-          <div class="form__row">
-            <label class="form__input-group" for="full-name">
-              <input class="form__input js-full-name" id="full-name" type="text" name="full-name" placeholder="Full name" required>
-              <span class="form__label">Full name</span>
-            </label>
-          </div>
-          <div class="form__row form__row--w-cols">
-            <label class="form__input-group" for="event-date">
-              <input class="form__input js-event-date" id="event-date" type="date" name="event-date" placeholder="Date of event" required>
-              <span class="form__label">Date of event</span>
-            </label>
-            <label class="form__input-group" for="pickup-time">
-              <input class="form__input js-pickup-time" id="pickup-time" type="time" name="pickup-time" placeholder="Pickup time" required>
-              <span class="form__label">Pickup time</span>
-            </label>
-          </div>
-          <div class="form__row form__row--w-cols">
-            <label class="form__input-group" for="guest_count">
-              <input class="form__input js-guest-count" id="guest-count" type="number" name="guest_count" placeholder="Number of guests" required>
-              <span class="form__label">Number of guests</span>
-            </label>
-            <label class="form__input-group" for="email">
-              <input class="form__input js-email" id="email" type="email" name="email" placeholder="Email address" required>
-              <span class="form__label">Email address</span>
-            </label>
-          </div>
-          <div class="form__row form__row--w-cols">
-            <label class="form__input-group" for="dietary_restrictions">
-              <input class="form__input js-dietary-restrictions" id="dietary-restrictions" type="text" name="dietary_restrictions" placeholder="Dietary restrictions">
-              <span class="form__label">Dietary restrictions</span>
-            </label>
-            <label class="form__input-group" for="special_requests">
-              <input class="form__input js-special-requests" id="special-requests" type="text" name="special_requests" placeholder="Special requests">
-              <span class="form__label">Special requests</span>
-            </label>
-          </div>
-          <div class="form__row">
-            <input type="text" id="xyq" name="{{ fn('apply_filters', 'honeypot_name', 'date_submitted') }}" value="" style="display: none;">
-            <button class="button button--secondary js-submit" type="submit" value="{{ submit_label }}">
-              {{ submit_label }}
-              <div data-label="{{ submit_label }}"></div>
-            </button>
-          </div>
-        </form>
+        {% include "catering-form.twig" %}
       </div>
       <div class="modal__image" style="background-image: url('{{ bg_image }}'); background-position: {{ bg_position }};"></div>
     </div>
