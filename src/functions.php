@@ -198,6 +198,9 @@ class PonoOno extends TimberSite {
 }
 new PonoOno();
 
+
+
+
 // Change Howdy message to Welcome
 function change_howdy($translated, $text, $domain) {
 
@@ -225,6 +228,7 @@ function admin_footer_hook() {
 }
 add_action( 'admin_footer-post.php', 'admin_footer_hook' );
 
+// cleanup admin area
 function custom_menu_page_removing() {
 
 	remove_menu_page( 'edit.php' );
@@ -245,7 +249,6 @@ function custom_menu_page_removing() {
 }
 add_action( 'admin_menu', 'custom_menu_page_removing' );
 
-// remove links/menus from the admin bar
 function mytheme_admin_bar_render() {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu('comments');
@@ -253,12 +256,15 @@ function mytheme_admin_bar_render() {
 }
 add_action( 'wp_before_admin_bar_render', 'mytheme_admin_bar_render' );
 
+// remove publish metabox from catering request
+// and message custom post types
 function remove_publish_box_on_inboxes() {
   remove_meta_box( 'submitdiv', 'catering_request', 'side' );
 	remove_meta_box( 'submitdiv', 'message', 'side' );
 }
 add_action( 'admin_menu', 'remove_publish_box_on_inboxes' );
 
+// add custom login screen logo
 function pono_ono_login_logo() { ?>
     <style type="text/css">
         #login h1 a, .login h1 a {
