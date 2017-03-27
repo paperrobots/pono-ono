@@ -111,7 +111,7 @@ class Menu extends Default {
 		tl.staggerTo(this.slides, 0.8, { cycle: {
 			x: (loop) => index === loop ? 0 : loop < index ? -config.width : config.width,
 			zIndex: (loop) => index === loop ? 2 : 1
-		}, ease: Power4.easeInOut}, 0, 0)
+		}, ease: Expo.easeInOut}, 0, 0)
 
 		tl.restart()
 	}
