@@ -1,10 +1,20 @@
 {% extends "base.twig" %}
 
-{% set cta_label = post.get_field('cta_label') %}
-{% set modal_title = post.get_field('modal_title') %}
-{% set submit_label = post.get_field('submit_label') %}
+{% set page_body = post.get_field('page_body') %}
+{% set button_label = post.get_field('button_label') %}
+
 {% set bg_image = TimberImage(post.get_field('bg_image')).src %}
 {% set bg_position = post.get_field('bg_position') %}
+
+{% set form_title = post.get_field('form_title') %}
+{% set pickup_time_options = post.get_field('pickup_time_options')|split(',') %}
+{% set submit_label = post.get_field('submit_label') %}
+
+{% set confirmation_title = post.get_field('confirmation_title') %}
+{% set confirmation_body = post.get_field('confirmation_body') %}
+
+{% set cta_link = post.get_field('cta_link') %}
+{% set cta_label = post.get_field('cta_label') %}
 
 {% block content %}
   {% if not isAJAX %}<div id="page-catering" class="page page-catering">{% endif %}
@@ -13,10 +23,10 @@
         <div class="page__text-box text-box text-box--h1">
           <h1 class="text-box__title">{{ post.title }}</h1>
           <div class="text-box__body">
-            {{ post.content }}
+            {{ page_body }}
             <button class="button button--secondary js-toggle">
-              {{ cta_label }}
-              <div data-label="{{ cta_label }}"></div>
+              {{ button_label }}
+              <div data-label="{{ button_label }}"></div>
             </button>
           </div>
         </div>

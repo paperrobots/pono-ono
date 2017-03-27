@@ -1,6 +1,6 @@
 <section class="modal__section modal__section--form">
 
-  <h4 class="modal__title">{{ modal_title }}</h4>
+  <h4 class="modal__title">{{ form_title }}</h4>
 
   <form class="modal__form form js-el">
     {{ fn('wp_nonce_field', 'action', 'user-submitted-catering-request', true, false) }}
@@ -27,23 +27,9 @@
       <label class="form__input-group" for="pickup-time">
         <select class="form__input js-pickup-time" id="pickup-time" name="pickup-time" required>
           <option value="" disabled selected>Pickup time</option>
-          <option value="11:00 AM">11:00 AM</option>
-          <option value="11:30 AM">11:30 AM</option>
-          <option value="12:00 PM">12:00 PM</option>
-          <option value="12:30 PM">12:30 PM</option>
-          <option value="1:00 PM">1:00 PM</option>
-          <option value="1:30 PM">1:30 PM</option>
-          <option value="2:00 PM">2:00 PM</option>
-          <option value="2:30 PM">2:30 PM</option>
-          <option value="3:00 PM">3:00 PM</option>
-          <option value="3:30 PM">3:30 PM</option>
-          <option value="4:00 PM">4:00 PM</option>
-          <option value="4:30 PM">4:30 PM</option>
-          <option value="5:00 PM">5:00 PM</option>
-          <option value="5:30 PM">5:30 PM</option>
-          <option value="6:00 PM">6:00 PM</option>
-          <option value="6:30 PM">6:30 PM</option>
-          <option value="7:00 PM">7:00 PM</option>
+          {% for opt in pickup_time_options %}
+            <option value="{{ opt }}">{{ opt }}</option>
+          {% endfor %}
         </select>
         <span class="form__label">Pickup time</span>
         <span class="form__icon"></span>
@@ -98,15 +84,11 @@
 
 <section class="modal__section modal__section--confirmation">
   <div class="modal__section-inner">
-    <h4 class="modal__title modal__title--confirmation">We have received your catering request.</h4>
-    <div class="modal__confirmation-body">
-      <p>
-        Thanks for your interest in Pono Ono catering! One of our team members will contact you shortly.
-      </p>
-    </div>
-    <a class="button button--secondary" href="/menu">
-      View our full menu
-      <div data-label="View our full menu"></div>
+    <h4 class="modal__title modal__title--confirmation">{{ confirmation_title }}</h4>
+    <div class="modal__confirmation-body">{{ confirmation_body }}</div>
+    <a class="button button--secondary" href="{{ cta_link|relative }}">
+      {{ cta_label }}
+      <div data-label="{{ cta_label }}"></div>
     </a>
   </div>
 </section>

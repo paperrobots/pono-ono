@@ -1,0 +1,67 @@
+<section class="modal__section modal__section--form">
+
+  <h4 class="modal__title">{{ form_title }}</h4>
+
+  <form class="modal__form form js-el">
+    {{ fn('wp_nonce_field', 'action', 'user-submitted-message', true, false) }}
+
+    <div class="form__row">
+
+      <label class="form__input-group" for="full-name">
+        <input class="form__input js-full-name" id="full-name" type="text" name="full-name" placeholder="Full name" required>
+        <span class="form__label">Full name</span>
+        <span class="form__error-message js-msg"></span>
+      </label>
+
+    </div>
+
+    <div class="form__row form__row--w-cols">
+
+      <label class="form__input-group" for="email">
+        <input class="form__input js-email" id="email" type="email" name="email" placeholder="Email address" required>
+        <span class="form__label">Email address</span>
+        <span class="form__error-message js-msg"></span>
+      </label>
+
+      <label class="form__input-group" for="subject">
+        <input class="form__input js-subject" id="subject" type="text" name="subject" placeholder="Subject" required>
+        <span class="form__label">Subject</span>
+        <span class="form__error-message js-msg"></span>
+      </label>
+
+    </div>
+
+    <div class="form__row">
+
+      <label class="form__input-group" for="message">
+        <textarea class="form__input form__input--textarea js-message" id="message" name="full-name" rows="4" placeholder="Message" required></textarea>
+        <span class="form__label">Message</span>
+        <span class="form__error-message js-msg"></span>
+      </label>
+
+    </div>
+
+    <div class="form__row">
+
+      <input type="text" id="xyq" name="{{ fn('apply_filters', 'honeypot_name', 'date_submitted') }}" value="" style="display: none;">
+
+      <button class="button button--secondary js-submit" type="submit" value="{{ submit_label }}">
+        {{ submit_label }}
+        <div data-label="{{ submit_label }}"></div>
+      </button>
+
+    </div>
+
+  </form>
+</section>
+
+<section class="modal__section modal__section--confirmation">
+  <div class="modal__section-inner">
+    <h4 class="modal__title modal__title--confirmation">{{ confirmation_title }}</h4>
+    <div class="modal__confirmation-body">{{ confirmation_body }}</div>
+    <a class="button button--secondary" href="{{ cta_link|relative }}">
+      {{ cta_label }}
+      <div data-label="{{ cta_label }}"></div>
+    </a>
+  </div>
+</section>

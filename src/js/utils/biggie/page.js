@@ -12,7 +12,7 @@ export default (req, view, options, done) => {
 
   let modal
 
-  if (id === 'catering') {
+  if (id === 'catering' || id === 'contact') {
 
     modal = req.previous === undefined ? config.modal.querySelector('.js-modal') : create({ selector: 'div', styles: `modal modal--${cn} js-modal` })
 

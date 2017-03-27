@@ -1,7 +1,52 @@
 {% extends "base.twig" %}
 
+{% set page_body = post.get_field('page_body') %}
+{% set button_label = post.get_field('button_label') %}
+
+{% set bg_image = TimberImage(post.get_field('bg_image')).src %}
+{% set bg_position = post.get_field('bg_position') %}
+
+{% set form_title = post.get_field('form_title') %}
+{% set submit_label = post.get_field('submit_label') %}
+
+{% set confirmation_title = post.get_field('confirmation_title') %}
+{% set confirmation_body = post.get_field('confirmation_body') %}
+
+{% set cta_link = post.get_field('cta_link') %}
+{% set cta_label = post.get_field('cta_label') %}
+
 {% block content %}
   {% if not isAJAX %}<div id="page-contact" class="page page-contact">{% endif %}
-    <h1>{{ post.title }}</h1>
+    <div class="page__container container">
+      <section class="page__section">
+        <div class="page__text-box text-box text-box--h1">
+          <h1 class="text-box__title">{{ post.title }}</h1>
+          <div class="text-box__body">
+            {{ page_body }}
+            <button class="button button--secondary js-toggle">
+              {{ button_label }}
+              <div data-label="{{ button_label }}"></div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+
   {% if not isAJAX %}</div>{% endif %}
+{% endblock %}
+
+{% block modal %}
+  {% if not isAJAX %}
+  <div class="modal modal--{{ post.title|lower }} js-modal">
+  {% endif %}
+    <div class="modal__container js-outer">
+      <div class="modal__body">
+        {% include "contact-form.twig" %}
+      </div>
+      <div class="modal__image" style="background-image: url('{{ bg_image }}'); background-position: {{ bg_position }};"></div>
+    </div>
+  {% if not isAJAX %}
+</div>
+  {% endif %}
 {% endblock %}
