@@ -210,3 +210,17 @@ function change_howdy($translated, $text, $domain) {
   return $translated;
 }
 add_filter('gettext', 'change_howdy', 10, 3);
+
+// Disable Page Title fields for non-admin users
+function admin_footer_hook() {
+
+	if ( !current_user_can( 'manage_options' ) ) {
+		echo
+		'<script type="text/javascript">
+	    if (jQuery("#post_type").val() === "page") {
+				jQuery("#title").prop("disabled", true);
+			}
+	  </script>';
+	}
+}
+add_action( 'admin_footer-post.php', 'admin_footer_hook' );
