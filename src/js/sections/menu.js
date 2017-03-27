@@ -4,6 +4,7 @@ import classes from 'dom-classes'
 import { on, off } from 'dom-event'
 import Default from './default'
 import Slider from '../lib/slider'
+import SplitText from '../lib/split'
 
 class Menu extends Default {
 
@@ -32,7 +33,7 @@ class Menu extends Default {
 		super.ready()
 
 		this.positionStepList()
-		this.positionMenuItemTitles()
+		this.setupMenuItemTitles()
 
 		this.addEvents()
 
@@ -66,16 +67,13 @@ class Menu extends Default {
 		})
 	}
 
-	positionMenuItemTitles() {
+	setupMenuItemTitles() {
 
-		[...this.ui.title]
-		.map(el => el.innerHTML)
-		.map(text => text.split(' '))
-		.map(arr => arr
-			.map(word => `<span>${word}</span>`)
-			.join('')
-		).forEach((split, i) => {
-			this.ui.title[i].innerHTML = split
+		this.titles = []
+
+		this.ui.title.forEach((title, i) => {
+			this.titles[i] = new SplitText(title, { type: 'words', wordsClass: 'word' }).words
+			this.titles[i].map(word => word.innerHTML = `<span class="word--inner">${word.textContent}</span>`)
 		})
 	}
 
@@ -96,22 +94,30 @@ class Menu extends Default {
 
 	onSlide(e) {
 
+		const direction = e.direction
 		const index = this.current = e.current
 		const previous = this.previous = e.previous
 
-		this.current === this.slides.length - 1 ? classes.add(this.ui.next, 'is-disabled') : classes.remove(this.ui.next, 'is-disabled')
-		this.current === 0 ? classes.add(this.ui.prev, 'is-disabled') : classes.remove(this.ui.prev, 'is-disabled')
+		const words = {
+			current: [...this.slides[index].querySelectorAll('.word--inner')],
+			previous: [...this.slides[previous].querySelectorAll('.word--inner')]
+		}
+
+		index === this.slides.length - 1 ? classes.add(this.ui.next, 'is-disabled') : classes.remove(this.ui.next, 'is-disabled')
+		index === 0 ? classes.add(this.ui.prev, 'is-disabled') : classes.remove(this.ui.prev, 'is-disabled')
 
 		this.slider.animating = true
 
-		const tl = new TimelineMax({ paused: true, onComplete: _ => {
+		const tl = new TimelineMax({ paused: true, onComplete: () => {
 			this.slider.animating = false
 		}})
 
 		tl.staggerTo(this.slides, 0.8, { cycle: {
 			x: (loop) => index === loop ? 0 : loop < index ? -config.width : config.width,
 			zIndex: (loop) => index === loop ? 2 : 1
-		}, ease: Power4.easeInOut}, 0, 0)
+		}, ease: Expo.easeInOut}, 0, 0, 'slide')
+		tl.staggerTo(words.current, 0.6, { y: 0, ease: Expo.easeInOut }, 0.1, 0.25, 'slide')
+		tl.staggerTo(words.previous, 0.6, { y: '120%', ease: Expo.easeOut, clearProps: 'all' }, -0.1, 0, 'slide')
 
 		tl.restart()
 	}

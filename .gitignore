@@ -39,3 +39,4 @@ dist
 _normalize.scss
 
 src/js/env.js
+src/js/lib/split.js

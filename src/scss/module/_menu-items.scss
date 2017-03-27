@@ -17,8 +17,15 @@
     text-transform: lowercase;
     margin-right: 8rem;
 
-    span {
-      display: block;
+    .word {
+      display: block !important;
+      overflow: hidden;
+      padding-bottom: 1.5rem;
+
+      &--inner {
+        display: inline-block;
+        transform: translateY(120%);
+      }
 
       &:last-child {
         margin-left: 5rem;

@@ -79,7 +79,7 @@
     align-items: center;
     justify-content: center;
     background-color: $white;
-    transition: opacity 0.8s $ease-out-quint, transform 0.5s $ease-out-quint;
+    transition: opacity 0.8s $ease-out-quint, transform 0.4s $ease-out-quint;
 
     &:hover {
       .button__svg {
@@ -90,7 +90,7 @@
     }
 
     &:active {
-      transform: scale(0.95);
+      transform: scale(0.9);
     }
 
     &.is-disabled {
