@@ -224,3 +224,37 @@ function admin_footer_hook() {
 	}
 }
 add_action( 'admin_footer-post.php', 'admin_footer_hook' );
+
+function custom_menu_page_removing() {
+
+	remove_menu_page( 'edit.php' );
+	remove_menu_page( 'edit-comments.php' );
+	remove_menu_page( 'upload.php' );
+	remove_submenu_page( 'edit.php?post_type=message', 'post-new.php?post_type=message' );
+	remove_submenu_page( 'edit.php?post_type=catering_request', 'post-new.php?post_type=catering_request' );
+
+	if ( !current_user_can( 'manage_options' ) ) {
+    remove_menu_page( 'edit.php' );
+		remove_menu_page( 'edit-comments.php' );
+		remove_menu_page( 'tools.php' );
+		remove_menu_page( 'upload.php' );
+		remove_submenu_page( 'edit.php?post_type=page', 'post-new.php?post_type=page' );
+		remove_submenu_page( 'edit.php?post_type=message', 'post-new.php?post_type=message' );
+		remove_submenu_page( 'edit.php?post_type=catering_request', 'post-new.php?post_type=catering_request' );
+	}
+}
+add_action( 'admin_menu', 'custom_menu_page_removing' );
+
+// remove links/menus from the admin bar
+function mytheme_admin_bar_render() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('comments');
+	$wp_admin_bar->remove_menu('new-content');
+}
+add_action( 'wp_before_admin_bar_render', 'mytheme_admin_bar_render' );
+
+function remove_publish_box_on_inboxes() {
+  remove_meta_box( 'submitdiv', 'catering_request', 'side' );
+	remove_meta_box( 'submitdiv', 'message', 'side' );
+}
+add_action( 'admin_menu', 'remove_publish_box_on_inboxes' );
