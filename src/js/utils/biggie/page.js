@@ -10,11 +10,9 @@ export default (req, view, options, done) => {
   const cn = id.replace('/', '-')
   const page = req.previous === undefined ? view.querySelector('.page') : create({ selector: 'div', id: `page-${cn}`, styles: `page page-${cn}` })
 
-  console.log(id)
-
   let modal
 
-  if (id === 'catering' || id === 'contact' || id === 'pono-ono-catering' || id === 'pono-ono-contact') {
+  if (id === 'catering' || id === 'contact' || id === 'pono-ono/catering' || id === 'pono-ono/contact') {
 
     modal = req.previous === undefined ? config.modal.querySelector('.js-modal') : create({ selector: 'div', styles: `modal modal--${cn} js-modal` })
 
