@@ -31,6 +31,8 @@ class Catering extends Default {
 
 		this.modal = select('.js-modal')
 
+		utils.biggie.bind.add(select.all('a', this.modal))
+
 		this.form = query({ el: this.modal })
 
 		this.inputs = [...select.all('select, input:not([type="submit"])')]
@@ -145,23 +147,25 @@ class Catering extends Default {
 
 		classes.add(config.body, `is-${this.slug}`)
 
-		TweenLite.to(this.page, 1, {
-			autoAlpha: 1,
-			ease: Expo.easeInOut,
-			onComplete: done
-		})
+		const tl = new TimelineMax({ paused: true, onComplete: done })
+
+		tl.to(this.page, 1, { autoAlpha: 1, ease: Expo.easeInOut })
+		tl.restart()
 	}
 
 	animateOut(req, done) {
 
 		classes.remove(config.body, `is-${this.slug}`)
 
-		TweenLite.to(this.page, 0.7, {
-			autoAlpha: 0,
-			ease: Expo.easeInOut,
-			clearProps: 'all',
-			onComplete: done
-		})
+		const tl = new TimelineMax({ paused: true, onComplete: done })
+
+		if (!classes.has(config.body, 'modal-is-hidden')) {
+			tl.to(this.modal, 0.7, { autoAlpha: 0, ease: Expo.easeInOut, onComplete: this.toggleModal })
+		}
+
+		tl.to(this.page, 0.7, { autoAlpha: 0, ease: Expo.easeInOut, clearProps: 'all' })
+
+		tl.restart()
 	}
 
 	destroy(req, done) {

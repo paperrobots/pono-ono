@@ -105,9 +105,9 @@ class PonoOno extends TimberSite {
 		}
 
 		$request_data = array(
-			'post_title' => sprintf( '%s-%s',
+			'post_title' => sprintf( '%s %s',
 				sanitize_text_field( $_POST[ 'data' ][ 'fullName' ] ),
-				esc_attr( current_time( 'Y-m-d' ) )
+				sanitize_text_field( $_POST[ 'data' ][ 'eventDate' ] )
 			),
 			'post_status' => 'draft',
 			'post_type' => 'catering_request'
