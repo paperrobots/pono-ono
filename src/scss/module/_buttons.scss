@@ -66,4 +66,104 @@
       color: $white;
     }
   }
+
+  &--circle {
+    display: inline-block;
+    @include size(6rem);
+    position: absolute;
+    bottom: 3rem;
+    z-index: 100;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+
+    &:hover {
+      .button__svg {
+        circle {
+          stroke-dashoffset: 0px;
+        }
+      }
+    }
+  }
+
+  &--prev {
+    left: 3rem;
+
+    .button__icon {
+
+      &::before,
+      &::after {
+        left: 0;
+        transform-origin: left;
+      }
+    }
+
+    .button__svg {
+
+      circle {
+        stroke-dashoffset: -150.8px;
+      }
+    }
+  }
+
+  &--next {
+    right: 3rem;
+
+    .button__icon {
+
+      &::before,
+      &::after {
+        right: 0;
+        transform-origin: right;
+      }
+    }
+  }
+}
+
+.button__icon {
+  display: inline-block;
+  @include size(1.5rem 1px);
+  background-color: $charcoal;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    @include size(0.75rem 1px);
+    background-color: $charcoal;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.button__border {
+  position: absolute;
+  @include size(6rem);
+  border: 1px solid $ash;
+  border-radius: 50%;
+}
+
+.button__svg {
+  position: absolute;
+  @include size(6rem);
+
+  circle {
+    stroke: $charcoal;
+    stroke-dasharray: (150.8, 150.8);
+    stroke-dashoffset: 150.8px;
+    transition: stroke-dashoffset 0.6s $ease-in-out-quart;
+    transform-origin: center center;
+    transform: rotate(-90deg);
+  }
 }

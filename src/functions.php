@@ -233,7 +233,7 @@ function custom_menu_page_removing() {
 
 	remove_menu_page( 'edit.php' );
 	remove_menu_page( 'edit-comments.php' );
-	remove_menu_page( 'upload.php' );
+	// remove_menu_page( 'upload.php' );
 	remove_submenu_page( 'edit.php?post_type=message', 'post-new.php?post_type=message' );
 	remove_submenu_page( 'edit.php?post_type=catering_request', 'post-new.php?post_type=catering_request' );
 
@@ -241,7 +241,7 @@ function custom_menu_page_removing() {
     remove_menu_page( 'edit.php' );
 		remove_menu_page( 'edit-comments.php' );
 		remove_menu_page( 'tools.php' );
-		remove_menu_page( 'upload.php' );
+		// remove_menu_page( 'upload.php' );
 		remove_submenu_page( 'edit.php?post_type=page', 'post-new.php?post_type=page' );
 		remove_submenu_page( 'edit.php?post_type=message', 'post-new.php?post_type=message' );
 		remove_submenu_page( 'edit.php?post_type=catering_request', 'post-new.php?post_type=catering_request' );

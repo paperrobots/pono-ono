@@ -6,6 +6,19 @@
   {% set menu_items = post.get_field('menu_items') %}
 
   {% if not isAJAX %}<div id="page-menu" class="page page-menu">{% endif %}
+
+    <button class="button button--circle button--prev js-prev">
+      <span class="button__icon button__icon"></span>
+      <span class="button__border"></span>
+      <svg class="button__svg" viewBox="0 0 48 48"><circle class="button__svg__circle" cx="24" cy="24" r="24" fill="none" stroke="#676767"></circle></svg>
+    </button>
+
+    <button class="button button--circle button--next js-next">
+      <span class="button__icon button__icon"></span>
+      <span class="button__border"></span>
+      <svg class="button__svg" viewBox="0 0 48 48"><circle class="button__svg__circle" cx="24" cy="24" r="24" fill="none" stroke="#676767"></circle></svg>
+    </button>
+
     <div class="page__container container">
       <section class="page__section js-slides">
         <div class="page__text-box text-box text-box--h1">
