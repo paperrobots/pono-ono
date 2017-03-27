@@ -138,7 +138,7 @@ class Catering extends Default {
 
 	displayConfirmation() {
 
-		alert('success!')
+		classes.add(this.modal, 'is-confirmation')
 	}
 
 	animateIn(req, done) {

@@ -18,6 +18,8 @@
   &__body {
     width: 60%;
     padding: 8rem 7rem;
+    position: relative;
+    overflow: hidden;
   }
 
   &__image {
@@ -29,5 +31,50 @@
 
   &__title {
     margin-bottom: 8rem;
+
+    &--confirmation {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__section {
+    transition: transform 1s $ease-out-quint, opacity 1s $ease-out-quint;
+
+    &--confirmation {
+      @include position(absolute, 0 0 0 0);
+      padding: 8rem 7rem;
+      width: 100%;
+      background-color: $white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  &__confirmation-body {
+    p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: $charcoal;
+      margin-bottom: 6rem;
+    }
+  }
+}
+
+.is-confirmation {
+
+  .modal__section {
+
+    &--form {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    &--confirmation {
+      transform: none;
+      opacity: 1;
+    }
   }
 }
