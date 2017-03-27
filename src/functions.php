@@ -258,3 +258,17 @@ function remove_publish_box_on_inboxes() {
 	remove_meta_box( 'submitdiv', 'message', 'side' );
 }
 add_action( 'admin_menu', 'remove_publish_box_on_inboxes' );
+
+function pono_ono_login_logo() { ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/assets/img/logo.png);
+		height:100px;
+		width:200px;
+		background-size: contain;
+		background-repeat: no-repeat;
+        	padding-bottom: 30px;
+        }
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'pono_ono_login_logo' );
