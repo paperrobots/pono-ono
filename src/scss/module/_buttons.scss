@@ -79,6 +79,7 @@
     align-items: center;
     justify-content: center;
     background-color: $white;
+    transition: opacity 0.8s $ease-out-quint;
 
     &:hover {
       .button__svg {
@@ -86,6 +87,10 @@
           stroke-dashoffset: 0px;
         }
       }
+    }
+
+    &:disabled {
+      opacity: 0;
     }
   }
 
