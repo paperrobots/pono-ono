@@ -35,7 +35,8 @@
       APP.BASE_URL = '{{ site.url }}';
       APP.THEME_URL = '{{ site.theme.uri }}';
       APP.AJAX_URL = '{{ fn('admin_url', 'admin-ajax.php') }}';
-      APP.SECURITY = '{{ fn( 'wp_create_nonce', 'user-submitted-catering-request' ) }}';
+      APP.CATERING_REQUEST = '{{ fn( 'wp_create_nonce', 'user-submitted-catering-request' ) }}';
+      APP.MESSAGE = '{{ fn( 'wp_create_nonce', 'user-submitted-message' ) }}';
     </script>
     <script src="{{site.theme.link}}/js/bundle.js"></script>
     {{ wp_footer }}

@@ -45,12 +45,16 @@ class PonoOno extends TimberSite {
 		add_action( 'wp_ajax_process_catering_request', array( $this, 'process_catering_request' ) );
 		add_action( 'wp_ajax_nopriv_process_catering_request', array( $this, 'process_catering_request' ) );
 
+		add_action( 'wp_ajax_process_message', array( $this, 'process_message' ) );
+		add_action( 'wp_ajax_nopriv_process_message', array( $this, 'process_message' ) );
+
 		add_action('admin_head', array( $this, 'custom_admin_style' ) );
 
 		parent::__construct();
 	}
 
 	function register_post_types() {
+
 		$post_labels = array(
 			'name' 			    	 	 => 'Catering Requests',
 			'singular_name' 		 => 'Catering Request',
@@ -67,6 +71,23 @@ class PonoOno extends TimberSite {
 			'not_found_in_trash' => 'No Catering Requests in Trash'
 		);
 		register_post_type( 'catering_request', array( 'labels' => $post_labels, 'public' => true ) );
+
+		$post_labels = array(
+			'name' 			    	 	 => 'Messages',
+			'singular_name' 		 => 'Message',
+			'add_new' 		    	 => 'Add New',
+			'add_new_item'  		 => 'Add New Message',
+			'edit'		        	 => 'Edit',
+			'edit_item'	      	 => 'Edit Message',
+			'new_item'	         => 'New Message',
+			'view' 			         => 'View Message',
+			'view_item' 		     => 'View Message',
+			'search_term'   	   => 'Search Messages',
+			'parent' 		    		 => 'Parent Message',
+			'not_found' 				 => 'No Messages found',
+			'not_found_in_trash' => 'No Messages in Trash'
+		);
+		register_post_type( 'message', array( 'labels' => $post_labels, 'public' => true ) );
 	}
 
 	function register_taxonomies() {
@@ -93,7 +114,7 @@ class PonoOno extends TimberSite {
 		wp_deregister_script( 'wp-embed' );
 	}
 
-	/* Process Form Submissions */
+	/* Process Catering Request Submissions */
 	function process_catering_request() {
 
 		if ( ! empty( $_POST[ 'submission' ] ) ) {
@@ -123,6 +144,34 @@ class PonoOno extends TimberSite {
 			update_post_meta( $post_id, 'contact_email', sanitize_email( $_POST[ 'data' ][ 'email'] ) );
 			update_post_meta( $post_id, 'dietary_restrictions', sanitize_text_field( $_POST[ 'data' ][ 'dietaryRestrictions'] ) );
 			update_post_meta( $post_id, 'special_requests', sanitize_text_field( $_POST[ 'data' ][ 'specialRequests'] ) );
+		}
+
+		wp_send_json_success( $post_id );
+	}
+
+	/* Process Contact Form Submissions */
+	function process_message() {
+
+		if ( ! empty( $_POST[ 'submission' ] ) ) {
+			wp_send_json_error( 'Honeypot check failed' );
+		}
+
+		if ( ! check_ajax_referer( 'user-submitted-message', 'security' ) ) {
+			wp_send_json_error( 'Security check failed' );
+		}
+
+		$request_data = array(
+			'post_title' => sanitize_text_field( $_POST[ 'data' ][ 'subject' ] ),
+			'post_content' => sanitize_text_field( $_POST[ 'data' ][ 'message' ] ),
+			'post_status' => 'draft',
+			'post_type' => 'message'
+		);
+
+		$post_id = wp_insert_post( $request_data, true );
+
+		if ( $post_id ) {
+			update_post_meta( $post_id, 'contact_name', sanitize_text_field( $_POST[ 'data' ][ 'fullName'] ) );
+			update_post_meta( $post_id, 'contact_email', sanitize_email( $_POST[ 'data' ][ 'email' ] ) );
 		}
 
 		wp_send_json_success( $post_id );

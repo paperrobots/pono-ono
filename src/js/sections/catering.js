@@ -127,7 +127,7 @@ class Catering extends Default {
 				action: action,
 				data: formData,
 				submission: select('#xyq').value,
-				security: APP.SECURITY
+				security: APP.CATERING_REQUEST
 			},
 			success: response => {
 				if ( true === response.success ) {

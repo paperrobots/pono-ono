@@ -35,8 +35,12 @@ class Contact extends Default {
 
 		this.form = query({ el: this.modal })
 
-		this.inputs = [...select.all('textarea, input:not([type="submit"])')]
-		this.inputs.forEach(i => i.validation = new Validation() )
+		this.inputs = [...select.all('textarea, input')]
+		this.inputs.forEach(i => (
+			i.hasAttribute('required')
+				? i.validation = new Validation()
+				: null
+		))
 
 		this.addEvents()
 
@@ -120,12 +124,14 @@ class Contact extends Default {
 				action: action,
 				data: formData,
 				submission: select('#xyq').value,
-				security: APP.SECURITY
+				security: APP.MESSAGE
 			},
 			success: response => {
 				if ( true === response.success ) {
 
 					this.displayConfirmation()
+				} else {
+					console.log('something went wrong!', response)
 				}
 			}
 		})
