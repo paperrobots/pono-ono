@@ -1,6 +1,7 @@
 import config from 'config'
 import utils from 'utils'
 import classes from 'dom-classes'
+import { on, off } from 'dom-event'
 import Default from './default'
 import Slider from '../lib/slider'
 
@@ -12,7 +13,13 @@ class Menu extends Default {
 
 		this.slug = 'menu'
 
-		this.onSlide = this.onSlide.bind(this)
+		this.bindEvents()
+	}
+
+	bindEvents() {
+
+		['onSlide', 'goToNextSlide', 'goToPreviousSlide']
+		.forEach(fn => this[fn] = this[fn].bind(this))
 	}
 
 	init(req, done) {
@@ -27,9 +34,25 @@ class Menu extends Default {
 		this.positionStepList()
 		this.positionMenuItemTitles()
 
-		this.initSlider()
+		this.addEvents()
 
 		done()
+	}
+
+	addEvents() {
+
+		this.initSlider()
+
+		on(this.ui.next, 'click', this.goToNextSlide)
+		on(this.ui.prev, 'click', this.goToPreviousSlide)
+	}
+
+	removeEvents() {
+
+		this.slider.destroy()
+
+		off(this.ui.next, 'click', this.goToNextSlide)
+		off(this.ui.prev, 'click', this.goToPreviousSlide)
 	}
 
 	positionStepList() {
@@ -58,6 +81,8 @@ class Menu extends Default {
 
 	initSlider() {
 
+		this.current = 0
+		this.previous = null
 		this.slides = [...this.ui.slides]
 
 		this.slider = new Slider({
@@ -71,8 +96,11 @@ class Menu extends Default {
 
 	onSlide(e) {
 
-		const index = e.current
-		const previous = e.previous
+		const index = this.current = e.current
+		const previous = this.previous = e.previous
+
+		this.current === this.slides.length - 1 ? classes.add(this.ui.next, 'is-disabled') : classes.remove(this.ui.next, 'is-disabled')
+		this.current === 0 ? classes.add(this.ui.prev, 'is-disabled') : classes.remove(this.ui.prev, 'is-disabled')
 
 		this.slider.animating = true
 
@@ -86,6 +114,22 @@ class Menu extends Default {
 		}, ease: Power4.easeInOut}, 0, 0)
 
 		tl.restart()
+	}
+
+	goToNextSlide() {
+
+		classes.remove(this.ui.next, 'is-disabled')
+		classes.remove(this.ui.prev, 'is-disabled')
+
+		this.slider.goTo(this.current + 1)
+	}
+
+	goToPreviousSlide() {
+
+		classes.remove(this.ui.next, 'is-disabled')
+		classes.remove(this.ui.prev, 'is-disabled')
+
+		this.slider.goTo(this.current - 1)
 	}
 
 	animateIn(req, done) {
@@ -114,7 +158,7 @@ class Menu extends Default {
 
 		super.destroy()
 
-		this.slider.destroy()
+		this.removeEvents()
 
 		this.page.parentNode.removeChild(this.page)
 
