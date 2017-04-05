@@ -3,7 +3,7 @@ import utils from 'utils'
 import classes from 'dom-classes'
 import { on, off } from 'dom-event'
 import Default from './default'
-import Slider from '../lib/slider'
+import Slider from 'slider-manager'
 
 class Menu extends Default {
 
@@ -88,6 +88,7 @@ class Menu extends Default {
 		this.slider = new Slider({
 			length: this.slides.length - 1,
 			direction: config.infos.isDevice ? 'x' : 'y',
+			limitInertia: true,
 			callback: this.onSlide
 		})
 

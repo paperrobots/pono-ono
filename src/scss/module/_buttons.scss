@@ -71,7 +71,8 @@
     display: inline-block;
     @include size(6rem);
     position: absolute;
-    bottom: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 100;
     padding: 0;
     border-radius: 50%;
@@ -90,7 +91,7 @@
     }
 
     &:active {
-      transform: scale(0.95);
+      transform: translateY(-50%) scale(0.95);
     }
 
     &.is-disabled {
@@ -107,7 +108,7 @@
       &::before,
       &::after {
         left: 0;
-        transform-origin: left;
+        transform-origin: top left;
       }
     }
 
@@ -127,7 +128,7 @@
       &::before,
       &::after {
         right: 0;
-        transform-origin: right;
+        transform-origin: top right;
       }
     }
   }

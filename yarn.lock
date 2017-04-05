@@ -1769,7 +1769,7 @@ dom-create-element@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/dom-create-element/-/dom-create-element-1.0.2.tgz#9ec89ecb501a210487577e1e00cee0d4ec9b5c77"
 
-dom-event@^1.0.0:
+dom-event@^1.0.0, "dom-event@github:npm-dom/dom-event":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dom-event/-/dom-event-1.0.0.tgz#690dcc4992d82281c068e2e166e377eeb1e56837"
 
@@ -5327,6 +5327,14 @@ slice-ansi@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-0.0.4.tgz#edbf8903f66f7ce2f8eafd6ceed65e264c831b35"
 
+slider-manager:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/slider-manager/-/slider-manager-2.0.1.tgz#b98ff162e4776261e7777da65167c67e63599fab"
+  dependencies:
+    dom-event npm-dom/dom-event
+    sniffer "github:watsondg/sniffer"
+    virtual-scroll "^1.1.1"
+
 "sniffer@github:watsondg/sniffer":
   version "2.0.3"
   resolved "https://codeload.github.com/watsondg/sniffer/tar.gz/a668f84296dd013feb3d346511efa0619be2e7be"
@@ -6067,7 +6075,7 @@ vinyl@^1.0.0, vinyl@1.X:
     clone-stats "^0.0.1"
     replace-ext "0.0.1"
 
-virtual-scroll:
+virtual-scroll, virtual-scroll@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/virtual-scroll/-/virtual-scroll-1.1.1.tgz#924cf5c8cc067af44b802d8553008a342ac1979c"
   dependencies:
