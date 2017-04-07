@@ -100,8 +100,21 @@ class Menu extends Default {
 		const index = this.current = e.current
 		const previous = this.previous = e.previous
 
-		this.current === this.slides.length - 1 ? classes.add(this.ui.next, 'is-disabled') : classes.remove(this.ui.next, 'is-disabled')
-		this.current === 0 ? classes.add(this.ui.prev, 'is-disabled') : classes.remove(this.ui.prev, 'is-disabled')
+		if (this.current === 0) {
+			classes.add(this.ui.prev, 'is-disabled')
+			classes.add(this.ui.pdf, 'is-hidden')
+			classes.remove(this.ui.cta, 'is-hidden')
+		} else {
+			classes.remove(this.ui.prev, 'is-disabled')
+			classes.remove(this.ui.pdf, 'is-hidden')
+			classes.add(this.ui.cta, 'is-hidden')
+		}
+
+		if (this.current === this.slides.length - 1) {
+			classes.add(this.ui.next, 'is-disabled')
+		} else {
+			classes.remove(this.ui.next, 'is-disabled')
+		}
 
 		this.slider.animating = true
 

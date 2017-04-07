@@ -18,7 +18,7 @@ a {
   &::after {
     content: '';
     display: block;
-    @include position(absolute, null null -3px 0);
+    @include position(absolute, null null -4px 0);
     @include size(100% 1px);
     background-color: $ash;
     transform-origin: left;

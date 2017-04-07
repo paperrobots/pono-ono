@@ -1,3 +1,5 @@
+// Rectangular buttons
+
 .button {
   @include reset-button();
   display: inline-block;
@@ -67,6 +69,8 @@
     }
   }
 
+// Circle buttons
+
   &--circle {
     display: inline-block;
     @include size(6rem);
@@ -81,6 +85,7 @@
     justify-content: center;
     background-color: $white;
     transition: opacity 0.8s $ease-out-quint, transform 0.5s $ease-out-quint;
+    overflow: visible;
 
     &:hover {
       .button__svg {
@@ -131,6 +136,23 @@
         transform-origin: top right;
       }
     }
+
+    .button__label {
+      display: inline-block;
+      position: absolute;
+      transform: translateX(-80%);
+      color: $ash;
+      font-family: $font-title;
+      font-size: 2rem;
+      text-align: right;
+      width: 8em;
+      transition: opacity 0.8s $ease-out-quint;
+
+      &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
   }
 }
 
@@ -167,6 +189,7 @@
 
 .button__svg {
   position: absolute;
+  border-radius: 50%;
   @include size(6rem);
 
   circle {

@@ -14,16 +14,22 @@
     </button>
 
     <button class="button button--circle button--next js-next">
+      <span class="button__label js-cta">{{ post.get_field('scroll_cta') }}</span>
       <span class="button__icon"></span>
       <span class="button__border"></span>
       <svg class="button__svg" viewBox="0 0 48 48"><circle class="button__svg__circle" cx="24" cy="24" r="24" fill="none" stroke="#676767" stroke-width="2"></circle></svg>
     </button>
 
+    <a class="page-menu__full-menu-link is-hidden js-pdf" href="{{ post.get_field('menu_pdf') }}" target="_blank">{{ post.get_field('menu_link_label') }}</a>
+
     <div class="page__container container">
       <section class="page__section js-slides">
         <div class="page__text-box text-box text-box--h1">
           <h1 class="text-box__title">{{ post.get_field('page_title') }}</h1>
-          <div class="text-box__body">{{ post.get_field('intro_body') }}</div>
+          <div class="text-box__body">
+            {{ post.get_field('intro_body') }}
+            <a class="text-box__link" href="{{ post.get_field('menu_pdf') }}" target="_blank">{{ post.get_field('menu_link_label') }}</a>
+          </div>
         </div>
         <ol class="page-menu__steps">
           {% for step in steps %}
