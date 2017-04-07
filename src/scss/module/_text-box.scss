@@ -1,14 +1,16 @@
 .text-box {
   position: relative;
   width: 60%;
-  border: 80px solid;
-  border-image: url(#{$base-img}text-box--soft.png) 80;
+  border: 75px solid;
+  border-image: url('#{$base-img}text-box-border-1.png') 100;
 
   &::before {
     content: '';
     display: block;
     @include position(absolute, 0 0 0 0);
-    background-color: $sand;
+    background-image: url('#{$base-img}text-box-background-1.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
 
   h1, p {
@@ -20,6 +22,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    line-height: 1;
     transform: translateY(-60%);
   }
 

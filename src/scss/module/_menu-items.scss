@@ -27,13 +27,24 @@
   }
 
   &__info {
+    position: relative;
     width: 35%;
-    height: 200%;
-    border: 80px solid;
-    border-image: url(#{$base-img}text-box--soft.png) 80;
+    border: 70px solid;
+    border-image: url('#{$base-img}text-box-border-2.png') 90;
+    padding-bottom: 3rem;
+
+    &::before {
+      content: '';
+      display: block;
+      @include position(absolute, 0 0 0 0);
+      background-image: url('#{$base-img}text-box-background-2.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
 
     p {
-      background-color: $sand;
+      position: relative;
+      z-index: 2;
     }
   }
 

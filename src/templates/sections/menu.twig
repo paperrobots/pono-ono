@@ -28,7 +28,7 @@
         <ol class="page-menu__steps">
           {% for step in steps %}
             <li class="page-menu__step js-steps">
-              <h2 class="page-menu__step__label">{{ step.label }}</h2>
+              <h3 class="page-menu__step__label">{{ step.label }}</h3>
               <ul class="page-menu__step__options">
                 {% set opts = step.options|split(',') %}
                 {% for opt in opts %}

@@ -57,7 +57,7 @@ class Menu extends Default {
 
 	positionStepList() {
 
-		let margin = 28
+		let margin = 32
 		const interval = 1.2
 
 		this.ui.steps.forEach((step, i) => {
