@@ -20,7 +20,7 @@ class App {
 
     this.ui = query({ el: config.body })
     this.page = config.view
-    this.a = Array.apply(null, this.ui.link)
+    this.a = [...this.ui.link, this.ui.logo]
 
     this.addEvents()
 
@@ -29,7 +29,7 @@ class App {
 
   addEvents() {
 
-    biggie.bind.add(this.ui.link)
+    biggie.bind.add(this.a)
 
     on(this.ui.burger, 'click', this.onBurgerClick)
     on(this.page, 'click', this.onPageClick)
@@ -83,7 +83,7 @@ class App {
       tl.to(this.ui.sideNav, 0.8, { x: 0 }, 'in')
     }
 
-    tl.staggerFrom(this.a, 1, { y: '100%', autoAlpha: 0 }, 0.06, 'in')
+    tl.staggerFrom(this.ui.link, 1, { y: '100%', autoAlpha: 0 }, 0.06, 'in')
     tl.restart()
   }
 
