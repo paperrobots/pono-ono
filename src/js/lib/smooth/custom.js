@@ -55,6 +55,7 @@ class Custom extends Smooth {
 
     this.dom.leaves.forEach((el, index) => {
       el.style.transform = 'none'
+      el.style['will-change'] = 'none'
 
       const scrollX = this.vars.target
       const bounding = el.getBoundingClientRect()
@@ -73,6 +74,7 @@ class Custom extends Smooth {
 
     this.dom.front.forEach((el, index) => {
       el.style.transform = 'none'
+      el.style['will-change'] = null
 
       const scrollX = this.vars.target
       const bounding = el.getBoundingClientRect()
@@ -112,7 +114,12 @@ class Custom extends Smooth {
     const inview = right > 0 && left < this.vars.width + cache.width
 
     if (inview && (classes.has(el, 'js-leaves') || classes.has(el, 'js-front'))) {
+      // if (el.style['will-change'] === 'none') {
+      el.style['will-change'] = 'transform'
+      // }
       el.style[this.prefix] = `translate3d(${transform}px, 0, 0)`
+    } else if (!inview && (classes.has(el, 'js-leaves') || classes.has(el, 'js-front'))) {
+      el.style['will-change'] = null
     }
   }
 }
