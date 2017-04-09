@@ -22,6 +22,8 @@ class Story extends Default {
 
 		super.ready()
 
+		this.ui.blockTitle.forEach((el, i) => el.innerHTML = this.positionBlockTitle(i))
+
 		this.smooth = new Custom({
 			extends: true,
 			section: this.ui.scrollContainer,
@@ -38,6 +40,16 @@ class Story extends Default {
 		this.smooth.init()
 
 		done()
+	}
+
+	positionBlockTitle(index) {
+		return [this.ui.blockTitle[index]]
+			.map(el => el.textContent)
+			.map(str => str.split(' '))
+			.map(words =>
+				words.length > 1
+					? `${words[0]}<div style="margin-left: 1ch">${words.slice(1).join(' ')}</div>`
+					: words[0])
 	}
 
 	animateIn(req, done) {
