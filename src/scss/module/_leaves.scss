@@ -2,15 +2,51 @@
   position: absolute;
   z-index: -1;
 
-  &--bottom {
+  // on menu page
+  &--1 {
     @include size(24% auto);
     left: 8rem;
     bottom: 0;
   }
 
-  &--top {
+  &--2 {
     @include size(38% auto);
     right: 2rem;
     top: 0;
+  }
+
+  // on story page
+  &--3 {
+    @include size(32% auto);
+    left: 0;
+    bottom: 0;
+  }
+
+  &--4 {
+    @include size(30% auto);
+    right: 0;
+    top: 0;
+    transform: translateX(15%);
+  }
+
+  &--5 {
+    @include size(32% auto);
+    right: 0;
+    bottom: 0;
+    transform: translateX(25%);
+  }
+
+  &--6 {
+    @include size(32% auto);
+    right: 0;
+    top: 0;
+    transform: translateX(25%);
+  }
+
+  &--7 {
+    @include size(30% auto);
+    right: 0;
+    bottom: 0;
+    transform: translateX(25%);
   }
 }
