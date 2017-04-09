@@ -5,17 +5,31 @@
   justify-content: flex-end;
   padding-top: 8rem;
 
+  @include tablet() {
+    padding-top: 0;
+  }
+
   &__header {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
+
+    @include tablet() {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
   }
 
   &__title {
     text-transform: lowercase;
     margin-right: 8rem;
+
+    @include tablet() {
+      margin-right: 0;
+    }
 
     span {
       display: block;
@@ -23,15 +37,29 @@
       &:last-child {
         margin-left: 5rem;
       }
+
+      @include tablet() {
+        display: inline-block;
+
+        &:last-child {
+          margin-left: 0.5ch;
+        }
+      }
     }
   }
 
   &__info {
     position: relative;
-    width: 35%;
+    flex: 0 0 48ch;
     border: 70px solid;
     border-image: url('#{$base-img}text-box-border-2.png') 90;
     padding-bottom: 3rem;
+
+    @include tablet() {
+      flex-basis: 100%;
+      padding-bottom: 1rem;
+      border-width: 50px;
+    }
 
     &::before {
       content: '';
@@ -50,7 +78,13 @@
 
   &__image {
     @include center-block();
-    width: auto;
+    width: 100%;
     height: 90%;
+    object-fit: contain;
+
+    @include tablet() {
+      height: 100%;
+      transform: scale(1.2) translateY(10%);
+    }
   }
 }

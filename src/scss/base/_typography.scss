@@ -6,6 +6,7 @@ body {
   font-size: 2rem;
   font-family: $font-body;
   color: $ash;
+  @include fluid-type(font-size, 768px, 1200px, 12px, 16px);
 }
 
 a {
@@ -47,39 +48,39 @@ h6 {
 }
 
 h1 {
-  font-size: 16rem;
+  @include fluid-type(font-size, 768px, 1200px, 72px, 128px);
   line-height: 1.12;
   text-transform: lowercase;
 }
 
 h2 {
-  font-size: 10rem;
+  @include fluid-type(font-size, 768px, 1200px, 48px, 80px);
   line-height: 0.93;
 }
 
 h3 {
-  font-size: 9rem;
+  @include fluid-type(font-size, 768px, 1200px, 40px, 72px);
   line-height: 1.06;
 }
 
 h4 {
-  font-size: 4.25rem;
+  @include fluid-type(font-size, 768px, 1200px, 18px, 34px);
   line-height: 1.28;
 }
 
 h5 {
-  font-size: 3.5rem;
+  @include fluid-type(font-size, 768px, 1200px, 16px, 28px);
 }
 
 h6 {
-  font-size: 3rem;
+  @include fluid-type(font-size, 768px, 1200px, 14px, 24px);
 }
 
 p {
-  font-size: 2rem;
   line-height: 1.5625;
   color: $ocean-blue-1;
   margin: 0;
+  @include fluid-type(font-size, 768px, 1200px, 13px, 16px);
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

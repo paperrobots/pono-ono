@@ -28,7 +28,6 @@
           <h1 class="text-box__title">{{ post.get_field('page_title') }}</h1>
           <div class="text-box__body text-box__body--intro">
             {{ post.get_field('intro_body') }}
-            <a class="text-box__link" href="{{ post.get_field('menu_pdf') }}" target="_blank">{{ post.get_field('menu_link_label') }}</a>
           </div>
         </div>
         <ol class="page-menu__steps">
@@ -44,8 +43,8 @@
             </li>
           {% endfor %}
         </ol>
-        <img class="leaves leaves--1" src="{{ site.theme.link }}/assets/img/leaves-1.jpg" alt="Eucalyptus Leaves">
-        <img class="leaves leaves--2" src="{{ site.theme.link }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves">
+        <img class="page-menu__intro-bowl" src="{{ site.theme.link|relative }}/assets/img/menu-1.jpg" alt="Poke Bowl">
+        <img class="leaves leaves--2" src="{{ site.theme.link|relative }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves">
       </section>
 
       {% for item in menu_items %}
@@ -58,10 +57,14 @@
                 {{ item.ingredients }}
               </figcaption>
             </header>
-            <img class="page-menu-item__image" src="{{ TimberImage( item.image ).src }}" alt="{{ item.title }}">
+            <img class="page-menu-item__image" src="{{ TimberImage( item.image ).src|relative }}" alt="{{ item.title }}">
           </figure>
         </section>
       {% endfor %}
+    </div>
+
+    <div class="mobile-landscape">
+      <p>please rotate your screen.</p>
     </div>
   {% if not isAJAX %}</div>{% endif %}
 {% endblock %}

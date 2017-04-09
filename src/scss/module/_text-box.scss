@@ -4,6 +4,10 @@
   border-image: url('#{$base-img}text-box-border-1.png') 100;
   white-space: normal;
 
+  @include tablet() {
+    border-width: 55px;
+  }
+
   &::before {
     content: '';
     display: block;
@@ -26,14 +30,30 @@
     line-height: 1.1;
     transform: translateY(-60%);
     z-index: 3;
+
+    @include tablet() {
+      margin-left: -1ch;
+    }
   }
 
   &__body {
-    padding: 12rem 4rem 4rem 6rem;
+    // padding: 12rem 4rem 4rem 6rem;
+    @include fluid-type(padding-top, 768px, 1200px, 56px, 96px);
+    @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
+    @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
+    @include fluid-type(padding-left, 768px, 1200px, 24px, 48px);
 
     &--intro {
       padding: 0 4rem 0 14rem;
-      transform: translateY(-6rem);
+      padding-top: 0;
+      @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
+      @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
+      @include fluid-type(padding-left, 768px, 1200px, 32px, 100px);
+      @include fluid-type(margin-top, 768px, 1200px, -24px, -48px);
+
+      @include tablet() {
+        padding: 0;
+      }
     }
 
     &--w-button {
@@ -46,6 +66,15 @@
 
   &--intro {
     width: 60%;
+
+    @include desktop() {
+      width: 75%;
+    }
+
+    @include tablet() {
+      width: 95%;
+      margin: 0 auto;
+    }
   }
 
   &__link {

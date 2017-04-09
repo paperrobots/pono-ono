@@ -1,6 +1,9 @@
 .leaves {
   position: absolute;
   z-index: -1;
+  @include tablet() {
+    display: none;
+  }
 
   // on menu page
   &--1 {
@@ -10,7 +13,7 @@
   }
 
   &--2 {
-    @include size(38% auto);
+    @include size(34% auto);
     right: 2rem;
     top: 0;
   }
