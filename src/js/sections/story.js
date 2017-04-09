@@ -39,6 +39,20 @@ class Story extends Default {
     done()
   }
 
+  resize (width, height) {
+    if (width < 769) {
+      this.smooth.off()
+      window.requestAnimationFrame(() => {
+        this.smooth.on()
+      })
+    } else {
+      this.smooth.off()
+      window.requestAnimationFrame(() => {
+        this.smooth.on()
+      })
+    }
+  }
+
   positionBlockTitle (index) {
     return [this.ui.blockTitle[index]]
       .map(el => el.textContent)

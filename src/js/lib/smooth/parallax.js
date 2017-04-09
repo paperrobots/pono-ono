@@ -7,6 +7,7 @@ class Parallax extends Smooth {
 
     this.createExtraBound()
 
+    this.isMobile = window.innerWidth <= 768
     this.resizing = false
     this.cache = null
     this.dom.blocks = Array.prototype.slice.call(opt.blocks, 0)
@@ -22,6 +23,7 @@ class Parallax extends Smooth {
   resize () {
     this.resizing = true
 
+    this.isMobile = window.innerWidth <= 768
     this.getCache()
     super.resize()
 
@@ -31,10 +33,10 @@ class Parallax extends Smooth {
   getCache () {
     this.cache = []
 
-    const unit = this.vars.width + 125
+    const unit = this.isMobile ? this.vars.height + 100 : this.vars.width + 125
 
     this.dom.blocks.forEach((el, index) => {
-      el.style.display = 'inline-block'
+      // el.style.display = 'inline-block'
       el.style.transform = 'none'
       el.style['z-index'] = '2'
 
@@ -91,14 +93,23 @@ class Parallax extends Smooth {
       this.cache.push(bounds)
     })
 
-    this.dom.section.style.width = `${this.vars.width}px`
-    this.vars.bounding = (unit * this.dom.blocks.length) - this.vars.width
+    if (this.isMobile) {
+      this.dom.section.style.width = window.innerWidth
+      this.dom.section.style.height = `${this.vars.height}px`
+      this.vars.bounding = this.dom.blocks.reduce((acc, block) => acc + block.getBoundingClientRect().height, 0) * 1.6
+    } else {
+      this.dom.section.style.height = window.innerHeight
+      this.dom.section.style.width = `${this.vars.width}px`
+      this.vars.bounding = this.dom.blocks.reduce((acc, block) => acc + block.getBoundingClientRect().width, 0) - this.vars.width / 2
+    }
   }
 
   run () {
-    [...this.dom.blocks, ...this.dom.leaves, ...this.dom.front].forEach(this.inViewport)
+    !this.isMobile && [...this.dom.blocks, ...this.dom.leaves, ...this.dom.front].forEach(this.inViewport)
 
-    this.dom.section.style[this.prefix] = `translate3d(${this.vars.current * -1}px, 0, 0)`
+    this.dom.section.style[this.prefix] = this.isMobile
+      ? `translate3d(0, ${this.vars.current * -1}px, 0)`
+      : `translate3d(${this.vars.current * -1}px, 0, 0)`
 
     super.run()
   }
