@@ -22,8 +22,10 @@ class Story extends Default {
     this.smooth = new Custom({
       extends: true,
       section: this.ui.scrollContainer,
-      divs: this.ui.block,
-      ease: 0.075,
+      blocks: this.ui.block,
+      leaves: this.ui.leaves,
+      front: this.ui.front,
+      ease: 0.1,
       noscrollbar: true,
       vs: {
         mouseMultiplier: 0.25,

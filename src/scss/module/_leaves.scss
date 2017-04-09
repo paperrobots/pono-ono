@@ -26,27 +26,27 @@
     @include size(30% auto);
     right: 0;
     top: 0;
-    transform: translateX(15%);
+    // transform: translateX(15%);
   }
 
   &--5 {
     @include size(32% auto);
-    right: 0;
+    right: 24rem;
     bottom: 0;
-    transform: translateX(25%);
+    // transform: translateX(25%);
   }
 
   &--6 {
     @include size(32% auto);
-    right: 0;
+    right: 8rem;
     top: 0;
-    transform: translateX(25%);
+    // transform: translateX(25%);
   }
 
   &--7 {
     @include size(30% auto);
     right: 0;
     bottom: 0;
-    transform: translateX(25%);
+    // transform: translateX(25%);
   }
 }
