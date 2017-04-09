@@ -1,10 +1,9 @@
 export default (fn) => {
+  let done = false
 
-    let done = false
-
-    return (...args) => {
-        if (done) return
-        done = true
-        fn(...args)
-    }
+  return (...args) => {
+    if (done) return
+    done = true
+    fn(...args)
+  }
 }

@@ -9,176 +9,156 @@ import Default from './default'
 import Validation from '../lib/validation'
 
 class Catering extends Default {
+  constructor (opt) {
+    super(opt)
 
-	constructor(opt) {
+    this.slug = 'catering'
 
-		super(opt)
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
 
-		this.slug = 'catering'
+  init (req, done) {
+    super.init(req, done)
+  }
 
-		this.onChange = this.onChange.bind(this)
-		this.onSubmit = this.onSubmit.bind(this)
-	}
+  ready (done) {
+    super.ready()
 
-	init(req, done) {
+    this.modal = select('.js-modal')
 
-		super.init(req, done)
-	}
+    utils.biggie.bind.add(select.all('a', this.modal))
 
-	ready(done) {
+    this.form = query({ el: this.modal })
 
-		super.ready()
+    this.inputs = [...select.all('select, input:not([type="submit"])')]
+    this.inputs.forEach(i => {
+      if (i.hasAttribute('required')) {
+        i.validation = new Validation()
+      }
+    })
 
-		this.modal = select('.js-modal')
+    this.addEvents()
 
-		utils.biggie.bind.add(select.all('a', this.modal))
+    done()
+  }
 
-		this.form = query({ el: this.modal })
+  addEvents () {
+    on(this.ui.toggle, 'click', this.toggleModal)
+    on(this.modal, 'click', this.toggleModal)
+    on(this.form.outer, 'click', this.blockClicks)
+    on(this.form.el, 'submit', this.onSubmit)
 
-		this.inputs = [...select.all('select, input:not([type="submit"])')]
-		this.inputs.forEach(i => (
-			i.hasAttribute('required')
-				? i.validation = new Validation()
-				: null
-		))
+    this.inputs.forEach(i => on(i, 'input', this.onChange))
+    this.inputs.forEach(i => on(i, 'focusout', this.onChange))
+  }
 
-		this.addEvents()
+  removeEvents () {
+    off(this.ui.toggle, 'click', this.toggleModal)
+    off(this.modal, 'click', this.toggleModal)
+    off(this.form.outer, 'click', this.blockClicks)
+    off(this.form.el, 'submit', this.onSubmit)
 
-		done()
-	}
+    this.inputs.forEach(i => off(i, 'input', this.onChange))
+    this.inputs.forEach(i => off(i, 'focusout', this.onChange))
+  }
 
-	addEvents() {
+  toggleModal () {
+    classes.toggle(config.body, 'modal-is-hidden')
+  }
 
-		on(this.ui.toggle, 'click', this.toggleModal)
-		on(this.modal, 'click', this.toggleModal)
-		on(this.form.outer, 'click', this.blockClicks)
-		on(this.form.el, 'submit', this.onSubmit)
+  blockClicks (e) {
+    e.stopPropagation()
+  }
 
-		this.inputs.forEach(i => on(i, 'input', this.onChange))
-		this.inputs.forEach(i => on(i, 'focusout', this.onChange))
-	}
+  onChange (e) {
+    const target = e.target
 
-	removeEvents() {
+    if (target.validation) {
+      target.validation.checkValidity(target)
+    }
 
-		off(this.ui.toggle, 'click', this.toggleModal)
-		off(this.modal, 'click', this.toggleModal)
-		off(this.form.outer, 'click', this.blockClicks)
-		off(this.form.el, 'submit', this.onSubmit)
+    if (target.value.length > 0) {
+      classes.add(target.parentNode, 'is-focused')
+    } else {
+      classes.remove(target.parentNode, 'is-focused')
+    }
+  }
 
-		this.inputs.forEach(i => off(i, 'input', this.onChange))
-		this.inputs.forEach(i => off(i, 'focusout', this.onChange))
-	}
+  onSubmit (e) {
+    e.preventDefault()
 
-	toggleModal() {
+    const { fullName, eventDate, pickupTime, guestCount, email, dietaryRestrictions, specialRequests } = this.form
 
-		classes.toggle(config.body, 'modal-is-hidden')
-	}
+    const formData = {
+      'fullName': fullName.value,
+      'eventDate': eventDate.value,
+      'pickupTime': pickupTime.value,
+      'guestCount': guestCount.value,
+      'email': email.value,
+      'dietaryRestrictions': dietaryRestrictions.value,
+      'specialRequests': specialRequests.value
+    }
 
-	blockClicks(e) {
+    this.postFormData(formData, 'process_catering_request')
+  }
 
-		e.stopPropagation()
-	}
+  postFormData (formData, action) {
+    ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: APP.AJAX_URL,
+      data: {
+        action: action,
+        data: formData,
+        submission: select('#xyq').value,
+        security: APP.CATERING_REQUEST
+      },
+      success: response => {
+        if (response.success === true) {
+          this.displayConfirmation()
+        }
+      }
+    })
+  }
 
-	onChange(e) {
+  displayConfirmation () {
+    classes.add(this.modal, 'is-confirmation')
+  }
 
-		const target = e.target
+  animateIn (req, done) {
+    classes.add(config.body, `is-${this.slug}`)
 
-		if (target.validation) {
+    const tl = new TimelineMax({ paused: true, onComplete: done })
 
-			target.validation.checkValidity(target)
-		}
+    tl.to(this.page, 1, { autoAlpha: 1, ease: Expo.easeInOut })
+    tl.restart()
+  }
 
-		if (target.value.length > 0) {
+  animateOut (req, done) {
+    classes.remove(config.body, `is-${this.slug}`)
 
-			classes.add(target.parentNode, 'is-focused')
+    const tl = new TimelineMax({ paused: true, onComplete: done })
 
-		} else {
+    if (!classes.has(config.body, 'modal-is-hidden')) {
+      tl.to(this.modal, 0.7, { autoAlpha: 0, ease: Expo.easeInOut, onComplete: this.toggleModal })
+    }
 
-			classes.remove(target.parentNode, 'is-focused')
-		}
-	}
+    tl.to(this.page, 0.7, { autoAlpha: 0, ease: Expo.easeInOut, clearProps: 'all' })
 
-	onSubmit(e) {
+    tl.restart()
+  }
 
-		e.preventDefault()
+  destroy (req, done) {
+    super.destroy()
 
-		const { fullName, eventDate, pickupTime, guestCount, email, dietaryRestrictions, specialRequests } = this.form
+    this.removeEvents()
 
-		const formData = {
-			'fullName' : fullName.value,
-			'eventDate' : eventDate.value,
-			'pickupTime' : pickupTime.value,
-			'guestCount' : guestCount.value,
-			'email' : email.value,
-			'dietaryRestrictions' : dietaryRestrictions.value,
-			'specialRequests' : specialRequests.value
-		}
+    this.page.parentNode.removeChild(this.page)
+    this.modal.parentNode.removeChild(this.modal)
 
-		this.postFormData(formData, 'process_catering_request')
-	}
-
-	postFormData(formData, action) {
-
-		ajax({
-			type: 'POST',
-			dataType: 'json',
-			url: APP.AJAX_URL,
-			data: {
-				action: action,
-				data: formData,
-				submission: select('#xyq').value,
-				security: APP.CATERING_REQUEST
-			},
-			success: response => {
-				if ( true === response.success ) {
-
-					this.displayConfirmation()
-				}
-			}
-		})
-	}
-
-	displayConfirmation() {
-
-		classes.add(this.modal, 'is-confirmation')
-	}
-
-	animateIn(req, done) {
-
-		classes.add(config.body, `is-${this.slug}`)
-
-		const tl = new TimelineMax({ paused: true, onComplete: done })
-
-		tl.to(this.page, 1, { autoAlpha: 1, ease: Expo.easeInOut })
-		tl.restart()
-	}
-
-	animateOut(req, done) {
-
-		classes.remove(config.body, `is-${this.slug}`)
-
-		const tl = new TimelineMax({ paused: true, onComplete: done })
-
-		if (!classes.has(config.body, 'modal-is-hidden')) {
-			tl.to(this.modal, 0.7, { autoAlpha: 0, ease: Expo.easeInOut, onComplete: this.toggleModal })
-		}
-
-		tl.to(this.page, 0.7, { autoAlpha: 0, ease: Expo.easeInOut, clearProps: 'all' })
-
-		tl.restart()
-	}
-
-	destroy(req, done) {
-
-		super.destroy()
-
-		this.removeEvents()
-
-		this.page.parentNode.removeChild(this.page)
-		this.modal.parentNode.removeChild(this.modal)
-
-		done()
-	}
+    done()
+  }
 }
 
 module.exports = Catering

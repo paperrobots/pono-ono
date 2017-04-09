@@ -1,12 +1,12 @@
 // ==== CONFIGURATION ==== //
 
 // Project paths
-var project     = 'pono-ono',             // The directory name for your theme; change this at the very least!
-    src         = './src/',               // The raw material of your theme: custom scripts, SCSS source files, PHP files, images, etc.; do not delete this folder!
-    build       = './build/',             // A temporary directory containing a development version of your theme; delete it anytime
-    dist        = './dist/'+project+'/',  // The distribution package that you'll be uploading to your server; delete it anytime
+var project     = 'pono-ono',             // The directory name for your theme change this at the very least!
+    src         = './src/',               // The raw material of your theme: custom scripts, SCSS source files, PHP files, images, etc. do not delete this folder!
+    build       = './build/',             // A temporary directory containing a development version of your theme delete it anytime
+    dist        = './dist/'+project+'/',  // The distribution package that you'll be uploading to your server delete it anytime
     assets      = './assets/',            // A staging area for assets that require processing before landing in the source folder (example: icons before being added to a sprite sheet)
-    modules     = './node_modules/';      // npm packages
+    modules     = './node_modules/'       // npm packages
 
 // Project settings
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
     files: [build+'/**', '!'+build+'/**.map'], // Exclude map files
     notify: false, // In-line notifications (the blocks of text saying whether you are connected to the BrowserSync server or not)
     open: true, // Set to false if you don't like the browser window opening automatically
-    port: 3000, // Port number for the live version of the site; default: 3000
+    port: 3000, // Port number for the live version of the site default: 3000
     proxy: 'dev.ponoonopoke.com', // We need to use a proxy instead of the built-in server because WordPress has to do some server-side rendering for the theme to work
     watchOptions: {
       debounceDelay: 2000 // This introduces a small delay when watching for file change events to avoid triggering too many reloads
@@ -23,7 +23,7 @@ module.exports = {
   },
 
   images: {
-    build: { // Copies images from `src` to `build`; does not optimize
+    build: { // Copies images from `src` to `build` does not optimize
       src: src+'**/*(*.png|*.jpg|*.jpeg|*.gif|*.svg|*.eot|*.ttf|*.woff)',
       dest: build
     },
@@ -71,8 +71,8 @@ module.exports = {
         modules
       ],
       precision: 6,
-      onError: function(err) {
-        return console.log(err);
+      onError: function (err) {
+        return console.log(err)
       }
     }
   },
@@ -89,7 +89,7 @@ module.exports = {
   },
 
   utils: {
-    clean: [build+'**/.DS_Store'], // A glob pattern matching junk files to clean out of `build`; feel free to add to this array
+    clean: [build+'**/.DS_Store'], // A glob pattern matching junk files to clean out of `build` feel free to add to this array
     wipe: [dist], // Clean this out before creating a new distribution copy
     dist: {
       src: [build+'**/*', '!'+build+'**/*.map'],
@@ -103,7 +103,7 @@ module.exports = {
     delete: dist+'javascript/bundle.js' // Delete the unminified bundle
   },
 
-  watch: { // What to watch before triggering each specified task; if files matching the patterns below change it will trigger BrowserSync
+  watch: { // What to watch before triggering each specified task if files matching the patterns below change it will trigger BrowserSync
     src: {
       styles:       src+'scss/**/*.scss',
       scripts:      src+'js/**/*.js',

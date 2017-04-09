@@ -1,4 +1,3 @@
 export default (arr) => {
-    
-    return Math.max(...arr)
+  return Math.max(...arr)
 }

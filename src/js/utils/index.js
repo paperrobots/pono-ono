@@ -6,10 +6,10 @@ import func from './func'
 import math from './math'
 
 export default {
-    array: array,
-    biggie: biggie,
-    css: css,
-    dom: dom,
-    func: func,
-    math: math
+  array: array,
+  biggie: biggie,
+  css: css,
+  dom: dom,
+  func: func,
+  math: math
 }

@@ -4,8 +4,8 @@ import slug from './slug'
 import page from './page'
 
 export default {
-    bind: bind,
-    route: route,
-    slug: slug,
-    page: page
+  bind: bind,
+  route: route,
+  slug: slug,
+  page: page
 }

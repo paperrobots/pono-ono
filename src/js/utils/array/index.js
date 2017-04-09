@@ -5,9 +5,9 @@ import combine from './combine'
 import without from './without'
 
 export default {
-    min: min,
-    max: max,
-    slice: slice,
-    combine: combine,
-    without: without
+  min: min,
+  max: max,
+  slice: slice,
+  combine: combine,
+  without: without
 }

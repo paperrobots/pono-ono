@@ -3,13 +3,11 @@ import route from './route'
 
 export default {
 
-    add: (a) => {
+  add: (a) => {
+    slice(a).forEach((el) => { el.onclick = route })
+  },
 
-        slice(a).forEach((el) => el.onclick = route)
-    },
-    
-    remove: (a) => {
-
-        slice(a).forEach((el) => el.onclick = null)
-    }
+  remove: (a) => {
+    slice(a).forEach((el) => { el.onclick = null })
+  }
 }

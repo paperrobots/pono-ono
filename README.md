@@ -8,7 +8,7 @@ The project setup and gulp configuration is based on [wordpress-gulp-starter-kit
 
 - [x] Set up Timber
 - [x] Add Browserify and Babelify to bundle scripts written in ES2015
-- [ ] Get rid of jshint and set up eslint with standard js style config
+- [x] Get rid of jshint and set up linter with standard js style
 - [x] Get rid of unused boilerplate (livereload, rubySass, composer, bower)
 - [x] Add some steps to the `gulp dist` task to replace script tag in base.twig to load minified javascript and delete the unminified version
 
@@ -107,7 +107,7 @@ I've explained the available `gulp` commands in more detail below:
 - Does everything that `gulp build` does but also opens up a browser window at `localhost:3000`. Now changes to any files in `src` will be live-reloaded on save using BrowserSync.
 
 ###`gulp build`
-- Lints, transpiles and bundles together `js` using Browserify and Babelify to support ES2015 JavaScript syntax. Sticks both a minified and unminified bundle in `build/js`.
+- Transpiles and bundles together `js` using Browserify and Babelify to support ES2015 JavaScript syntax. Sticks both a minified and unminified bundle in `build/js`.
 - Compiles all `scss` files imported to `src/scss/main.scss`, autoprefixes, minifies, renames to `style.css`, and sticks it in `build`.
 - Copies all images, `php` files, and `twig` templates over to `build` as well.
 
