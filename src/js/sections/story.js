@@ -2,6 +2,7 @@ import config from 'config'
 import utils from 'utils'
 import classes from 'dom-classes'
 import Default from './default'
+import Custom from '../lib/smooth/custom'
 
 class Story extends Default {
 
@@ -20,6 +21,21 @@ class Story extends Default {
 	ready(done) {
 
 		super.ready()
+
+		this.smooth = new Custom({
+			extends: true,
+			section: this.ui.scrollContainer,
+			divs: this.ui.block,
+			ease: 0.075,
+			noscrollbar: true,
+			vs: {
+	      mouseMultiplier: 0.25,
+	      touchMultiplier: 1.8,
+	      firefoxMultiplier: 30
+    	}
+		})
+
+		this.smooth.init()
 
 		done()
 	}
@@ -49,6 +65,8 @@ class Story extends Default {
 	destroy(req, done) {
 
 		super.destroy()
+
+		this.smooth.destroy()
 
 		this.page.parentNode.removeChild(this.page)
 

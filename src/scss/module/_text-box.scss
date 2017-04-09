@@ -1,8 +1,8 @@
 .text-box {
   position: relative;
-  width: 60%;
   border: 75px solid;
   border-image: url('#{$base-img}text-box-border-1.png') 100;
+  white-space: normal;
 
   &::before {
     content: '';
@@ -22,13 +22,17 @@
     position: absolute;
     top: 0;
     left: 0;
-    line-height: 1;
+    line-height: 1.1;
     transform: translateY(-60%);
   }
 
   &__body {
-    padding: 0 4rem 0 14rem;
-    transform: translateY(-6rem);
+    padding: 12rem 4rem 4rem 6rem;
+
+    &--intro {
+      padding: 0 4rem 0 14rem;
+      transform: translateY(-6rem);
+    }
 
     &--w-button {
 
@@ -36,6 +40,10 @@
         margin-bottom: 6rem;
       }
     }
+  }
+
+  &--intro {
+    width: 60%;
   }
 
   &__link {

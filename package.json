@@ -39,6 +39,7 @@
     "prefix": "^1.0.0",
     "query-dom-components": "^0.1.0",
     "slider-manager": "^2.0.1",
+    "smooth-scrolling": "^2.3.7",
     "sniffer": "github:watsondg/sniffer",
     "virtual-scroll": "^1.1.1"
   },

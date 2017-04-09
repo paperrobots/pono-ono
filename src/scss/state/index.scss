@@ -2,22 +2,9 @@
 @import 'modal-state';
 
 body {
+  overflow: hidden;
 
   &.is-loading {
     cursor: wait;
-  }
-
-  &.is-home,
-  &.is-menu,
-  &.is-catering {
-    overflow: hidden;
-  //
-  //   .menu-bar__logo {
-  //     @include pointer-events-hidden();
-  //
-  //     @include tablet() {
-  //       @include pointer-events-visible();
-  //     }
-  //   }
   }
 }
