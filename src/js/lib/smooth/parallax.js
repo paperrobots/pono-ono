@@ -1,7 +1,7 @@
 import Smooth from 'smooth-scrolling'
 import classes from 'dom-classes'
 
-class Custom extends Smooth {
+class Parallax extends Smooth {
   constructor (opt) {
     super(opt)
 
@@ -124,4 +124,4 @@ class Custom extends Smooth {
   }
 }
 
-export default Custom
+export default Parallax

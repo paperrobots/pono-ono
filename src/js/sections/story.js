@@ -1,7 +1,7 @@
 import config from 'config'
 import classes from 'dom-classes'
 import Default from './default'
-import Custom from '../lib/smooth/custom'
+import Parallax from '../lib/smooth/parallax'
 
 class Story extends Default {
   constructor (opt) {
@@ -19,7 +19,7 @@ class Story extends Default {
 
     this.ui.blockTitle.forEach((el, i) => { el.innerHTML = this.positionBlockTitle(i) })
 
-    this.smooth = new Custom({
+    this.smooth = new Parallax({
       extends: true,
       section: this.ui.scrollContainer,
       blocks: this.ui.block,
