@@ -6,106 +6,45 @@
 
       <div class="story__scroll-container js-scroll-container">
 
+        <!-- intro block -->
         <div class="story__block js-block">
           <div class="story__item story__item--top" style="z-index: 1;">
             <div class="page__text-box text-box">
-              <h1 class="text-box__title">the story</h1>
+              <h1 class="text-box__title">{{ post.get_field('page_title') }}</h1>
               <div class="text-box__body text-box__body--intro">
-                <p>The word "pono" lends itself to many interpretations across the Hawaiian islands. Some hear it as a call to moral action and goodness. For others it may be a state of balance and harmony. But whether you’re in Honolulu or Hana, islanders can always agree on one central and consistent meaning; righteousness!</p>
+                {{ post.get_field('intro_body') }}
               </div>
             </div>
           </div>
           <div class="story__item story__item--bottom story__item--margin">
-            <img class="story__image" src="{{ site.theme.link }}/assets/img/story-page-assets/story-1.jpg">
+            <img class="story__image" src="{{ TimberImage(post.get_field('intro_image')).src }}">
           </div>
           <img class="leaves leaves--3" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-3.jpg" alt="Eucalyptus Leaves">
           <img class="leaves leaves--4" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-4.jpg" alt="Eucalyptus Leaves">
         </div>
 
-        <div class="story__block js-block">
-          <div class="story__item story__item--bottom story__item--margin" style="z-index: 1;">
-            <div class="page__text-box text-box">
-              <h3 class="text-box__title">classic <div style="margin-left: 1ch;">& current</div></h3>
-              <div class="text-box__body">
-                <p>Pono ono seeks to blend the varying interpretations of "pono" into a guiding inspiration for how we source, prepare, and serve our poke. Our menu reflects both the classic and current preparations that are so adored across the island chain.</p>
+        {% set story_blocks = post.get_field('story_blocks') %}
+        <!-- story block loop -->
+        {% for story_block in story_blocks %}
+          <div class="story__block js-block">
+            <div class="story__item story__item--{{ story_block.text_box_position }}{% if story_block.text_box_margin %} story__item--margin {% endif %}"{% if story_block.layer_order %} style="z-index: 1;"{% endif %}>
+              <div class="page__text-box text-box">
+                <h3 class="text-box__title">{{ story_block.title }}</h3>
+                <div class="text-box__body">
+                  {{ story_block.body }}
+                </div>
               </div>
             </div>
-          </div>
-          <div class="story__item story__item--top story__item--margin">
-            <img class="story__image" src="{{ site.theme.link }}/assets/img/story-page-assets/story-2.jpg">
-          </div>
-          <img class="leaves leaves--5" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-5.jpg" alt="Eucalyptus Leaves">
-        </div>
-
-        <div class="story__block js-block">
-          <div class="story__item story__item--center" style="z-index: 1;">
-            <div class="page__text-box text-box">
-              <h3 class="text-box__title">harmony <div style="margin-left: 1ch;">& balance</div></h3>
-              <div class="text-box__body">
-                <p>Pono calls for harmony and balance. We answer with poke that's not over-complicated, never overdressed and always well balanced. The fish is our star, and we mean to let it shine. We cut precisely, season thoughtfully, and toss carefully so you can experience poke the way it was meant to be.</p>
+            {% if story_block.image %}
+              <div class="story__item story__item--{{ story_block.image_position }}{% if story_block.image_margin %} story__item--margin {% endif %}">
+                <img class="story__image" src="{{ TimberImage(story_block.image).src }}">
               </div>
-            </div>
+            {% endif %}
+            {% if story_block.leaves_image != 'none' %}
+              <img class="leaves leaves--{{ story_block.leaves_image }}" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-{{ story_block.leaves_image }}.jpg" alt="Eucalyptus Leaves">
+            {% endif %}
           </div>
-          <div class="story__item story__item--bottom">
-            <img class="story__image" src="{{ site.theme.link }}/assets/img/story-page-assets/story-3.jpg">
-          </div>
-          <img class="leaves leaves--6" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-6.jpg" alt="Eucalyptus Leaves">
-        </div>
-
-        <div class="story__block js-block">
-          <div class="story__item story__item--bottom story__item--margin">
-            <div class="page__text-box text-box">
-              <h3 class="text-box__title">environmentally <div style="margin-left: 1ch;">concious</div></h3>
-              <div class="text-box__body">
-                <p>To exemplify what it means to be "good" on an environmental scale, we take pride in being environmentally conscious from ingredient sourcing, to packaging materials, and even the lights we use to illuminate our shop.</p>
-              </div>
-            </div>
-          </div>
-          <div class="story__item story__item--top story__item--margin">
-            <img class="story__image" src="{{ site.theme.link }}/assets/img/story-page-assets/story-4.jpg">
-          </div>
-          <img class="leaves leaves--7" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-7.jpg" alt="Eucalyptus Leaves">
-        </div>
-
-        <div class="story__block js-block">
-          <div class="story__item story__item--top story__item--margin" style="z-index: 1;">
-            <div class="page__text-box text-box">
-              <h3 class="text-box__title">boat <div style="margin-left: 1ch;">to bowl</div></h3>
-              <div class="text-box__body">
-                <p>The sourcing of our tuna is possible thanks to our fantastic supplier Honolulu Fish Company, who hold themselves to the most righteous of environmental standards, boasting an impressive dual environmental sustainability certification. The tuna is exclusively line caught in Hawaiian waters before it’s shipped fresh to us overnight. Working with sushi grade fish that's never frozen allows us to preserve taste and texture from boat to bowl. And while Salmon isn't native to Hawaiian waters, that doesn't stop us from finding sustainable options off the coast of Faroe Island in Scotland.</p>
-              </div>
-            </div>
-          </div>
-          <div class="story__item story__item--bottom">
-            <img class="story__image" src="{{ site.theme.link }}/assets/img/story-page-assets/story-5.jpg">
-          </div>
-          <img class="leaves leaves--4" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-4.jpg" alt="Eucalyptus Leaves">
-        </div>
-
-        <div class="story__block js-block">
-          <div class="story__item story__item--top story__item--margin" style="z-index: 1;">
-            <div class="page__text-box text-box">
-              <h3 class="text-box__title">share <div style="margin-left: 1ch;">the love</div></h3>
-              <div class="text-box__body">
-                <p>We don't just take great care of our fish though, our Pono Ono team starts at $15 an hour, and we're proud to offer profit sharing opportunities to our most capable and hard working staff members. There's lots of love to go around, why not share some.</p>
-              </div>
-            </div>
-          </div>
-          <div class="story__item story__item--full-bleed">
-            <img class="story__image" src="{{ site.theme.link }}/assets/img/story-page-assets/story-6.jpg">
-          </div>
-        </div>
-
-        <div class="story__block js-block">
-          <div class="story__item story__item--bottom" style="z-index: 1;">
-            <div class="page__text-box text-box">
-              <h3 class="text-box__title">righteous <div style="margin-left: 1ch;">poke.</div></h3>
-              <div class="text-box__body">
-                <p>While all this Righteousness is certainly key, it only makes up half of "Pono Ono". So what good is the “pono” without the “ono”, or as we say on the mainland, “deliciousness”.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
 
       </div>
     </section>

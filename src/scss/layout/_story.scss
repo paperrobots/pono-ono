@@ -45,14 +45,14 @@
       transform: translateY(-50%);
     }
 
-    &--full-bleed {
+    &--background {
       top: 50%;
       left: 30%;
       transform: translateY(-50%);
       width: 85%;
     }
 
-    &:nth-child(2):not(.story__item--full-bleed) {
+    &:nth-child(2):not(.story__item--background) {
       width: 45%;
       left: 50%;
     }
