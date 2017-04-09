@@ -25,7 +25,7 @@ class Contact extends Default {
   ready (done) {
     super.ready()
 
-    this.modal = select('.js-modal')
+    this.modal = select('.modal--contact')
 
     utils.biggie.bind.add(select.all('a', this.modal))
 
@@ -154,7 +154,7 @@ class Contact extends Default {
     this.removeEvents()
 
     this.page.parentNode.removeChild(this.page)
-    this.modal.parentNode.removeChild(this.modal)
+    config.modal.removeChild(this.modal)
 
     done()
   }

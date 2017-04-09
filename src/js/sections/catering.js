@@ -25,7 +25,7 @@ class Catering extends Default {
   ready (done) {
     super.ready()
 
-    this.modal = select('.js-modal')
+    this.modal = select('.modal--catering')
 
     utils.biggie.bind.add(select.all('a', this.modal))
 
