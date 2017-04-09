@@ -19,8 +19,8 @@
           <div class="story__item story__item--bottom story__item--margin">
             <img class="story__image" src="{{ TimberImage(post.get_field('intro_image')).src }}">
           </div>
-          <img class="leaves leaves--3" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-3.jpg" alt="Eucalyptus Leaves">
-          <img class="leaves leaves--4" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-4.jpg" alt="Eucalyptus Leaves">
+          <img class="leaves leaves--3" src="{{ site.theme.link }}/assets/img/leaves-3.jpg" alt="Eucalyptus Leaves">
+          <img class="leaves leaves--4" src="{{ site.theme.link }}/assets/img/leaves-4.jpg" alt="Eucalyptus Leaves">
         </div>
 
         {% set story_blocks = post.get_field('story_blocks') %}
@@ -41,7 +41,7 @@
               </div>
             {% endif %}
             {% if story_block.leaves_image != 'none' %}
-              <img class="leaves leaves--{{ story_block.leaves_image }}" src="{{ site.theme.link }}/assets/img/story-page-assets/leaves-{{ story_block.leaves_image }}.jpg" alt="Eucalyptus Leaves">
+              <img class="leaves leaves--{{ story_block.leaves_image }}" src="{{ site.theme.link }}/assets/img/leaves-{{ story_block.leaves_image }}.jpg" alt="Eucalyptus Leaves">
             {% endif %}
           </div>
         {% endfor %}
