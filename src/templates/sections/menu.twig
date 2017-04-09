@@ -43,8 +43,8 @@
             </li>
           {% endfor %}
         </ol>
-        <img class="page-menu__intro-bowl" src="{{ site.theme.link|relative }}/assets/img/menu-1.jpg" alt="Poke Bowl">
-        <img class="leaves leaves--2" src="{{ site.theme.link|relative }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves">
+        <img class="page-menu__intro-bowl" src="{{ site.theme.link }}/assets/img/menu-1.jpg" alt="Poke Bowl">
+        <img class="leaves leaves--2" src="{{ site.theme.link }}/assets/img/leaves-2.jpg" alt="Eucalyptus Leaves">
       </section>
 
       {% for item in menu_items %}
@@ -57,7 +57,7 @@
                 {{ item.ingredients }}
               </figcaption>
             </header>
-            <img class="page-menu-item__image" src="{{ TimberImage( item.image ).src|relative }}" alt="{{ item.title }}">
+            <img class="page-menu-item__image" src="{{ TimberImage( item.image ).src }}" alt="{{ item.title }}">
           </figure>
         </section>
       {% endfor %}
