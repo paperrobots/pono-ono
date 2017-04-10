@@ -60,6 +60,10 @@
 
       p {
         margin-bottom: 6rem;
+
+        @include tablet() {
+          margin-bottom: 4rem;
+        }
       }
     }
   }

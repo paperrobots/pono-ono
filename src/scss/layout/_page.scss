@@ -23,4 +23,21 @@
       transform: translateX(100%);
     }
   }
+
+  &__image {
+    position: absolute;
+    z-index: -1;
+    width: 70%;
+    height: auto;
+    right: 0;
+    bottom: 0;
+
+    @include desktop() {
+      width: 90%;
+    }
+
+    @include tablet() {
+      width: 100%;
+    }
+  }
 }
