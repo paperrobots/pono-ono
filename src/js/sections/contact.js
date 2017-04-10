@@ -25,7 +25,7 @@ class Contact extends Default {
   ready (done) {
     super.ready()
 
-    this.modal = select('.modal--contact')
+    this.modal = select('.modal--contact') || select('.modal--pono-ono-contact')
 
     utils.biggie.bind.add(select.all('a', this.modal))
 
