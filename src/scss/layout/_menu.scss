@@ -107,6 +107,23 @@
   display: block;
   text-align: left;
   margin-left: $menu-bar-size;
+
+  @media (max-width: 768px) and (orientation: landscape) {
+    .page__container,
+    .button,
+    .page-menu__full-menu-link {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .mobile-landscape {
+      opacity: 1;
+    }
+  }
+
+  @include tablet() {
+    margin-left: 0;
+    margin-top: 8rem;
+  }
 }
 
 .mobile-landscape {
