@@ -13,7 +13,7 @@ export default (req, view, options, done) => {
 
   if (id === 'catering' || id === 'contact' || id === 'pono-ono/catering' || id === 'pono-ono/contact') {
     modal = req.previous === undefined ? config.modal.querySelector(`.modal--${cn}`) : create({ selector: 'div', styles: `modal modal--${cn} js-modal` })
-
+    console.log(req.previous, id, modal)
     config.modal.appendChild(modal)
   }
 
