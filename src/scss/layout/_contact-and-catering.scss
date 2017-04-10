@@ -1,0 +1,12 @@
+@include tablet() {
+  body.is-catering {
+    overflow: auto;
+  }
+  .page-contact,
+  .page-catering {
+    .page__section {
+      position: relative;
+      overflow: scroll;
+    }
+  }
+}
