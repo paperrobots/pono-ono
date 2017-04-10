@@ -18,5 +18,5 @@ export default (req, options) => {
     route = route.slice(0, -1)
   }
 
-  return route.substr(config.BASE.length - 1)
+  return route.substr(1)
 }
