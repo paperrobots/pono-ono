@@ -21,6 +21,8 @@
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     padding: 18px 6rem;
     transform: translateX(-101%);
     transition: transform 0.6s cubic-bezier(.275,0,0,1);
@@ -33,6 +35,8 @@
       position: absolute;
       top: 0;
       left: 0;
+      bottom: 0;
+      right: 0;
       transform: translateX(101%);
       transition: transform 0.6s cubic-bezier(.275,0,0,1);
     }
@@ -217,5 +221,11 @@
     transition: stroke-dashoffset 0.6s $ease-in-out-quart;
     transform-origin: center center;
     transform: rotate(-90deg);
+  }
+}
+
+button[type="submit"] {
+  @include tablet() {
+    width: 100%;
   }
 }

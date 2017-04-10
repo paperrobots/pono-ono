@@ -9,16 +9,42 @@
     &:last-child {
       margin-bottom: 0;
       padding-left: calc(50% + 3rem);
+
+      @include desktop() {
+        padding-left: 0;
+      }
     }
 
     &--w-cols {
+
+      @include tablet() {
+        flex-direction: column;
+      }
+
       .form__input-group {
         &:first-child {
           margin-right: 3rem;
+
+          @include desktop() {
+            margin-right: 2rem;
+          }
+
+          @include tablet() {
+            margin-right: 0;
+            margin-bottom: 5rem;
+          }
         }
 
         &:last-child {
           margin-left: 3rem;
+
+          @include desktop() {
+            margin-left: 2rem;
+          }
+
+          @include tablet() {
+            margin-left: 0;
+          }
         }
       }
     }
