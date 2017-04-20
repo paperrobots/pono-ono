@@ -37,6 +37,8 @@ class PonoOno extends TimberSite {
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
 
+		add_action( 'init', array( $this, 'add_custom_options_page' ) );
+
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 
@@ -94,12 +96,26 @@ class PonoOno extends TimberSite {
 		//this is where you can register custom taxonomies
 	}
 
+	function add_custom_options_page() {
+		if ( function_exists('acf_add_options_page') ) {
+			acf_add_options_page(array(
+				'page_title' 	=> 'Options',
+				'menu_title'	=> 'Options',
+				'menu_slug' 	=> 'site-options',
+				'capability'	=> 'edit_posts',
+				'redirect'		=> false
+			));
+		}
+	}
+
 	function add_to_context( $context ) {
 
 		$context['menu'] = new TimberMenu();
 		$context['site'] = $this;
 
 		$context['isAJAX'] = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+
+		$context['options'] = get_fields('option');
 
 		return $context;
 	}

@@ -33,12 +33,8 @@ class Parallax extends Smooth {
   getCache () {
     this.cache = []
 
-    const unit = this.isMobile ? this.vars.height + 100 : this.vars.width + 125
-
     this.dom.blocks.forEach((el, index) => {
-      // el.style.display = 'inline-block'
       el.style.transform = 'none'
-      el.style['z-index'] = '2'
 
       const scrollX = this.vars.target
       const bounding = el.getBoundingClientRect()
@@ -47,9 +43,8 @@ class Parallax extends Smooth {
         state: false,
         left: bounding.left + scrollX,
         right: bounding.right + scrollX,
-        center: unit / 2,
         width: bounding.width,
-        speed: el.getAttribute('data-speed') || '-1'
+        speed: '-1'
       }
 
       this.cache.push(bounds)
@@ -57,7 +52,7 @@ class Parallax extends Smooth {
 
     this.dom.leaves.forEach((el, index) => {
       el.style.transform = 'none'
-      el.style['will-change'] = 'none'
+      el.style['will-change'] = null
 
       const scrollX = this.vars.target
       const bounding = el.getBoundingClientRect()
@@ -66,9 +61,8 @@ class Parallax extends Smooth {
         state: false,
         left: bounding.left + scrollX,
         right: bounding.right + scrollX,
-        center: bounding.width / 2,
         width: bounding.width,
-        speed: el.getAttribute('data-speed') || '0.1'
+        speed: '0.1'
       }
 
       this.cache.push(bounds)
@@ -85,22 +79,17 @@ class Parallax extends Smooth {
         state: false,
         left: bounding.left + scrollX,
         right: bounding.right + scrollX,
-        center: bounding.width / 2,
         width: bounding.width,
-        speed: el.getAttribute('data-speed') || '-0.015'
+        speed: '-0.015'
       }
 
       this.cache.push(bounds)
     })
 
     if (this.isMobile) {
-      this.dom.section.style.width = window.innerWidth
-      this.dom.section.style.height = `${this.vars.height}px`
       this.vars.bounding = this.dom.blocks.reduce((acc, block) => acc + block.getBoundingClientRect().height, 0) * 1.6
     } else {
-      this.dom.section.style.height = window.innerHeight
-      this.dom.section.style.width = `${this.vars.width}px`
-      this.vars.bounding = this.dom.blocks.reduce((acc, block) => acc + block.getBoundingClientRect().width, 0) - this.vars.width / 2
+      this.vars.bounding = this.dom.section.getBoundingClientRect().width - this.vars.width
     }
   }
 

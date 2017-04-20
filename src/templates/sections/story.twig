@@ -28,25 +28,36 @@
         {% for story_block in story_blocks %}
           <div class="story__block js-block">
             <div class="story__item story__item--{{ story_block.text_box_position }}{% if story_block.text_box_margin %} story__item--margin{% endif %}"{% if story_block.layer_order %} style="z-index: 1;"{% endif %}>
-              <div class="page__text-box text-box{% if story_block.layer_order == true %} js-front{% endif %}">
+              <div class="text-box{% if story_block.layer_order == true %} js-front{% endif %}">
                 <h3 class="text-box__title js-block-title">{{ story_block.title }}</h3>
                 <div class="text-box__body">
                   {{ story_block.body }}
                 </div>
               </div>
             </div>
-            {% if story_block.image %}
-              <div class="story__item story__item--image story__item--{{ story_block.image_position }}{% if story_block.image_margin %} story__item--margin {% endif %}">
-                <img class="story__image{% if story_block.layer_order == false %} js-front{% endif %}" src="{{ TimberImage(story_block.image).src }}">
-              </div>
-            {% endif %}
+
+              {% if story_block.image %}
+                <div class="story__item story__item--image story__item--{{ story_block.image_position }}{% if story_block.image_margin %} story__item--margin {% endif %}">
+                  <img class="story__image{% if story_block.layer_order == false %} js-front{% endif %}" src="{{ TimberImage(story_block.image).src }}">
+                </div>
+              {% endif %}
+
             {% if story_block.leaves_image != 'none' %}
               <img class="js-leaves leaves leaves--{{ story_block.leaves_image }}" src="{{ site.theme.link }}/assets/img/leaves-{{ story_block.leaves_image }}.jpg" alt="Eucalyptus Leaves">
             {% endif %}
           </div>
         {% endfor %}
+      </div> <!-- end scroll container -->
 
-      </div>
+      <!-- <div class="cta js-cta">
+        <div class="cta__inner">
+          <h3 class="cta__title js-block-title">Feeling hungry?</h3>
+          <a href="/menu" class="button button--cta">
+            View our menu
+            <div data-label="View our menu"></div>
+          </a>
+        </div>
+      </div> -->
     </section>
   {% if not isAJAX %}</div>{% endif %}
 {% endblock %}

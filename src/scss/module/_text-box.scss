@@ -56,14 +56,15 @@
       }
     }
 
-    &--w-button {
+    p + p {
+      margin-top: 2rem;
+    }
 
-      p {
-        margin-bottom: 6rem;
+    .button {
+      margin-top: 6rem;
 
-        @include tablet() {
-          margin-bottom: 4rem;
-        }
+      @include tablet() {
+        margin-top: 4rem;
       }
     }
   }

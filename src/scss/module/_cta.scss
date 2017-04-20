@@ -1,0 +1,40 @@
+.cta {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $eucalyptus-1;
+  padding: 10rem;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+
+  @include tablet() {
+    top: auto;
+    left: 0;
+  }
+
+  &__inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    @include tablet() {
+      align-items: center;
+    }
+  }
+
+  &__title {
+    color: $white;
+    text-transform: lowercase;
+    margin-bottom: 6rem;
+    font-size: 9rem;
+
+    @include tablet() {
+      margin-bottom: 3rem;
+    }
+  }
+}

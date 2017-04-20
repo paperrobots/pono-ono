@@ -2,6 +2,7 @@
 
 {% set page_body = post.get_field('page_body') %}
 {% set button_label = post.get_field('button_label') %}
+{% set page_bg = TimberImage(post.get_field('page_bg')).src %}
 
 {% set bg_image = TimberImage(post.get_field('bg_image')).src %}
 {% set bg_position = post.get_field('bg_position') %}
@@ -19,7 +20,7 @@
   {% if not isAJAX %}<div id="page-contact" class="page page-contact">{% endif %}
     <div class="page__container container">
       <section class="page__section">
-        <div class="page__text-box text-box text-box--intro">
+        <div class="text-box text-box--intro">
           <h1 class="text-box__title">{{ post.title }}</h1>
           <div class="text-box__body text-box__body--intro text-box__body--w-button">
             {{ page_body }}
@@ -30,7 +31,7 @@
           </div>
         </div>
 
-        <img src="{{ site.theme.link }}/assets/img/contact-map.jpg" alt="Chicago Map" class="page__image">
+        <img src="{{ page_bg }}" alt="Chicago Map" class="page__image">
       </section>
 
 
