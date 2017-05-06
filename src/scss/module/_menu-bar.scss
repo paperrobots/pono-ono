@@ -7,14 +7,14 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  @include hidden();
 
   @include tablet() {
     flex-direction: row;
     @include position(fixed, 0 0 auto 0);
     @include size(100% 8rem);
   }
-
-  // .menu-bar__burger
+  
   &__burger {
     @include reset-button();
     width: 100%;

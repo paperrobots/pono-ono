@@ -29,10 +29,17 @@ class Preloader {
     this.el = create({
       selector: 'div',
       styles: 'preloader',
-      html: `<p>Preloader</p>`
+      html: this.template()
     })
 
     this.view.insertBefore(this.el, page)
+  }
+
+  template () {
+    return `
+      <video class="preloader__video" preload autoplay>
+        <source src="${APP.THEME_URL}/assets/video/preloader.mp4" type="video/mp4">
+      </video>`
   }
 
   resize (width, height) {
@@ -41,18 +48,29 @@ class Preloader {
   }
 
   animateIn (req, done) {
+    const video = document.querySelector('.preloader__video')
+
     const tl = new TimelineMax({ paused: true,
       onComplete: () => {
         done()
-        this.preloaded()
       }})
-    tl.to(this.el, 1, {autoAlpha: 1})
+
+    tl.to(this.el, 1, { autoAlpha: 1 })
     tl.restart()
+
+    video.addEventListener('timeupdate', e => {
+      if (e.timeStamp > 4000) {
+        this.preloaded()
+      }
+    })
   }
 
   animateOut (req, done) {
+    const nav = document.querySelector('.js-menu-bar')
     const tl = new TimelineMax({ paused: true, onComplete: done })
-    tl.to(this.el, 1, {autoAlpha: 0})
+
+    tl.to(nav, 1, { autoAlpha: 1, ease: Expo.easeInOut }, 'out')
+    tl.to(this.el, 1, { autoAlpha: 0, ease: Expo.easeInOut }, 'out')
     tl.restart()
   }
 
