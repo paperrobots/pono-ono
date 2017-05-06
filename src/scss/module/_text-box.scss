@@ -44,12 +44,11 @@
     @include fluid-type(padding-left, 768px, 1200px, 24px, 48px);
 
     &--intro {
-      padding: 0 4rem 0 14rem;
       padding-top: 0;
       @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
       @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
-      @include fluid-type(padding-left, 768px, 1200px, 32px, 100px);
-      @include fluid-type(margin-top, 768px, 1200px, -24px, -48px);
+      @include fluid-type(padding-left, 768px, 1200px, 32px, 56px);
+      @include fluid-type(margin-top, 768px, 1200px, -24px, -88px);
 
       @include tablet() {
         padding: 0;
@@ -70,7 +69,9 @@
   }
 
   &--intro {
-    width: 60%;
+    width: 50%;
+    margin-top: 4%;
+    margin-left: 2%;
 
     @include desktop() {
       width: 75%;
@@ -79,6 +80,10 @@
     @include tablet() {
       width: 95%;
       margin: 0 auto;
+    }
+
+    .text-box__title {
+      transform: translateY(-90%);
     }
   }
 
