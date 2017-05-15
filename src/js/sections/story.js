@@ -40,16 +40,18 @@ class Story extends Default {
   }
 
   resize (width, height) {
-    if (width < 769) {
-      this.smooth.off()
-      window.requestAnimationFrame(() => {
-        this.smooth.on()
-      })
-    } else {
-      this.smooth.off()
-      window.requestAnimationFrame(() => {
-        this.smooth.on()
-      })
+    if (this.smooth) {
+      if (width < 769) {
+        this.smooth.off()
+        window.requestAnimationFrame(() => {
+          this.smooth.on()
+        })
+      } else {
+        this.smooth.off()
+        window.requestAnimationFrame(() => {
+          this.smooth.on()
+        })
+      }
     }
   }
 

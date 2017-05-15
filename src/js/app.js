@@ -94,15 +94,17 @@ class App {
 
       // animate y
       tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
-      tl.to(this.ui.mask, 0.8, { y: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
+      tl.to(this.ui.mask, 0.8, { y: -this.translate, borderColor: '#B8B8B8' }, 'out')
       tl.to(this.ui.sideNav, 0.8, { y: this.translate, clearProps: 'all' }, 'out')
+      tl.set(this.ui.mask, { clearProps: 'all' })
     } else {
       this.translate = (config.width / 2) - 100 // side nav width - menu bar width
 
       // animate x
       tl.to(this.ui.overlay, 0.8, { autoAlpha: 1 }, 'out')
-      tl.to(this.ui.mask, 0.8, { x: -this.translate, borderColor: '#B8B8B8', clearProps: 'all' }, 'out')
+      tl.to(this.ui.mask, 0.8, { x: -this.translate, borderColor: '#B8B8B8' }, 'out')
       tl.to(this.ui.sideNav, 0.8, { x: this.translate, clearProps: 'all' }, 'out')
+      tl.set(this.ui.mask, { clearProps: 'all' })
     }
 
     tl.restart()
