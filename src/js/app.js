@@ -27,6 +27,7 @@ class App {
   addEvents () {
     biggie.bind.add(this.a)
 
+    on(window, 'resize', this.resize)
     on(this.ui.burger, 'click', this.onBurgerClick)
     on(this.page, 'click', this.onPageClick)
     this.a.forEach(a => on(a, 'click', this.onAnchorClick))
@@ -105,6 +106,10 @@ class App {
     }
 
     tl.restart()
+  }
+
+  resize () {
+    config.menuBarIsHorizontal = window.innerWidth < 769
   }
 }
 
