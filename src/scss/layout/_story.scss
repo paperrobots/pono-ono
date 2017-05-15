@@ -24,6 +24,10 @@
     position: relative;
     margin-right: 125px;
 
+    &:last-child {
+      margin-right: 0;
+    }
+
     @include tablet() {
       display: block;
       width: 100vw;

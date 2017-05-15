@@ -254,7 +254,7 @@ function custom_menu_page_removing() {
 	remove_submenu_page( 'edit.php?post_type=catering_request', 'post-new.php?post_type=catering_request' );
 
 	if ( !current_user_can( 'manage_options' ) ) {
-    remove_menu_page( 'edit.php' );
+    	remove_menu_page( 'edit.php' );
 		remove_menu_page( 'edit-comments.php' );
 		remove_menu_page( 'tools.php' );
 		// remove_menu_page( 'upload.php' );
