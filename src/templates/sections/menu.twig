@@ -51,7 +51,7 @@
         <section class="page-menu__section js-slides">
           <figure class="page-menu-item">
             <header class="page-menu-item__header">
-              <h2 class="page-menu-item__title js-title" data-split="chars">{{ item.title }}</h2>
+              <h2 class="page-menu-item__title js-title">{{ item.title }}</h2>
               <figcaption class="page-menu-item__info">
                 <p>{{ item.sauce }}</p>
                 {{ item.ingredients }}
@@ -61,6 +61,10 @@
           </figure>
         </section>
       {% endfor %}
+
+      <section class="page-menu__section js-slides">
+        {% include "cta-block.twig" %}
+      </section>
     </div>
 
     <div class="mobile-landscape">

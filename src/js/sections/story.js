@@ -17,7 +17,7 @@ class Story extends Default {
   ready (done) {
     super.ready()
 
-    this.ui.blockTitle.forEach((el, i) => { el.innerHTML = this.positionBlockTitle(i) })
+    this.ui.title.forEach((el, i) => { el.innerHTML = super.positionTitle(i) })
 
     this.smooth = new Parallax({
       extends: true,
@@ -53,16 +53,6 @@ class Story extends Default {
         })
       }
     }
-  }
-
-  positionBlockTitle (index) {
-    return [this.ui.blockTitle[index]]
-      .map(el => el.textContent)
-      .map(str => str.split(' '))
-      .map(words =>
-        words.length > 1
-          ? `${words[0]}<div style="margin-left: 1ch">${words.slice(1).join(' ')}</div>`
-          : words[0])
   }
 
   animateIn (req, done) {
