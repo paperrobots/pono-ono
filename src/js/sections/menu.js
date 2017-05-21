@@ -26,7 +26,7 @@ class Menu extends Default {
     super.ready()
 
     this.positionStepList()
-    this.positionMenuItemTitles()
+    this.ui.title.forEach((el, i) => { el.innerHTML = super.positionTitle(i) })
 
     this.addEvents()
 
@@ -54,15 +54,6 @@ class Menu extends Default {
     this.ui.steps.forEach((step, i) => {
       step.style.marginLeft = `${margin}%`
       margin = margin * interval
-    })
-  }
-
-  positionMenuItemTitles () {
-    [...this.ui.title]
-    .map(el => el.innerHTML)
-    .map(text => text.split(' '))
-    .map(arr => arr.map(word => `<span>${word}</span>`).join('')).forEach((split, i) => {
-      this.ui.title[i].innerHTML = split
     })
   }
 
@@ -107,10 +98,7 @@ class Menu extends Default {
         this.slider.animating = false
       }})
 
-    tl.staggerTo(this.slides, 0.8, { cycle: {
-      x: (loop) => index === loop ? 0 : loop < index ? -config.width : config.width
-    },
-      ease: Expo.easeInOut}, 0, 0)
+    tl.staggerTo(this.slides, 0.8, { cycle: { x: (loop) => index === loop ? 0 : loop < index ? -config.width : config.width }, ease: Expo.easeInOut }, 0, 0)
 
     tl.restart()
   }

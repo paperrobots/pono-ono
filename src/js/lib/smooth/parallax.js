@@ -87,9 +87,10 @@ class Parallax extends Smooth {
     })
 
     if (this.isMobile) {
-      this.vars.bounding = this.dom.blocks.reduce((acc, block) => acc + block.getBoundingClientRect().height, 0) * 1.6
+      // this.vars.bounding = this.dom.blocks.reduce((acc, block) => acc + block.getBoundingClientRect().height, 0) * 1.6
+      this.vars.bounding = this.dom.section.getBoundingClientRect().height - this.vars.height + 64
     } else {
-      this.vars.bounding = this.dom.section.getBoundingClientRect().width - this.vars.width
+      this.vars.bounding = this.dom.section.getBoundingClientRect().width - this.vars.width + 100
     }
   }
 

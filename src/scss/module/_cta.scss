@@ -1,17 +1,11 @@
 .cta {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: $eucalyptus-1;
-  padding: 10rem;
-  z-index: -1;
-  opacity: 0;
-  pointer-events: none;
+  @include position(absolute, 0 0 0 null);
+  padding: 0 6rem 0 14rem;
 
   @include tablet() {
-    top: auto;
-    left: 0;
+    position: relative;
+    padding: 4rem 0;
+    margin-top: 10rem;
   }
 
   &__inner {
@@ -21,6 +15,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    position: relative;
+    z-index: 1;
 
     @include tablet() {
       align-items: center;
@@ -31,10 +27,74 @@
     color: $white;
     text-transform: lowercase;
     margin-bottom: 6rem;
-    font-size: 9rem;
+    font-size: 8rem;
 
     @include tablet() {
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
+      font-size: 7rem;
+    }
+  }
+
+  &__image {
+    @include position(absolute, 0 0 0 null);
+    width: auto;
+    height: 100%;
+    user-select: none;
+
+    @include tablet() {
+      @include hidden();
+      pointer-events: none;
+    }
+
+    &--mobile {
+      @include position(absolute, auto 0 0 0);
+      width: 100%;
+      height: 40vh;
+      @include hidden();
+      object-fit: cover;
+      pointer-events: none;
+
+      @include tablet() {
+        @include visible();
+        pointer-events: auto;
+      }
+    }
+  }
+
+  &--lg {
+    @include position(absolute, 0 0 0 0);
+    padding: 0 14rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include tablet() {
+      position: absolute;
+      padding: 0 2rem;
+      margin-top: 0;
+    }
+
+    .cta__inner {
+      align-items: center;
+
+      .button {
+        margin-left: 16rem;
+
+        @include tablet {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .cta__image {
+      @include position(absolute, 50% auto auto 50%);
+      transform: translate(-50%, -50%);
+
+      @include tablet {
+        @include visible;
+        pointer-events: auto;
+        height: 100vh;
+      }
     }
   }
 }

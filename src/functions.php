@@ -141,11 +141,16 @@ class PonoOno extends TimberSite {
 			wp_send_json_error( 'Security check failed' );
 		}
 
+		$full_name = sanitize_text_field( $_POST[ 'data' ][ 'fullName'] );
+		$event_date = sanitize_text_field( $_POST[ 'data' ][ 'eventDate' ] );
+		$pickup_time = sanitize_text_field( $_POST[ 'data' ][ 'pickupTime' ] );
+		$guest_count = sanitize_text_field( $_POST[ 'data' ][ 'guestCount'] );
+		$email = sanitize_email( $_POST[ 'data' ][ 'email'] );
+		$dietary_restrictions = sanitize_text_field( $_POST[ 'data' ][ 'dietaryRestrictions'] );
+		$special_requests = sanitize_text_field( $_POST[ 'data' ][ 'specialRequests'] );
+
 		$request_data = array(
-			'post_title' => sprintf( '%s %s',
-				sanitize_text_field( $_POST[ 'data' ][ 'fullName' ] ),
-				sanitize_text_field( $_POST[ 'data' ][ 'eventDate' ] )
-			),
+			'post_title' => sprintf( '%s %s', $full_name, $event_date ),
 			'post_status' => 'draft',
 			'post_type' => 'catering_request'
 		);
@@ -153,14 +158,27 @@ class PonoOno extends TimberSite {
 		$post_id = wp_insert_post( $request_data, true );
 
 		if ( $post_id ) {
-			update_post_meta( $post_id, 'full_name', sanitize_text_field( $_POST[ 'data' ][ 'fullName'] ) );
-			update_post_meta( $post_id, 'event_date', sanitize_text_field( $_POST[ 'data' ][ 'eventDate' ] ) );
-			update_post_meta( $post_id, 'pickup_time', sanitize_text_field( $_POST[ 'data' ][ 'pickupTime' ] ) );
-			update_post_meta( $post_id, 'guest_count', sanitize_text_field( $_POST[ 'data' ][ 'guestCount'] ) );
-			update_post_meta( $post_id, 'contact_email', sanitize_email( $_POST[ 'data' ][ 'email'] ) );
-			update_post_meta( $post_id, 'dietary_restrictions', sanitize_text_field( $_POST[ 'data' ][ 'dietaryRestrictions'] ) );
-			update_post_meta( $post_id, 'special_requests', sanitize_text_field( $_POST[ 'data' ][ 'specialRequests'] ) );
+			update_post_meta( $post_id, 'full_name', $full_name );
+			update_post_meta( $post_id, 'event_date', $event_date );
+			update_post_meta( $post_id, 'pickup_time', $pickup_time );
+			update_post_meta( $post_id, 'guest_count', $guest_count );
+			update_post_meta( $post_id, 'contact_email', $email );
+			update_post_meta( $post_id, 'dietary_restrictions', $dietary_restrictions );
+			update_post_meta( $post_id, 'special_requests', $special_requests );
 		}
+
+		$content = 'Name: '. $full_name . "\r\n" .
+							 'Email: '. $email . "\r\n" .
+							 'Event Date: ' . $event_date . "\r\n" .
+							 'Pickup Time: ' . $pickup_time . "\r\n" .
+							 '# of Guests: ' . $guest_count . "\r\n" .
+							 'Dietary Restrictions: ' . $dietary_restrictions . "\r\n" .
+							 'Special Requests: ' . $special_requests . "\r\n";
+		$to = get_option('admin_email');
+		$subject = 'New ' . get_bloginfo('name') . ' Catering Request';
+		$headers = 'From: '. $email . "\r\n" .
+							 'Reply-To: ' . $email . "\r\n";
+		wp_mail($to, $subject, stripslashes(strip_tags($content)), $headers);
 
 		wp_send_json_success( $post_id );
 	}
@@ -176,9 +194,14 @@ class PonoOno extends TimberSite {
 			wp_send_json_error( 'Security check failed' );
 		}
 
+		$email = sanitize_email( $_POST[ 'data' ][ 'email' ] );
+		$full_name = sanitize_text_field( $_POST[ 'data' ][ 'fullName'] );
+		$subject = sanitize_text_field( $_POST[ 'data' ][ 'subject' ] );
+		$message = sanitize_text_field( $_POST[ 'data' ][ 'message' ] );
+
 		$request_data = array(
-			'post_title' => sanitize_text_field( $_POST[ 'data' ][ 'subject' ] ),
-			'post_content' => sanitize_text_field( $_POST[ 'data' ][ 'message' ] ),
+			'post_title' => $subject,
+			'post_content' => $message,
 			'post_status' => 'draft',
 			'post_type' => 'message'
 		);
@@ -186,9 +209,19 @@ class PonoOno extends TimberSite {
 		$post_id = wp_insert_post( $request_data, true );
 
 		if ( $post_id ) {
-			update_post_meta( $post_id, 'contact_name', sanitize_text_field( $_POST[ 'data' ][ 'fullName'] ) );
-			update_post_meta( $post_id, 'contact_email', sanitize_email( $_POST[ 'data' ][ 'email' ] ) );
+			update_post_meta( $post_id, 'contact_name', $full_name );
+			update_post_meta( $post_id, 'contact_email', $email );
 		}
+
+		$content = 'Subject: '. $subject . "\r\n" .
+							 'Name: '. $full_name . "\r\n" .
+							 'Email: '. $email . "\r\n" .
+							 'Message: ' . $message . "\r\n";
+		$to = get_option('admin_email');
+		$subject = 'Someone sent a message from ' . get_bloginfo('name');
+		$headers = 'From: '. $email . "\r\n" .
+							 'Reply-To: ' . $email . "\r\n";
+		wp_mail($to, $subject, stripslashes(strip_tags($content)), $headers);
 
 		wp_send_json_success( $post_id );
 	}
@@ -254,7 +287,7 @@ function custom_menu_page_removing() {
 	remove_submenu_page( 'edit.php?post_type=catering_request', 'post-new.php?post_type=catering_request' );
 
 	if ( !current_user_can( 'manage_options' ) ) {
-    remove_menu_page( 'edit.php' );
+    	remove_menu_page( 'edit.php' );
 		remove_menu_page( 'edit-comments.php' );
 		remove_menu_page( 'tools.php' );
 		// remove_menu_page( 'upload.php' );

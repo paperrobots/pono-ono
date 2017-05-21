@@ -32,6 +32,16 @@ class Default {
     config.menuBarIsHorizontal = config.width < 769
   }
 
+  positionTitle (i) {
+    return [this.ui.title[i]]
+      .map(el => el.textContent)
+      .map(str => str.split(' '))
+      .map(words =>
+        words.length > 1
+          ? `${words[0]}<div style="margin-left: 1ch">${words.slice(1).join(' ')}</div>`
+          : words[0])
+  }
+
   destroy () {
     biggie.bind.remove(this.a)
 

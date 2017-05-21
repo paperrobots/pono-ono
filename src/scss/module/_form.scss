@@ -199,3 +199,7 @@ select {
 [placeholder]:focus::-webkit-input-placeholder {
   color: transparent;
 }
+
+textarea {
+  resize: none;
+}
