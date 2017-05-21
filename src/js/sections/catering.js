@@ -138,6 +138,8 @@ class Catering extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
+    window.sprite.gotoAndPlay(0)
+
     const tl = new TimelineMax({ paused: true, onComplete: done })
 
     if (!classes.has(config.body, 'modal-is-hidden')) {

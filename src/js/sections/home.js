@@ -33,6 +33,8 @@ class Home extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
+    window.sprite.gotoAndPlay(0)
+
     TweenLite.to(this.page, 0.7, {
       autoAlpha: 0,
       ease: Expo.easeInOut,
