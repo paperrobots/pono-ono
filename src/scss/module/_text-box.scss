@@ -66,6 +66,20 @@
         margin-top: 4rem;
       }
     }
+
+    a {
+      color: $ocean-blue-1;
+      text-decoration: underline;
+      display: inline;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 
   &--intro {
