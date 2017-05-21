@@ -1,0 +1,30 @@
+.preloader {
+  @include fixed();
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+
+  // initially hidden!
+  @include hidden();
+
+  &__inner {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  &__logo {
+    width: 100%;
+    height: auto;
+    margin-bottom: 4rem;
+  }
+
+  &__progress-bar {
+    // @include position(absolute, null 0 null 0);
+    @include size(100% 1px);
+    background-color: $eucalyptus-1;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+}

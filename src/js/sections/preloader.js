@@ -29,7 +29,11 @@ class Preloader {
     this.el = create({
       selector: 'div',
       styles: 'preloader',
-      html: `<p>Preloader</p>`
+      html: `
+        <div class="preloader__inner">
+          <img class="preloader__logo" src="${APP.THEME_URL}/assets/img/logo-green.png" alt="Logo" />
+          <div class="preloader__progress-bar"></div>
+        </div>`
     })
 
     this.view.insertBefore(this.el, page)
@@ -46,13 +50,19 @@ class Preloader {
         done()
         this.preloaded()
       }})
+
     tl.to(this.el, 1, {autoAlpha: 1})
+    tl.to('.preloader__progress-bar', 2, { scaleX: 1, ease: Expo.easeInOut })
     tl.restart()
   }
 
   animateOut (req, done) {
     const tl = new TimelineMax({ paused: true, onComplete: done })
-    tl.to(this.el, 1, {autoAlpha: 0})
+
+    tl.set('.preloader__progress-bar', { transformOrigin: 'right' })
+    tl.to('.preloader__progress-bar', 0.8, { scaleX: 0, ease: Expo.easeIn }, 'out')
+    tl.to(this.el, 0.7, { autoAlpha: 0, ease: Expo.easeIn }, 'out', '+=0.4')
+
     tl.restart()
   }
 

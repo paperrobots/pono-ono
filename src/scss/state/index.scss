@@ -7,4 +7,10 @@ body {
   &.is-loading {
     cursor: wait;
   }
+
+  &.is-loaded {
+    .menu-bar {
+      transform: none;
+    }
+  }
 }

@@ -8,6 +8,13 @@
   justify-content: space-between;
   align-items: center;
 
+  // initially hidden!
+  transform: translateX(-100%);
+
+
+  // fade in!
+  transition: transform 0.8s $ease-out-quint;
+
   @include tablet() {
     flex-direction: row;
     @include position(fixed, 0 0 auto 0);
