@@ -38,6 +38,7 @@
     "gsap": "^1.19.0",
     "hammerjs": "^2.0.8",
     "jquery": "^3.2.1",
+    "pixi.js": "4.5.1",
     "please-ajax": "^2.0.2",
     "prefix": "^1.0.0",
     "query-dom-components": "^0.1.0",
@@ -123,7 +124,8 @@
       "CSSPlugin",
       "ThrowPropsPlugin",
       "BezierPlugin",
-      "APP"
+      "APP",
+      "PIXI"
     ]
   }
 }

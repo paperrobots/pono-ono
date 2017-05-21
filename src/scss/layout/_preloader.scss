@@ -21,7 +21,6 @@
   }
 
   &__progress-bar {
-    // @include position(absolute, null 0 null 0);
     @include size(100% 1px);
     background-color: $eucalyptus-1;
     transform-origin: left;
