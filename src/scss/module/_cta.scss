@@ -67,6 +67,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     @include tablet() {
       position: absolute;
@@ -89,6 +90,7 @@
     .cta__image {
       @include position(absolute, 50% auto auto 50%);
       transform: translate(-50%, -50%);
+      height: 100vh;
 
       @include tablet {
         @include visible;
