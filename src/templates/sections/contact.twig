@@ -31,7 +31,9 @@
           </div>
         </div>
 
-        <img src="{{ page_bg }}" alt="Chicago Map" class="page__image">
+        <a href="{{ post.get_field('google_maps_link') }}" class="page__image" target="_blank">
+          <img src="{{ page_bg }}" alt="Map" class="page__image--inner">
+        </a>
       </section>
 
 

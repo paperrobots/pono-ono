@@ -31,6 +31,7 @@
   }
 
   &__image {
+    display: inline-block;
     position: absolute;
     z-index: -1;
     width: 70%;
@@ -44,6 +45,11 @@
 
     @include tablet() {
       width: 100%;
+    }
+
+    &--inner {
+      width: 100%;
+      height: auto;
     }
   }
 }
