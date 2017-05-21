@@ -60,4 +60,41 @@
       }
     }
   }
+
+  &--lg {
+    @include position(absolute, 0 0 0 0);
+    padding: 0 14rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include tablet() {
+      position: absolute;
+      padding: 0 2rem;
+      margin-top: 0;
+    }
+
+    .cta__inner {
+      align-items: center;
+
+      .button {
+        margin-left: 16rem;
+
+        @include tablet {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .cta__image {
+      @include position(absolute, 50% auto auto 50%);
+      transform: translate(-50%, -50%);
+
+      @include tablet {
+        @include visible;
+        pointer-events: auto;
+        height: 100vh;
+      }
+    }
+  }
 }
