@@ -1,4 +1,5 @@
-.preloader {
+.preloader,
+.page-loader {
   @include fixed();
   text-align: center;
   display: flex;
@@ -34,8 +35,20 @@
   }
 
   &.is-animating {
-    .preloader__progress-bar::before {
-      animation: loader 1.2s $ease-in-out-quint infinite;
+    .preloader,
+    .page-loader {
+      &__progress-bar::before {
+        animation: loader 1.2s $ease-in-out-quint infinite;
+      }
     }
+  }
+}
+
+.page-loader {
+  z-index: 9999;
+  pointer-events: none;
+  @include hidden();
+  &__progress-bar::before {
+    background-color: $white;
   }
 }

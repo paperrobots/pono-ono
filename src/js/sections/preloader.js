@@ -60,7 +60,7 @@ class Preloader {
 
   animateOut (req, done) {
     const tl = new TimelineMax({ paused: true, onComplete: done })
-
+    tl.add(() => window.sprite.animateIntro())
     tl.to(this.el, 0.7, { autoAlpha: 0, ease: Expo.easeIn })
     tl.restart()
   }

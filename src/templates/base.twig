@@ -52,6 +52,12 @@
       {% endblock %}
     </aside>
 
+    <div class="js-page-loader page-loader">
+      <div class="page-loader__inner">
+        <div class="page-loader__progress-bar"></div>
+      </div>
+    </div>
+
     <script>
       window.APP = window.APP || {};
       APP.BASE_URL = '{{ site.url }}';

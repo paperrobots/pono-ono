@@ -1,11 +1,13 @@
 import 'pixi.js'
 import config from 'config'
 import { on } from 'dom-event'
+import classes from 'dom-classes'
 
 class Transitions {
   constructor (ready) {
     this.src = `${APP.THEME_URL}/assets/sprite/sprites.json`
-    this.ready = ready
+    this.preloaded = ready
+    this.ui = { pageLoader: document.querySelector('.js-page-loader') }
     this.scale = {
       x: config.width / 600,
       y: config.height / 338
@@ -19,8 +21,8 @@ class Transitions {
     this.pixi.view.style.position = 'absolute'
     this.pixi.view.style.display = 'block'
     this.pixi.view.style.pointerEvents = 'none'
-    this.pixi.view.style.zIndex = '9999'
-    this.pixi.autoResize = true
+    this.pixi.view.style.zIndex = '9998'
+    // this.pixi.autoResize = true
 
     config.body.appendChild(this.pixi.view)
     this.pixi.stop()
@@ -33,7 +35,6 @@ class Transitions {
 
   onAssetsLoad (loader, resources) {
     this.addEvents()
-    this.ready()
 
     const textures = resources.spritesheet.textures
     const frames = Object.keys(textures).map(key => textures[key])
@@ -44,14 +45,26 @@ class Transitions {
     this.sprite.scale.set(this.scale.x, this.scale.y)
     this.sprite.animationSpeed = 0.35
     this.sprite.loop = false
-    this.animate()
 
     this.pixi.stage.addChild(this.sprite)
     this.pixi.start()
+
+    setTimeout(() => this.preloaded(), 2000)
+  }
+
+  animateIntro () {
+    this.sprite.gotoAndPlay(0)
   }
 
   animate () {
-    this.sprite.gotoAndPlay(0)
+    const tl = new TimelineMax({ paused: true })
+    tl.add(() => this.sprite.gotoAndPlay(0))
+    tl.to(this.ui.pageLoader, 0.6, { autoAlpha: 1 })
+    tl.add(() => classes.add(this.ui.pageLoader, 'is-animating'))
+    tl.to(this.ui.pageLoader, 1, { autoAlpha: 1 })
+    tl.add(() => classes.remove(this.ui.pageLoader, 'is-animating'))
+    tl.to(this.ui.pageLoader, 0.5, { autoAlpha: 0 })
+    tl.restart()
   }
 
   addEvents () {
@@ -65,6 +78,8 @@ class Transitions {
     }
     this.pixi.view.style.width = `${window.innerWidth}px`
     this.pixi.view.style.height = `${window.innerHeight}px`
+    this.pixi.view.width = window.innerWidth
+    this.pixi.view.height = window.innerHeight
     this.sprite && this.sprite.scale.set(this.scale.x, this.scale.y)
   }
 }
