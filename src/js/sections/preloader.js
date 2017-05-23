@@ -2,8 +2,8 @@ import config from 'config'
 import sniffer from 'sniffer'
 import classes from 'dom-classes'
 import create from 'dom-create-element'
+import Transitions from '../lib/transitions'
 import 'gsap'
-import 'pixi.js'
 
 TweenLite.defaultEase = Expo.easeOut
 
@@ -12,8 +12,6 @@ class Preloader {
     this.preloaded = onComplete
     this.view = config.view
     this.el = null
-
-    this.onAssetsLoad = this.onAssetsLoad.bind(this)
   }
 
   init (req, done) {
@@ -51,7 +49,8 @@ class Preloader {
     const tl = new TimelineMax({ paused: true,
       onComplete: () => {
         classes.add(this.el, 'is-animating')
-        // this.initPIXI()
+        window.sprite = new Transitions(this.preloaded)
+        window.sprite.initPIXI()
         done()
       }})
 
@@ -64,47 +63,6 @@ class Preloader {
 
     tl.to(this.el, 0.7, { autoAlpha: 0, ease: Expo.easeIn })
     tl.restart()
-  }
-
-  initPIXI () {
-    window.pixi = new PIXI.Application(config.width, config.height, { transparent: true })
-    window.pixi.view.style.position = 'absolute'
-    window.pixi.view.style.display = 'block'
-    window.pixi.view.style.pointerEvents = 'none'
-    window.pixi.view.style.zIndex = '9999'
-    window.pixi.autoResize = true
-
-    config.body.appendChild(window.pixi.view)
-
-    window.pixi.stop()
-
-    PIXI.loader.reset()
-
-    PIXI.loader
-      .add('spritesheet', `${APP.THEME_URL}/assets/sprite/sprites.json`)
-      .load(this.onAssetsLoad)
-  }
-
-  onAssetsLoad (loader, resources) {
-    this.preloaded()
-
-    const textures = resources.spritesheet.textures
-    const keys = Object.keys(textures)
-    const frames = []
-
-    keys.forEach(key => frames.push(textures[key]))
-
-    window.sprite = new PIXI.extras.AnimatedSprite(frames)
-
-    window.sprite.x = -20
-    window.sprite.y = 0
-    window.sprite.scale.set(2.5, 2.5)
-    window.sprite.animationSpeed = 0.35
-    window.sprite.loop = false
-    window.sprite.gotoAndPlay(0)
-
-    window.pixi.stage.addChild(window.sprite)
-    window.pixi.start()
   }
 
   destroy (req, done) {

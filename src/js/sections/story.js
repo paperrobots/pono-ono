@@ -1,7 +1,7 @@
 import config from 'config'
 import classes from 'dom-classes'
 import Default from './default'
-import Parallax from '../lib/smooth/parallax'
+import Parallax from '../lib/parallax'
 
 class Story extends Default {
   constructor (opt) {
@@ -68,7 +68,7 @@ class Story extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
-    window.sprite.gotoAndPlay(0)
+    window.sprite.animate()
 
     TweenLite.to(this.page, 0.7, {
       autoAlpha: 0,

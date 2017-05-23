@@ -137,7 +137,7 @@ class Contact extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
-    window.sprite.gotoAndPlay(0)
+    window.sprite.animate()
 
     const tl = new TimelineMax({ paused: true, onComplete: done })
 

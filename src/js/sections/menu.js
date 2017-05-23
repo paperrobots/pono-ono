@@ -130,7 +130,7 @@ class Menu extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
-    window.sprite.gotoAndPlay(0)
+    window.sprite.animate()
 
     TweenLite.to(this.page, 0.7, {
       autoAlpha: 0,
