@@ -22,8 +22,20 @@
 
   &__progress-bar {
     @include size(100% 1px);
-    background-color: $eucalyptus-1;
-    transform-origin: left;
-    transform: scaleX(0);
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      display: block;
+      @include size(100%);
+      background-color: $eucalyptus-1;
+      transform: translateX(-100%);
+    }
+  }
+
+  &.is-animating {
+    .preloader__progress-bar::before {
+      animation: loader 1.2s $ease-in-out-quint infinite;
+    }
   }
 }

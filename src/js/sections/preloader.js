@@ -50,22 +50,19 @@ class Preloader {
   animateIn (req, done) {
     const tl = new TimelineMax({ paused: true,
       onComplete: () => {
+        classes.add(this.el, 'is-animating')
+        // this.initPIXI()
         done()
-        this.initPIXI()
       }})
 
     tl.to(this.el, 1, {autoAlpha: 1})
-    tl.to('.preloader__progress-bar', 2, { scaleX: 1, ease: Expo.easeInOut })
     tl.restart()
   }
 
   animateOut (req, done) {
     const tl = new TimelineMax({ paused: true, onComplete: done })
 
-    tl.set('.preloader__progress-bar', { transformOrigin: 'right' })
-    tl.to('.preloader__progress-bar', 0.8, { scaleX: 0, ease: Expo.easeIn }, 'out')
-    tl.to(this.el, 0.7, { autoAlpha: 0, ease: Expo.easeIn }, 'out', '+=0.5')
-
+    tl.to(this.el, 0.7, { autoAlpha: 0, ease: Expo.easeIn })
     tl.restart()
   }
 
