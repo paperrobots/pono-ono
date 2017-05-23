@@ -34,7 +34,7 @@ class Preloader {
       styles: 'preloader',
       html: `
         <div class="preloader__inner">
-          <img class="preloader__logo" src="${APP.THEME_URL}/assets/img/logo-green.png" alt="Logo" />
+          <img class="preloader__logo" src="${APP.THEME_URL}/assets/img/logo.png" alt="Logo" />
           <div class="preloader__progress-bar"></div>
         </div>`
     })
