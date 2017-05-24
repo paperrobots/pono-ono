@@ -77,11 +77,11 @@ class Menu extends Default {
 
     if (this.current === 0) {
       classes.add(this.ui.prev, 'is-disabled')
-      classes.add(this.ui.pdf, 'is-hidden')
+      !window.hideMenu && classes.add(this.ui.pdf, 'is-hidden')
       classes.remove(this.ui.cta, 'is-hidden')
     } else {
       classes.remove(this.ui.prev, 'is-disabled')
-      classes.remove(this.ui.pdf, 'is-hidden')
+      !window.hideMenu && classes.remove(this.ui.pdf, 'is-hidden')
       classes.add(this.ui.cta, 'is-hidden')
     }
 

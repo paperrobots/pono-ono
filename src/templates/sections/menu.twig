@@ -20,7 +20,9 @@
       <svg class="button__svg" viewBox="0 0 48 48"><circle class="button__svg__circle" cx="24" cy="24" r="24" fill="none" stroke="#676767" stroke-width="2"></circle></svg>
     </button>
 
-    <a class="page-menu__full-menu-link is-hidden js-pdf" href="{{ post.get_field('menu_pdf') }}" target="_blank">{{ post.get_field('menu_link_label') }}</a>
+    {% if not post.get_field('hide_menu_link') %}
+      <a class="page-menu__full-menu-link is-hidden js-pdf" href="{{ post.get_field('menu_pdf') }}" target="_blank">{{ post.get_field('menu_link_label') }}</a>
+    {% endif %}
 
     <div class="page__container container">
       <section class="page__section js-slides">
@@ -70,5 +72,9 @@
     <div class="mobile-landscape">
       <p>please rotate your screen.</p>
     </div>
+
+    <script>
+      var hideMenu = {{ post.get_field('hide_menu_link') }}
+    </script>
   {% if not isAJAX %}</div>{% endif %}
 {% endblock %}
