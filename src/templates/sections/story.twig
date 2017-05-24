@@ -58,10 +58,17 @@
                     {{ story_block.body }}
                   </div>
                   <div class="image-link-grid">
-                    {% for grid_item in story_block.image_link_grid_items %}
-                      <a class="image-link-grid__link" href="{{ grid_item.link }}" target="_blank">
-                        <img class="image-link-grid__image" src="{{ TimberImage(grid_item.image).src }}">
-                      </a>
+                    {% for grid_section in story_block.image_link_grid_sections %}
+                      <div class="image-link-grid__section">
+                        <h4 class="image-link-grid__title">{{ grid_section.title }}</h4>
+                        <div class="image-link-grid__items">
+                          {% for grid_item in grid_section.items %}
+                            <a class="image-link-grid__link" href="{{ grid_item.link }}" target="_blank">
+                              <img class="image-link-grid__image" src="{{ TimberImage(grid_item.image).src }}">
+                            </a>
+                          {% endfor %}
+                        </div>
+                      </div>
                     {% endfor %}
                   </div>
                 </div>
