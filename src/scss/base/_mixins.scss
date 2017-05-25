@@ -43,6 +43,7 @@
 
 @mixin reset-button() {
   appearance: none;
+  border-radius: 0;
   border: none;
   background: none;
   outline: none;
