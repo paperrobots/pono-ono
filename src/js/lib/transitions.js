@@ -22,7 +22,6 @@ class Transitions {
     this.pixi.view.style.display = 'block'
     this.pixi.view.style.pointerEvents = 'none'
     this.pixi.view.style.zIndex = '9998'
-    // this.pixi.autoResize = true
 
     config.body.appendChild(this.pixi.view)
     this.pixi.stop()
@@ -48,7 +47,6 @@ class Transitions {
 
     this.pixi.stage.addChild(this.sprite)
     this.pixi.start()
-
     setTimeout(() => this.preloaded(), 2000)
   }
 
@@ -76,10 +74,7 @@ class Transitions {
       x: window.innerWidth / 600,
       y: window.innerHeight / 338
     }
-    this.pixi.view.style.width = `${window.innerWidth}px`
-    this.pixi.view.style.height = `${window.innerHeight}px`
-    this.pixi.view.width = window.innerWidth
-    this.pixi.view.height = window.innerHeight
+    this.pixi.renderer.resize(window.innerWidth, window.innerHeight)
     this.sprite && this.sprite.scale.set(this.scale.x, this.scale.y)
   }
 }
