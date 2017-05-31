@@ -47,7 +47,7 @@ class Transitions {
 
     this.pixi.stage.addChild(this.sprite)
     this.pixi.start()
-    setTimeout(() => this.preloaded(), 2000)
+    this.preloaded()
   }
 
   animateIntro () {
