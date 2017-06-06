@@ -40,7 +40,7 @@ The project setup and gulp configuration is based on [wordpress-gulp-starter-kit
 ### 3) Project Setup
 Open the command line and navigate to the directory where you'd like to store the theme.
 ```bash
-# Clone the repo over SSH
+# Clone the repo
 $ git clone https://github.com/mikehwagz/pono-ono.git
 
 # Move into the directory
