@@ -61,7 +61,10 @@ class Story extends Default {
     TweenLite.to(this.page, 1, {
       autoAlpha: 1,
       ease: Expo.easeInOut,
-      onComplete: done
+      onComplete: () => {
+        window.dispatchEvent(new Event('resize'))
+        done()
+      }
     })
   }
 
