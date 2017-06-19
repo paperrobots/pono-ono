@@ -49,7 +49,7 @@ class Preloader {
     const tl = new TimelineMax({ paused: true,
       onComplete: () => {
         classes.add(this.el, 'is-animating')
-        if (!config.infos.isDevice) {
+        if (!config.infos.isDevice && !config.infos.isFirefox) {
           window.sprite = new Transitions(this.preloaded)
           window.sprite.initPIXI()
           done()
@@ -65,7 +65,7 @@ class Preloader {
 
   animateOut (req, done) {
     const tl = new TimelineMax({ paused: true, onComplete: done })
-    !config.infos.isDevice && tl.add(() => window.sprite.animateIntro())
+    if (!config.infos.isDevice && !config.infos.isFirefox) tl.add(() => window.sprite.animateIntro())
     tl.to(this.el, 0.7, { autoAlpha: 0, ease: Expo.easeIn })
     tl.restart()
   }

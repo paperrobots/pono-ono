@@ -33,7 +33,7 @@ class Home extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
-    !config.infos.isDevice && window.sprite.animate()
+    if (!config.infos.isDevice && !config.infos.isFirefox) window.sprite.animate()
 
     TweenLite.to(this.page, 0.7, {
       autoAlpha: 0,

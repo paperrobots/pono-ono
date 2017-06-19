@@ -137,7 +137,7 @@ class Contact extends Default {
   animateOut (req, done) {
     classes.remove(config.body, `is-${this.slug}`)
 
-    !config.infos.isDevice && window.sprite.animate()
+    if (!config.infos.isDevice && !config.infos.isFirefox) window.sprite.animate()
 
     const tl = new TimelineMax({ paused: true, onComplete: done })
 

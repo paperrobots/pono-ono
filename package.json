@@ -125,7 +125,8 @@
       "ThrowPropsPlugin",
       "BezierPlugin",
       "APP",
-      "PIXI"
+      "PIXI",
+      "Event"
     ]
   }
 }
