@@ -1,150 +1,153 @@
 .form {
-  display: flex;
-  flex-direction: column;
-
-  &__row {
     display: flex;
-    margin-bottom: 5rem;
+    flex-direction: column;
 
-    &:last-child {
-      margin-bottom: 0;
-      padding-left: calc(50% + 3rem);
-
-      @include desktop() {
-        padding-left: 0;
-      }
-    }
-
-    &--w-cols {
-
-      @include tablet() {
-        flex-direction: column;
-      }
-
-      .form__input-group {
-        &:first-child {
-          margin-right: 3rem;
-
-          @include desktop() {
-            margin-right: 2rem;
-          }
-
-          @include tablet() {
-            margin-right: 0;
-            margin-bottom: 5rem;
-          }
-        }
+    &__row {
+        display: flex;
+        margin-bottom: 5rem;
 
         &:last-child {
-          margin-left: 3rem;
+            margin-bottom: 0;
+            padding-left: calc(50% + 3rem);
 
-          @include desktop() {
-            margin-left: 2rem;
-          }
-
-          @include tablet() {
-            margin-left: 0;
-          }
+            @include desktop {
+                padding-left: 0;
+            }
         }
-      }
+
+        &--w-cols {
+            @include tablet {
+                flex-direction: column;
+            }
+
+
+            .form__input-group {
+                &:first-child {
+                    margin-right: 3rem;
+
+                    @include desktop {
+                        margin-right: 2rem;
+                    }
+
+
+                    @include tablet {
+                        margin-right: 0;
+                        margin-bottom: 5rem;
+                    }
+                }
+
+                &:last-child {
+                    margin-left: 3rem;
+
+                    @include desktop {
+                        margin-left: 2rem;
+                    }
+
+
+                    @include tablet {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
     }
-  }
 
-  &__input-group {
-    width: 100%;
-    position: relative;
-    cursor: pointer;
+    &__input-group {
+        width: 100%;
+        position: relative;
+        cursor: pointer;
 
-    &.is-focused {
+        &.is-focused {
+            .form__label {
+                opacity: 1;
+            }
+        }
 
-      .form__label {
-        opacity: 1;
-      }
+        &.is-invalid {
+            .form__input {
+                color: $invalid-salmon;
+                border-color: $invalid-salmon;
+            }
+
+            input[type="date"] {
+                &::before {
+                    content: '';
+                }
+
+                & + .form__label {
+                    opacity: 1;
+                }
+            }
+
+            .form__error-message {
+                opacity: 1;
+            }
+        }
     }
 
-    &.is-invalid {
+    &__label {
+        position: absolute;
+        top: -1.5rem;
+        left: 0;
+        display: block;
+        font-size: 9px;
+        color: $ash;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.8s $ease-out-quint;
+    }
 
-      .form__input {
+    &__input {
+        @include reset-button;
+
+        width: 100%;
+        font-size: 16px;
+        line-height: 1.6;
+        padding: 0.5rem 0;
+        color: $ocean-blue-1;
+        border-bottom: 1px solid $ocean-blue-3;
+        transition: border-color 0.5s $ease-out-quint;
+
+        &:hover,
+        &:focus {
+            border-color: $ocean-blue-1;
+        }
+
+        &:focus + .form__label {
+            opacity: 1;
+        }
+    }
+
+    &__error-message {
         color: $invalid-salmon;
-        border-color: $invalid-salmon;
-      }
-
-      input[type="date"] {
-        &::before {
-          content: '';
-        }
-
-        & + .form__label {
-          opacity: 1;
-        }
-      }
-
-      .form__error-message {
-        opacity: 1;
-      }
-    }
-  }
-
-  &__label {
-    position: absolute;
-    top: -1.5rem;
-    left: 0;
-    display: block;
-    font-size: 9px;
-    color: $ash;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.8s $ease-out-quint;
-  }
-
-  &__input {
-    @include reset-button();
-    width: 100%;
-    font-size: 13px;
-    line-height: 1.6;
-    padding: 0.5rem 0;
-    color: $ocean-blue-1;
-    border-bottom: 1px solid $ocean-blue-3;
-    transition: border-color 0.5s $ease-out-quint;
-
-    &:hover,
-    &:focus {
-      border-color: $ocean-blue-1;
+        font-size: 9px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        transform: translateY(calc(100% + 4px));
+        opacity: 0;
+        transition: opacity 0.8s $ease-out-quint;
     }
 
-    &:focus + .form__label {
-      opacity: 1;
+    &__icon {
+        position: absolute;
+
+        @include size(0.6rem);
+
+        right: 0.5rem;
+        bottom: 1.5rem;
+        border-left: 1px solid $charcoal;
+        border-bottom: 1px solid $charcoal;
+        transform: rotate(-45deg);
     }
-  }
-
-  &__error-message {
-    color: $invalid-salmon;
-    font-size: 9px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    transform: translateY(calc(100% + 4px));
-    opacity: 0;
-    transition: opacity 0.8s $ease-out-quint;
-  }
-
-  &__icon {
-    position: absolute;
-    @include size(0.6rem);
-    right: 0.5rem;
-    bottom: 1.5rem;
-    border-left: 1px solid $charcoal;
-    border-bottom: 1px solid $charcoal;
-    transform: rotate(-45deg);
-  }
 }
 
 ::-webkit-datetime-edit-text,
 ::-webkit-datetime-edit-month-field,
 ::-webkit-datetime-edit-day-field,
 ::-webkit-datetime-edit-year-field {
-  color: $ocean-blue-1;
+    color: $ocean-blue-1;
 }
 
 input::-webkit-inner-spin-button, input::-webkit-clear-button {
@@ -152,56 +155,58 @@ input::-webkit-inner-spin-button, input::-webkit-clear-button {
 }
 
 ::-webkit-calendar-picker-indicator {
-  box-sizing: border-box;
-  @include size(4rem 4rem);
-  position: absolute;
-  right: 0;
-  top: 0;
-  opacity: 1;
-  background-color: transparent;
-  color: transparent;
-  cursor: pointer;
+    box-sizing: border-box;
+
+    @include size(4rem 4rem);
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 1;
+    background-color: transparent;
+    color: transparent;
+    cursor: pointer;
 }
 
 input[type="date"] {
-  position: relative;
+    position: relative;
 
-  &::before {
-    display: block;
-    content: attr(placeholder);
-    color: $charcoal;
-    background-color: $white;
-    position: absolute;
-    bottom: 0;
-    padding: 0.5rem 0;
-  }
+    &::before {
+        display: block;
+        content: attr(placeholder);
+        color: $charcoal;
+        background-color: $white;
+        position: absolute;
+        bottom: 0;
+        padding: 0.5rem 0;
+    }
 
-  &:focus::before,
-  &:valid::before {
-    content: '';
-  }
+    &:focus::before,
+    &:valid::before {
+        content: '';
+    }
 }
 
 select {
-  border-radius: 0;
+    border-radius: 0;
 
-  option[disabled] {
-    color: $charcoal;
-  }
+    option[disabled] {
+        color: $charcoal;
+    }
 
-  &:invalid {
-    color: $charcoal;
-  }
+    &:invalid {
+        color: $charcoal;
+    }
 
-  &:valid {
-    color: $ocean-blue-1;
-  }
+    &:valid {
+        color: $ocean-blue-1;
+    }
 }
 
 [placeholder]:focus::-webkit-input-placeholder {
-  color: transparent;
+    color: transparent;
 }
 
 textarea {
-  resize: none;
+    resize: none;
 }

@@ -1,16 +1,16 @@
-@import 'menu-state';
-@import 'modal-state';
+@import "menu-state";
+@import "modal-state";
 
 body {
-  overflow: hidden;
+    overflow: hidden;
 
-  &.is-loading {
-    cursor: wait;
-  }
-
-  &.is-loaded {
-    .menu-bar {
-      transform: none;
+    &.is-loading {
+        cursor: wait;
     }
-  }
+
+    &.is-loaded {
+        .menu-bar {
+            transform: none;
+        }
+    }
 }

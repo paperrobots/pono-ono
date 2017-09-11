@@ -1,38 +1,41 @@
 html {
-  font-size: 8px;
+    font-size: 8px;
 }
 
 body {
-  font-size: 2rem;
-  font-family: $font-body;
-  color: $ash;
-  @include fluid-type(font-size, 768px, 1200px, 12px, 16px);
+    font-size: 2rem;
+    font-family: $font-body;
+    color: $ash;
+
+    @include fluid-type(font-size, 768px, 1200px, 12px, 16px);
 }
 
 a {
-  text-decoration: none;
-  color: $charcoal;
-  display: inline-block;
-  position: relative;
-  font-weight: 500;
-
-  &::after {
-    content: '';
-    display: block;
-    @include position(absolute, null null -4px 0);
-    @include size(100% 1px);
-    background-color: $ash;
-    transform-origin: left;
-    transition: transform 1s $ease-out-expo;
-  }
-
-  &:hover {
+    text-decoration: none;
+    color: $charcoal;
+    display: inline-block;
+    position: relative;
+    font-weight: 500;
 
     &::after {
-      transform-origin: right;
-      transform: scaleX(0);
+        content: '';
+        display: block;
+
+        @include position(absolute, null null -4px 0);
+
+        @include size(100% 1px);
+
+        background-color: $ash;
+        transform-origin: left;
+        transition: transform 1s $ease-out-expo;
     }
-  }
+
+    &:hover {
+        &::after {
+            transform-origin: right;
+            transform: scaleX(0);
+        }
+    }
 }
 
 h1,
@@ -41,66 +44,74 @@ h3,
 h4,
 h5,
 h6 {
-  color: $monstera-green;
-  font-family: $font-title;
-  font-weight: 700;
-  margin: 0;
+    color: $green-1;
+    font-family: $font-title;
+    font-weight: 700;
+    margin: 0;
 }
 
 h1 {
-  @include fluid-type(font-size, 768px, 1200px, 72px, 128px);
-  line-height: 1.12;
-  text-transform: lowercase;
+    @include fluid-type(font-size, 768px, 1200px, 55px, 76px);
+
+    line-height: 1.12;
+    text-transform: lowercase;
 }
 
 h2 {
-  @include fluid-type(font-size, 768px, 1200px, 48px, 80px);
-  line-height: 0.93;
+    @include fluid-type(font-size, 768px, 1200px, 48px, 80px);
+
+    line-height: 0.93;
 }
 
 h3 {
-  @include fluid-type(font-size, 768px, 1200px, 40px, 72px);
-  line-height: 1.06;
+    @include fluid-type(font-size, 768px, 1200px, 40px, 72px);
+
+    line-height: 1.06;
 }
 
 h4 {
-  @include fluid-type(font-size, 768px, 1200px, 18px, 34px);
-  line-height: 1.28;
+    @include fluid-type(font-size, 768px, 1200px, 18px, 34px);
+
+    line-height: 1.28;
 }
 
 h5 {
-  @include fluid-type(font-size, 768px, 1200px, 16px, 28px);
+    @include fluid-type(font-size, 768px, 1200px, 16px, 28px);
 }
 
 h6 {
-  @include fluid-type(font-size, 768px, 1200px, 14px, 24px);
+    @include fluid-type(font-size, 768px, 1200px, 14px, 24px);
 }
 
 p {
-  line-height: 1.5625;
-  color: $ocean-blue-1;
-  margin: 0;
-  @include fluid-type(font-size, 768px, 1200px, 13px, 16px);
+    line-height: 28px;
+    color: $body-text;
+    margin: 0;
+
+    @include fluid-type(font-size, 768px, 1200px, 13px, 16px);
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: $charcoal;
-  opacity: 1;
+    color: $charcoal;
+    opacity: 1;
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
-  color: $charcoal;
-  opacity: 1;
+    color: $charcoal;
+    opacity: 1;
 }
+
 :-ms-input-placeholder { /* IE 10+ */
-  color: $charcoal;
-  opacity: 1;
+    color: $charcoal;
+    opacity: 1;
 }
+
 :-moz-placeholder { /* Firefox 18- */
-  color: $charcoal;
-  opacity: 1;
+    color: $charcoal;
+    opacity: 1;
 }
 
 ::selection {
-  background-color: $eucalyptus-1;
-  color: $white;
+    background-color: $eucalyptus-1;
+    color: $white;
 }

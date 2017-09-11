@@ -1,109 +1,121 @@
 .text-box {
-  position: relative;
-  border: 75px solid;
-  border-image: url('#{$base-img}text-box-border-1.png') 100;
-  white-space: normal;
-
-  @include tablet() {
-    border-width: 55px;
-  }
-
-  &::before {
-    content: '';
-    display: block;
-    @include position(absolute, 0 0 0 0);
-    background-image: url('#{$base-img}text-box-background-1.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-  }
-
-  h1, p {
     position: relative;
-    z-index: 2;
-  }
+    border: 75px solid;
+    border-image: url("#{$base-img}text-box-border-1.png") 100;
+    white-space: normal;
 
-  &__title {
-    position: absolute;
-    text-transform: lowercase;
-    top: 0;
-    left: 0;
-    line-height: 1.1;
-    transform: translateY(-60%);
-    z-index: 3;
-
-    @include tablet() {
-      margin-left: -1ch;
+    @include tablet {
+        border-width: 55px;
     }
-  }
 
-  &__body {
-    // padding: 12rem 4rem 4rem 6rem;
-    @include fluid-type(padding-top, 768px, 1200px, 56px, 96px);
-    @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
-    @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
-    @include fluid-type(padding-left, 768px, 1200px, 24px, 48px);
+
+    &::before {
+        content: '';
+        display: block;
+
+        @include position(absolute, 0 0 0 0);
+
+        background-image: url("#{$base-img}text-box-background-1.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    h1, p {
+        position: relative;
+        z-index: 2;
+    }
+
+    &__title {
+        position: absolute;
+        text-transform: lowercase;
+        top: 0;
+        left: 0;
+        line-height: 1.1;
+        transform: translateY(-60%);
+        z-index: 3;
+
+        @include tablet {
+            margin-left: -1ch;
+        }
+    }
+
+    &__body {
+        // padding: 12rem 4rem 4rem 6rem;
+        @include fluid-type(padding-top, 768px, 1200px, 56px, 96px);
+
+        @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
+
+        @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
+
+        @include fluid-type(padding-left, 768px, 1200px, 24px, 48px);
+
+        &--intro {
+            padding-top: 0;
+
+            @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
+
+            @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
+
+            @include fluid-type(padding-left, 768px, 1200px, 32px, 56px);
+
+            @include fluid-type(margin-top, 768px, 1200px, -50px, -50px);
+
+            @include tablet {
+                padding: 0;
+            }
+        }
+
+        p + p {
+            margin-top: 2rem;
+        }
+
+        .button {
+            margin-top: 6rem;
+
+            @include tablet {
+                margin-top: 4rem;
+            }
+        }
+
+        a {
+            color: $ocean-blue-1;
+            text-decoration: underline;
+            display: inline;
+
+            &::after {
+                display: none;
+            }
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
 
     &--intro {
-      padding-top: 0;
-      @include fluid-type(padding-right, 768px, 1200px, 18px, 32px);
-      @include fluid-type(padding-bottom, 768px, 1200px, 18px, 32px);
-      @include fluid-type(padding-left, 768px, 1200px, 32px, 56px);
-      @include fluid-type(margin-top, 768px, 1200px, -24px, -88px);
+        width: 50%;
+        margin-top: 4%;
+        margin-left: 2%;
 
-      @include tablet() {
-        padding: 0;
-      }
+        @include desktop {
+            width: 75%;
+        }
+
+
+        @include tablet {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+
+        .text-box__title {
+            transform: translateY(-90%);
+        }
     }
 
-    p + p {
-      margin-top: 2rem;
+    &__link {
+        font-weight: 400;
+        color: $ocean-blue-1;
+        margin-top: 2rem;
     }
-
-    .button {
-      margin-top: 6rem;
-
-      @include tablet() {
-        margin-top: 4rem;
-      }
-    }
-
-    a {
-      color: $ocean-blue-1;
-      text-decoration: underline;
-      display: inline;
-
-      &::after {
-        display: none;
-      }
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-
-  &--intro {
-    width: 50%;
-    margin-top: 4%;
-    margin-left: 2%;
-
-    @include desktop() {
-      width: 75%;
-    }
-
-    @include tablet() {
-      width: 95%;
-      margin: 0 auto;
-    }
-
-    .text-box__title {
-      transform: translateY(-90%);
-    }
-  }
-
-  &__link {
-    font-weight: 400;
-    color: $ocean-blue-1;
-    margin-top: 2rem;
-  }
 }
